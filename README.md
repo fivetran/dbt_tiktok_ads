@@ -11,7 +11,10 @@ This package contains transformation models, designed to work simultaneously wit
 
 | **model**                    | **description**                                                                                                        |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| model                      | Each record                                                |
+| tiktok_ads__ad_adapter                      | Each record represents the daily ad performance, including information about the UTM parameters. |
+| tiktok_ads__ad_group_report                 | Each record represents the daily ad performance for each ad group. | 
+| tiktok_ads__audience_report                 | Each record represents the daily ad performance with metrics for audience segmentation. | 
+| tiktok_ads__campaign_report                 | Each record represents the daily ad performance for each campaign. | 
 
 ## Installation Instructions
 
