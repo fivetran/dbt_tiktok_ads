@@ -1,1 +1,18 @@
-# make databricks compatible
+version: 2
+
+models:
+  - name: tiktok_ads__ad_adapter
+    description: Each record in this table represents the daily performance of ads at the ad group level and URL level.
+    columns:
+
+  - name: tiktok_ads__ad_group_report
+    description: Each record in this table represents the daily performance of ads at the ad group level.
+    columns:
+
+  - name: tiktok_ads__audience_report
+    description: Each record in this table represents the daily performance of ads with added metrics for audience segmentation.
+    columns:
+
+  - name: tiktok_ads__campaign_report
+    description: Each record in this table represents the daily performance of ads at the campaign level.
+    columns:
