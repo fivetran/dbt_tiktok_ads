@@ -1,30 +1,26 @@
 -- take urls and utms from ad group 
 
 
-adgroup_id
-adgroup_name 
-campaign_date
-campaign_id
-advertiser_id
-action_categories
-action_days
-audience
-audience_type
-category
-gender
-age
-location
-languages
-video_actions
-video_downloads
-state_time_day -- or hour depending on which ad report we use, hourly or daily 
-sum(spend)
-sum(clicks)
-sum(impressions)
-sum(follows)
-sum(likes)
-sum(comments)
-sum(shares)
+adgroup_id, 
+adgroup_name , 
+campaign_date, 
+campaign_id, 
+advertiser_id, 
+action_categories, 
+action_days, 
+audience, 
+audience_type, 
+category, 
+video_actions, 
+video_downloads, 
+stat_time_day, -- or hour depending on which ad report we use, hourly or daily 
+sum(spend) as spend, 
+sum(clicks) as clicks, 
+sum(impressions) as impressions, 
+sum(follows) as follows, 
+sum(likes) as likes, 
+sum(comments) as comments, 
+sum(shares) as shares, 
 
 
 from
@@ -54,3 +50,4 @@ left join ad_group_report_daily
 -- video_views_p25
 -- average_video_play
 
+group by 
