@@ -4,15 +4,150 @@ models:
   - name: tiktok_ads__ad_adapter
     description: Each record in this table represents the daily performance of ads at the ad group level and URL level.
     columns:
+      - name: daily_id
+        description: 
+        tests:
+          - unique
+          - not_null
+      - name: campaign_date
+        description: The performance date of the record.
+      - name: base_url
+        description: The base URL of the ad, extracted from the ``.
+      - name: url_host
+        description: The URL host of the ad, extracted from the ``.
+      - name: url_path
+        description: The URL path of the ad, extracted from the ``.
+      - name: utm_source
+        description: The utm_source parameter of the ad, extracted from the ``.
+      - name: utm_medium
+        description: The utm_medium parameter of the ad, extracted from the ``.
+      - name: utm_campaign
+        description: The utm_campaign parameter of the ad, extracted from the ``.
+      - name: utm_content
+        description: The utm_content parameter of the ad, extracted from the ``.
+      - name: utm_term
+        description: The utm_term parameter of the ad, extracted from the ``.
+      - name: campaign_id
+        description: Campaign ID.
+      - name: campaign_name
+        description: Campaign name.
+      - name: ad_group_id
+        description: Ad group ID.
+      - name: ad_group_name
+        description: Ad group name.
+      - name: platform
+        description: 'TikTok Ads'
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
 
   - name: tiktok_ads__ad_group_report
     description: Each record in this table represents the daily performance of ads at the ad group level.
     columns:
+      - name: adgroup_id
+        description: Ad group ID
+      - name: adgroup_name 
+        description: Ad group name
+      - name: campaign_date
+        description: Campaign date
+      - name: campaign_id
+        description: Campaign ID
+      - name: advertiser_id
+        description: Advertiser ID
+      - name: action_categories
+        description: IDs of the action categories (behaviors) that you want to target. 
+      - name: action_days
+        description: 
+      - name: audience
+        description: A list of audience IDs.
+      - name: audience_type
+        description: Audience type.
+      - name: category
+        description: Ad group category.
+      - name: video_actions
+        description: Number of video actions.
+      - name: video_downloads
+        description: Number of video downloads.
+      - name: stat_time_day
+        description: 
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
+      - name: follows
+        description: The number of follows that occurred on the day of the record.
+      - name: likes
+        description: The number of likes that occurred on the day of the record.
+      - name: comments
+        description: The number of comments that occurred on the day of the record.
+      - name: shares
+        description: The number of shares that occurred on the day of the record.
 
   - name: tiktok_ads__audience_report
     description: Each record in this table represents the daily performance of ads with added metrics for audience segmentation.
     columns:
+      - name: ad_id
+        description: Ad ID
+      - name: advertiser_id
+        description: Advertiser ID
+      - name: campaign_id
+        description: Campaign ID
+      - name: adgroup_id
+        description: Ad group ID
+      - name: gender
+        description: The gender of the audience
+      - name: age
+        description: The age of the audience
+      - name: country_code
+        description: The country of the audience
+      - name: language
+        description: The language of the audience
+      - name: interest_category
+        description: Interest classification. 
+      - name: stat_time_day
+        description: 
+      - name: stat_time_hour
+        description: 
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
 
   - name: tiktok_ads__campaign_report
     description: Each record in this table represents the daily performance of ads at the campaign level.
     columns:
+      - name: date_day
+        description:
+      - name: ad_account_id
+        description: Advertiser ID
+      - name: ad_account_name
+        description: Advertiser name
+      - name: campaign_id
+        description: Campaign ID
+      - name: campaign_name
+        description: Campaign name
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
+      - name: likes
+        description: The number of likes that occurred on the day of the record.
+      - name: shares
+        description: The number of shares that occurred on the day of the record.
+      - name: profile_visits
+        description: The number of profile visits that occurred on the day of the record.
+      - name: follows
+        description: The number of follows that occurred on the day of the record.
+      - name: engagements
+        description: The number of engagements that occurred on the day of the record.
+      - name: skip_ad
+        description: The number of times the ad was skipped on the day of the record.
