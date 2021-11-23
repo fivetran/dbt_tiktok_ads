@@ -5,7 +5,7 @@ models:
     description: Each record in this table represents the daily performance of ads at the ad group level and URL level.
     columns:
       - name: daily_id
-        description: 
+        description: replace
         tests:
           - unique
           - not_null
@@ -60,7 +60,7 @@ models:
       - name: action_categories
         description: IDs of the action categories (behaviors) that you want to target. 
       - name: action_days
-        description: 
+        description: replace
       - name: audience
         description: A list of audience IDs.
       - name: audience_type
@@ -72,7 +72,7 @@ models:
       - name: video_downloads
         description: Number of video downloads.
       - name: stat_time_day
-        description: 
+        description: replace
       - name: spend
         description: The amount of spend that occurred on the day of the record.
       - name: clicks
@@ -110,9 +110,9 @@ models:
       - name: interest_category
         description: Interest classification. 
       - name: stat_time_day
-        description: 
+        description: replace
       - name: stat_time_hour
-        description: 
+        description: replace
       - name: spend
         description: The amount of spend that occurred on the day of the record.
       - name: clicks
@@ -124,7 +124,7 @@ models:
     description: Each record in this table represents the daily performance of ads at the campaign level.
     columns:
       - name: date_day
-        description:
+        description: replace
       - name: ad_account_id
         description: Advertiser ID
       - name: ad_account_name

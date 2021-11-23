@@ -7,7 +7,7 @@ with base as (
 
     select 
         *,
-        row_number() over (partition by ad_group_id order by _fivetran_synced desc) as rn
+        row_number() over (partition by ad_id order by _fivetran_synced desc) as rn
     from base
 
 ), filtered as (

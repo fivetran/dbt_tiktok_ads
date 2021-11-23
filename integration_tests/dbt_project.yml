@@ -1,16 +1,31 @@
-name: 'tiktok_ads_integration_tests'
+name: 'tiktok_ads_source_integration_tests'
 version: '0.1.0'
 profile: 'integration_tests'
 config-version: 2
 
 vars: 
-  tiktok_ads:
-
-  #  change to data file names 
+  tiktok_ads_source:
+    ad_group_history: "{{ ref('adgroup_history') }}"
+    ad_history: "{{ ref('ad_history') }}"
+    advertiser: "{{ ref('advertiser') }}"
+    campaign_history: "{{ ref('campaign_history') }}"
+    ad_report_daily: "{{ ref('ad_report_daily') }}"
+    ad_report_hourly: "{{ ref('ad_report_hourly') }}"
+    adgroup_daily: "{{ ref('adgroup_daily') }}"
+    adgroup_hourly: "{{ ref('adgroup_hourly') }}"
+    campaign_report_daily: "{{ ref('campaign_report_daily') }}"
+    campaign_report_hourly: "{{ ref('campaign_report_hourly') }}"
 
 seeds:
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"
 
-dispatch:
-  - macro_namespace: dbt_utils
-    search_order: ['spark_utils', 'dbt_utils']
+# dispatch:
+#   - macro_namespace: dbt_utils
+#     search_order: ['spark_utils', 'dbt_utils']
+
+# snapchat has this:
+# seeds:
+#   snapchat_ads_integration_tests:
+#     snapchat_ad_hourly_report_data:
+#       +column_types:
+#         date: timestamp
