@@ -27,9 +27,9 @@ with hourly as (
         -- ad_account_id, -- figure out where to pull
         -- ad_account_name, -- figure out where to pull
         campaigns.campaign_id,
-        campaigns.ampaign_name,
+        campaigns.campaign_name,
         ad_groups.ad_group_id,
-        ad_groups.ad_group_name,
+        -- ad_groups.ad_group_name,
         ads.ad_id,
         ads.ad_name,
         ads.base_url,
@@ -50,7 +50,8 @@ with hourly as (
         on ads.ad_group_id = ad_groups.ad_group_id
     left join campaigns
         on ads.campaign_id = campaigns.campaign_id
-    {{ dbt_utils.group_by(17) }}
+    {{ dbt_utils.group_by(15) }}
+    
 
 
 )

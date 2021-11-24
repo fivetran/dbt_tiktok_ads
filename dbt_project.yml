@@ -11,7 +11,7 @@ models:
       # change to ephemeral before releasing
 vars:
   tiktok_ads:
-    ad_history: "{{ ref('stg_tiktok_ads__ad_group_history') }}"
+    ad_history: "{{ ref('stg_tiktok_ads__ad_history') }}"
     ad_group_history: "{{ ref('stg_tiktok_ads__ad_group_history') }}"
     campaign_history: "{{ ref('stg_tiktok_ads__campaign_history') }}"
     advertiser: "{{ ref('stg_tiktok_ads__advertiser') }}"

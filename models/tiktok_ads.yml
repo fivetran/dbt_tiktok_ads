@@ -46,8 +46,13 @@ models:
 
   - name: tiktok_ads__ad_group_report
     description: Each record in this table represents the daily performance of ads at the ad group level.
+    # tests:
+      # - dbt_utils.unique_combination_of_columns:
+      #     combination_of_columns:
+      #       - ad_group_id
+      #       - 
     columns:
-      - name: adgroup_id
+      - name: ad_group_id
         description: Ad group ID
       - name: adgroup_name 
         description: Ad group name
@@ -90,6 +95,10 @@ models:
 
   - name: tiktok_ads__audience_report
     description: Each record in this table represents the daily performance of ads with added metrics for audience segmentation.
+    # tests:
+    #   - dbt_utils.unique_combination_of_columns:
+    #       combination_of_columns:
+
     columns:
       - name: ad_id
         description: Ad ID
@@ -122,6 +131,10 @@ models:
 
   - name: tiktok_ads__campaign_report
     description: Each record in this table represents the daily performance of ads at the campaign level.
+    # tests:
+    #   - dbt_utils.unique_combination_of_columns:
+    #       combination_of_columns:
+          
     columns:
       - name: date_day
         description: replace

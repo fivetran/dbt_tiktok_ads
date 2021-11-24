@@ -1,57 +1,47 @@
+with adapter as (
 
     select *
-    from {{ ref('int_tiktok_ads__most_recent_campaign') }}
+    from {{ ref('tiktok_ads__ad_adapter') }}
 
--- with adapter as (
+), campaign_daily as (
 
---     select *
---     from {{ ref('') }}
+    select * 
+    from {{ ref('stg_tiktok_ads__campaign_report_daily')}}
 
--- ), aggregated as (
+), aggregated as (
 
---     select
---         stat_time_day as date_day,
---         advertiser_id as ad_account_id,
---         as ad_account_name,
---         campaign_id,
---         campaign_name,
---         sum(impressions) as impressions,
---         sum(clicks) as clicks,
---         sum(spend) as spend,
---         sum(likes) as likes,
---         sum(comments) as impressions,
---         sum(shares) as shares,
---         sum(profile_visits) as profile_visits,
---         sum(follows) as follows,
---         sum(engagements) as engagements,
---         sum(skip_ad) as skip_ad,
--- -- spend,
--- -- cpm, 
--- -- cpc,
--- -- ctr,
--- -- impressions,
--- -- clicks,
--- -- likes,
--- -- comments,
--- -- shares,
--- -- profile_visits,
--- -- follows,
--- -- engagements,
--- -- engagement_rate,
--- -- skip_ad,
--- -- video_watched_2s,
--- -- video_watched_6s,
--- -- video_views_p25, 
--- -- video_views_p50, 
--- -- video_views_p75, 
--- -- video_views_p100, 
--- -- average_video_play, 
--- -- average_video_play_per_user
+    select
+        adapter.date_day,
+        adapter.advertiser_id,
+        -- as ad_account_id
+        -- as ad_account_name,
+        adapter.campaign_id,
+        adapter.campaign_name,
+        sum(campaign_daily.impressions) as impressions,
+        sum(campaign_daily.clicks) as clicks,
+        sum(campaign_daily.spend) as spend,
+        sum(campaign_daily.likes) as likes,
+        sum(campaign_daily.shares) as shares,
+        sum(campaign_daily.profile_visits) as profile_visits,
+        sum(campaign_daily.follows) as follows,
+        sum(campaign_daily.engagements) as engagements,
+        sum(campaign_daily.skip_ad) as skip_ad,
+        sum(campaign_daily.video_watched_2s),
+        sum(campaign_daily.video_watched_6s),
+        sum(campaign_daily.video_views_p25), 
+        sum(campaign_daily.video_views_p50), 
+        sum(campaign_daily.video_views_p75), 
+        sum(campaign_daily.average_video_play), 
+        sum(campaign_daily.average_video_play_per_user)
 
---     from adapter
---     {{ dbt_utils.group_by(5) }}
+    from adapter
+    left join campaign_daily
+    on adapter.campaign_id = campaign_daily.campaign_id
+    and adapter.date_day = cast(campaign_daily.stat_time_day as date) 
 
--- )
+    {{ dbt_utils.group_by(6) }}
 
--- select *
--- from aggregated
+)
+
+select *
+from aggregated
