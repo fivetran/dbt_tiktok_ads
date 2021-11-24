@@ -71,7 +71,9 @@ Please create issues or open PRs against `master`. See [this Discourse post](htt
 This package has been tested on BigQuery, Snowflake, Redshift, Postgres, and Databricks.
 
 ### Databricks Dispatch Configuration
-dbt `v0.20.0` introduced a new project-level dispatch configuration that enables an "override" setting for all dispatched macros. If you are using a Databricks destination with this package you will need to add the below (or a variation of the below) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
+
+dbt `v0.20.0` introduced a new project-level dispatch configuration that enables an "override" setting for all dispatched macros. If you are using a Databricks destination with this package, you will need to add the following (or a variation of the following) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` and then the `dbt-labs/dbt_utils` packages, respectively.
+
 ```yml
 # dbt_project.yml
 
