@@ -3,7 +3,7 @@
 
 This package models TikTok Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/tiktok-ads). It uses data in the format described by [this ERD](https://fivetran.com/docs/applications/tiktok-ads#schemainformation).
 
-The main focus of the package is to transform the core ad object tables into analytics-ready models, including an 'ad adapter' model that can be easily unioned in to other ad platform packages to get a single view.  This is especially easy using our [Ad Reporting package](https://github.com/fivetran/dbt_ad_reporting).
+The main focus of the package is to transform the core ad object tables into analytics-ready models, including an 'ad adapter' model that can be easily unioned in to other ad platform packages to get a single view. This is especially easy using our [Ad Reporting package](https://github.com/fivetran/dbt_ad_reporting).
 
 ## Models
 
@@ -64,7 +64,7 @@ models:
 ## Contributions
 
 Don't see a model or specific metric you would have liked to be included? Notice any bugs when installing and running the package? If so, we highly encourage and welcome contributions to this package! 
-Please create issues or open PRs against `master`. See [the Discourse post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) for information on how to contribute to a package.
+Please create issues or open PRs against `master`. See [this Discourse post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) for information on how to contribute to a package.
 
 ## Database Support
 
