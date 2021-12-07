@@ -42,7 +42,19 @@ with hourly as (
         ads.utm_term,
         sum(hourly.spend) as spend,
         sum(hourly.clicks) as clicks,
-        sum(hourly.impressions) as impressions
+        sum(hourly.impressions) as impressions,
+        sum(hourly.reach) as reach,
+        sum(hourly.conversion) as conversion,
+        sum(hourly.likes) as likes,
+        sum(hourly.comments) as comments,
+        sum(hourly.shares) as shares,
+        sum(hourly.profile_visits) as profile_visits,
+        sum(hourly.follows) as follows,
+        sum(hourly.video_watched_2_s) as video_watched_2_s, 
+        sum(hourly.video_watched_6_s) as video_watched_6_s, 
+        sum(hourly.video_views_p_25) as video_views_p_25, 
+        sum(hourly.video_views_p_50) as video_views_p_50,
+        sum(hourly.video_views_p_75) as video_views_p_75
     from hourly
     left join ads
         on hourly.ad_id = ads.ad_id
