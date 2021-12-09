@@ -2,13 +2,14 @@ name: 'tiktok_ads'
 version: '0.1.0'
 config-version: 2
 require-dbt-version: [">=0.20.0"]
+
 models:
-  pinterest:
+  tiktok_ads:
     +schema: tiktok_ads
     +materialized: table
     intermediate:
-      +materialized: table
-      # change to ephemeral before releasing
+      +materialized: table # change to ephemeral before releasing
+
 vars:
   tiktok_ads:
     ad_history: "{{ ref('stg_tiktok_ads__ad_history') }}"
@@ -18,4 +19,3 @@ vars:
     ad_report_hourly: "{{ ref('stg_tiktok_ads__ad_report_hourly') }}"
     campaign_report_hourly: "{{ ref('stg_tiktok_ads__campaign_report_hourly') }}"
     ad_group_report_hourly: "{{ ref('stg_tiktok_ads__adgroup_report_hourly') }}"
-    

@@ -3,7 +3,7 @@ with adapter as (
     select *
     from {{ ref('tiktok_ads__ad_adapter') }}
 
-), campaign_daily as (
+), campaign_daily as (  --Why don't we use hourly here? I would imagine using the hourly grain like you did in the ad adapter would work.
 
     select * 
     from {{ ref('stg_tiktok_ads__campaign_report_daily')}}

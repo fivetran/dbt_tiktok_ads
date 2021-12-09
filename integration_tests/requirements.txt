@@ -1,4 +1,4 @@
-dbt~=0.20.0
+dbt~=0.21.0
 dbt~=0.21.0
 dbt-spark~=0.21.0
 dbt-spark[PyHive]~=0.21.0

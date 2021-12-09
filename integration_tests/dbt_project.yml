@@ -1,4 +1,4 @@
-name: 'tiktok_ads_source_integration_tests'
+name: 'tiktok_ads_integration_tests'
 version: '0.1.0'
 profile: 'integration_tests'
 config-version: 2
@@ -19,13 +19,6 @@ vars:
 seeds:
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"
 
-# dispatch:
-#   - macro_namespace: dbt_utils
-#     search_order: ['spark_utils', 'dbt_utils']
-
-# snapchat has this:
-# seeds:
-#   snapchat_ads_integration_tests:
-#     snapchat_ad_hourly_report_data:
-#       +column_types:
-#         date: timestamp
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['spark_utils', 'dbt_utils']
