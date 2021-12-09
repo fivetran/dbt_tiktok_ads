@@ -3,14 +3,28 @@ version: 2
 models:
   - name: tiktok_ads__ad_adapter
     description: Each record in this table represents the daily performance of ads at the ad group level and URL level.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_group_id
+            - date_day
     columns:
-      - name: daily_id
-        description: replace
-        tests:
-          - unique
-          - not_null
-      - name: campaign_date
-        description: The performance date of the record.
+      - name: date_day
+        description: Day of record.
+      - name: ad_id
+        description: Ad ID.
+      - name: ad_name
+        description: Ad name.
+      - name: campaign_id
+        description: Campaign ID.
+      - name: campaign_name
+        description: Campaign name.
+      - name: advertiser_id
+        description: Advertiser ID. 
+      - name: ad_group_id
+        description: Ad group ID.
+      - name: ad_group_name
+        description: Ad group name.
       - name: base_url
         description: The base URL of the ad, extracted from the `landing page url`.
       - name: url_host
@@ -27,22 +41,37 @@ models:
         description: The utm_content parameter of the ad, extracted from the `landing page url`.
       - name: utm_term
         description: The utm_term parameter of the ad, extracted from the `landing page url`.
-      - name: campaign_id
-        description: Campaign ID.
-      - name: campaign_name
-        description: Campaign name.
-      - name: ad_group_id
-        description: Ad group ID.
-      - name: ad_group_name
-        description: Ad group name.
-      - name: platform
-        description: 'TikTok Ads'
-      - name: impressions
-        description: The number of impressions that occurred on the day of the record.
       - name: clicks
         description: The number of clicks that occurred on the day of the record.
       - name: spend
         description: The amount of spend that occurred on the day of the record.
+      - name: reach
+        description: The number of unique users who saw your ads at least once. This metric is estimated.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+      - name: likes
+        description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
+      - name: comments
+        description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
+      - name: shares
+        description: The number of shares that occurred on the day of the record.
+      - name: profile_visits
+        description: The number of profile visits that occurred on the day of the record.
+      - name: follows
+        description: The number of follows that occurred on the day of the record.
+      - name: video_watched_2_s
+        description: The number of times your video played for at least 2 seconds, or completely played. Replays will not be counted.
+      - name: video_watched_6_s
+        description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
+      - name: video_views_p_25
+        description: The number of times your video was played at 25% of its length. Replays will not be counted.
+      - name: video_views_p_50
+        description: The number of times your video was played at 50% of its length. Replays will not be counted.
+      - name: video_views_p_75
+        description: The number of times your video was played at 75% of its length. Replays will not be counted.
 
   - name: tiktok_ads__ad_group_report
     description: Each record in this table represents the daily performance of ads at the ad group level.
@@ -56,27 +85,46 @@ models:
         description: Day of record
       - name: ad_group_id
         description: Ad group ID
-      - name: adgroup_name 
-        description: Ad group name
-      - name: advertiser_id
-        description: Advertiser ID
       - name: campaign_id
         description: Campaign ID
-      - name: action_categories
-        description: IDs of the action categories (behaviors) that you want to target. 
-      - name: gender
-        description: gender
-      - name: audience_type
-        description: Audience type.
-      - name: budget
-        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
-      - name: age
-        description: Age groups you want to target. 
-      - name: languages
-        description: Codes of the languages that you want to target.
-      - name: interest_category
-        description: Interest classification.
-
+      - name: campaign_name
+        description: Campaign name
+      - name: advertiser_id
+        description: Advertiser ID
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: reach
+        description: The number of unique users who saw your ads at least once. This metric is estimated.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+      - name: likes
+        description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
+      - name: comments
+        description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
+      - name: shares
+        description: The number of shares that occurred on the day of the record.
+      - name: profile_visits
+        description: The number of profile visits that occurred on the day of the record.
+      - name: follows
+        description: The number of follows that occurred on the day of the record.
+      - name: video_watched_2_s
+        description: The number of times your video played for at least 2 seconds, or completely played. Replays will not be counted.
+      - name: video_watched_6_s
+        description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
+      - name: video_views_p_25
+        description: The number of times your video was played at 25% of its length. Replays will not be counted.
+      - name: video_views_p_50
+        description: The number of times your video was played at 50% of its length. Replays will not be counted.
+      - name: video_views_p_75
+        description: The number of times your video was played at 75% of its length. Replays will not be counted.
+        
   - name: tiktok_ads__ad_group_audience_report
     description: Each record in this table represents enhanced audience data for each ad group.
     tests:
@@ -119,29 +167,42 @@ models:
     columns:
       - name: date_day
         description: Day of record
-      - name: ad_account_id
-        description: Advertiser ID
-      - name: ad_account_name
-        description: Advertiser name
       - name: campaign_id
         description: Campaign ID
       - name: campaign_name
         description: Campaign name
-      - name: spend
-        description: The amount of spend that occurred on the day of the record.
-      - name: clicks
-        description: The number of clicks that occurred on the day of the record.
+      - name: advertiser_id
+        description: Advertiser ID
       - name: impressions
         description: The number of impressions that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: reach
+        description: The number of unique users who saw your ads at least once. This metric is estimated.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
-        description: The number of likes that occurred on the day of the record.
+        description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
+      - name: comments
+        description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
       - name: shares
         description: The number of shares that occurred on the day of the record.
       - name: profile_visits
         description: The number of profile visits that occurred on the day of the record.
       - name: follows
         description: The number of follows that occurred on the day of the record.
-      - name: engagements
-        description: The number of engagements that occurred on the day of the record.
-      - name: skip_ad
-        description: The number of times the ad was skipped on the day of the record.
+      - name: video_watched_2_s
+        description: The number of times your video played for at least 2 seconds, or completely played. Replays will not be counted.
+      - name: video_watched_6_s
+        description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
+      - name: video_views_p_25
+        description: The number of times your video was played at 25% of its length. Replays will not be counted.
+      - name: video_views_p_50
+        description: The number of times your video was played at 50% of its length. Replays will not be counted.
+      - name: video_views_p_75
+        description: The number of times your video was played at 75% of its length. Replays will not be counted.
