@@ -12,10 +12,9 @@ with adapter as (
 
     select
         adapter.date_day,
-        adapter.ad_group_id,
-        adapter.advertiser_id,
         adapter.campaign_id,
         adapter.campaign_name,
+        adapter.advertiser_id,
         sum(campaign_daily.impressions) as impressions,
         sum(campaign_daily.clicks) as clicks,
         sum(campaign_daily.spend) as spend,
@@ -37,7 +36,7 @@ with adapter as (
     on adapter.campaign_id = campaign_daily.campaign_id
     and adapter.date_day = cast(campaign_daily.stat_time_day as date) 
 
-    {{ dbt_utils.group_by(5) }}
+    {{ dbt_utils.group_by(4) }}
 
 )
 

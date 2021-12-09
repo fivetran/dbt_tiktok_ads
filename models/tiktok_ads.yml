@@ -12,21 +12,21 @@ models:
       - name: campaign_date
         description: The performance date of the record.
       - name: base_url
-        description: The base URL of the ad, extracted from the ``.
+        description: The base URL of the ad, extracted from the `landing page url`.
       - name: url_host
-        description: The URL host of the ad, extracted from the ``.
+        description: The URL host of the ad, extracted from the `landing page url`.
       - name: url_path
-        description: The URL path of the ad, extracted from the ``.
+        description: The URL path of the ad, extracted from the `landing page url`.
       - name: utm_source
-        description: The utm_source parameter of the ad, extracted from the ``.
+        description: The utm_source parameter of the ad, extracted from the `landing page url`.
       - name: utm_medium
-        description: The utm_medium parameter of the ad, extracted from the ``.
+        description: The utm_medium parameter of the ad, extracted from the `landing page url`.
       - name: utm_campaign
-        description: The utm_campaign parameter of the ad, extracted from the ``.
+        description: The utm_campaign parameter of the ad, extracted from the `landing page url`.
       - name: utm_content
-        description: The utm_content parameter of the ad, extracted from the ``.
+        description: The utm_content parameter of the ad, extracted from the `landing page url`.
       - name: utm_term
-        description: The utm_term parameter of the ad, extracted from the ``.
+        description: The utm_term parameter of the ad, extracted from the `landing page url`.
       - name: campaign_id
         description: Campaign ID.
       - name: campaign_name
@@ -46,11 +46,11 @@ models:
 
   - name: tiktok_ads__ad_group_report
     description: Each record in this table represents the daily performance of ads at the ad group level.
-    # tests:
-      # - dbt_utils.unique_combination_of_columns:
-      #     combination_of_columns:
-      #       - ad_group_id
-      #       - 
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_group_id
+            - 
     columns:
       - name: ad_group_id
         description: Ad group ID
@@ -130,10 +130,12 @@ models:
         description: The number of impressions that occurred on the day of the record.
 
   - name: tiktok_ads__campaign_report
-    description: Each record in this table represents the daily performance of ads at the campaign level.
-    # tests:
-    #   - dbt_utils.unique_combination_of_columns:
-    #       combination_of_columns:
+    description: Each record in this table represents the daily performance at the campaign level.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - campaign_id
+            - date_day
           
     columns:
       - name: date_day
