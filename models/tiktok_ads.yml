@@ -2,11 +2,11 @@ version: 2
 
 models:
   - name: tiktok_ads__ad_adapter
-    description: Each record in this table represents the daily performance of ads at the ad group level and URL level.
+    description: Each record in this table represents the daily performance of ads at the ad level and URL level.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - ad_group_id
+            - ad_id
             - date_day
     columns:
       - name: date_day
