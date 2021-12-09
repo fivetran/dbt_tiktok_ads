@@ -50,64 +50,48 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ad_group_id
-            - 
+            - date_day
     columns:
+      - name: date_day
+        description: Day of record
       - name: ad_group_id
         description: Ad group ID
       - name: adgroup_name 
         description: Ad group name
-      - name: campaign_date
-        description: Campaign date
-      - name: campaign_id
-        description: Campaign ID
       - name: advertiser_id
         description: Advertiser ID
+      - name: campaign_id
+        description: Campaign ID
       - name: action_categories
         description: IDs of the action categories (behaviors) that you want to target. 
-      - name: action_days
-        description: replace
-      - name: audience
-        description: A list of audience IDs.
+      - name: gender
+        description: gender
       - name: audience_type
         description: Audience type.
-      - name: category
-        description: Ad group category.
-      - name: video_actions
-        description: Number of video actions.
-      - name: video_downloads
-        description: Number of video downloads.
-      - name: stat_time_day
-        description: replace
-      - name: spend
-        description: The amount of spend that occurred on the day of the record.
-      - name: clicks
-        description: The number of clicks that occurred on the day of the record.
-      - name: impressions
-        description: The number of impressions that occurred on the day of the record.
-      - name: follows
-        description: The number of follows that occurred on the day of the record.
-      - name: likes
-        description: The number of likes that occurred on the day of the record.
-      - name: comments
-        description: The number of comments that occurred on the day of the record.
-      - name: shares
-        description: The number of shares that occurred on the day of the record.
+      - name: budget
+        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
+      - name: age
+        description: Age groups you want to target. 
+      - name: languages
+        description: Codes of the languages that you want to target.
+      - name: interest_category
+        description: Interest classification.
 
-  - name: tiktok_ads__audience_report
-    description: Each record in this table represents the daily performance of ads with added metrics for audience segmentation.
-    # tests:
-    #   - dbt_utils.unique_combination_of_columns:
-    #       combination_of_columns:
-
+  - name: tiktok_ads__ad_group_audience_report
+    description: Each record in this table represents enhanced audience data for each ad group.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_group_id
     columns:
-      - name: ad_id
-        description: Ad ID
+      - name: ad_group_id
+        description: Ad group ID
+      - name: ad_group_name
+        description: Ad group name
       - name: advertiser_id
         description: Advertiser ID
       - name: campaign_id
         description: Campaign ID
-      - name: adgroup_id
-        description: Ad group ID
       - name: gender
         description: The gender of the audience
       - name: age
@@ -118,10 +102,6 @@ models:
         description: The language of the audience
       - name: interest_category
         description: Interest classification. 
-      - name: stat_time_day
-        description: replace
-      - name: stat_time_hour
-        description: replace
       - name: spend
         description: The amount of spend that occurred on the day of the record.
       - name: clicks
@@ -136,10 +116,9 @@ models:
           combination_of_columns:
             - campaign_id
             - date_day
-          
     columns:
       - name: date_day
-        description: replace
+        description: Day of record
       - name: ad_account_id
         description: Advertiser ID
       - name: ad_account_name
