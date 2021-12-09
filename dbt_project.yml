@@ -7,8 +7,7 @@ models:
     +schema: tiktok_ads
     +materialized: table
     intermediate:
-      +materialized: table
-      # change to ephemeral before releasing
+      +materialized: ephemeral
 vars:
   tiktok_ads:
     ad_history: "{{ ref('stg_tiktok_ads__ad_history') }}"
