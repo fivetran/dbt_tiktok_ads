@@ -7,7 +7,6 @@ models:
       - name: date_day
         description: replace
         tests:
-          - unique
           - not_null
       - name: campaign_date
         description: The performance date of the record.
