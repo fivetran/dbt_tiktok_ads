@@ -1,5 +1,8 @@
-# packages:
+packages:
 #   - package: fivetran/tiktok_ads_source
 #     version: [">=0.1.0", "<0.2.0"]
-packages:
- - local: ../dbt_tiktok_ads_source
+
+  ## SWAP OUT ONCE SOURCE IS LIVE ON THE DBT HUB
+  - git: https://github.com/fivetran/dbt_tiktok_ads_source.git
+    revision: main
+    warn-unpinned: false

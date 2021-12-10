@@ -2,8 +2,9 @@ name: 'tiktok_ads'
 version: '0.1.0'
 config-version: 2
 require-dbt-version: [">=0.20.0"]
+
 models:
-  pinterest:
+  tiktok_ads:
     +schema: tiktok_ads
     +materialized: table
     intermediate:

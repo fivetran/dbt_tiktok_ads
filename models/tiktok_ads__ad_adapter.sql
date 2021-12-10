@@ -9,6 +9,11 @@ with hourly as (
     select *
     from {{ ref('int_tiktok_ads__most_recent_campaign') }}
 
+), advertiser as (
+
+    select *
+    from {{ var('advertiser') }}
+
 ), ad_groups as (
 
     select *
@@ -23,13 +28,12 @@ with hourly as (
 
     select 
         cast(hourly.stat_time_hour as date) as date_day,
-        ad_groups.advertiser_id,
-        -- ad_account_id, -- figure out where to pull
-        -- ad_account_name, -- figure out where to pull
+        advertiser.advertiser_id,
+        advertiser.company as company_name,
         campaigns.campaign_id,
         campaigns.campaign_name,
         ad_groups.ad_group_id,
-        -- ad_groups.ad_group_name,
+        ad_groups.ad_group_name,
         ads.ad_id,
         ads.ad_name,
         ads.base_url,
@@ -62,7 +66,9 @@ with hourly as (
         on ads.ad_group_id = ad_groups.ad_group_id
     left join campaigns
         on ads.campaign_id = campaigns.campaign_id
-    {{ dbt_utils.group_by(15) }}
+    left join advertiser
+        on campaigns.advertiser_id = advertiser.advertiser_id
+    {{ dbt_utils.group_by(17) }}
     
 
 

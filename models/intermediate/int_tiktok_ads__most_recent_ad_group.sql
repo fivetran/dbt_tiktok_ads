@@ -7,7 +7,7 @@ with base as (
 
     select *
     from base
-    where is_most_recent_record like 'true' 
+    where is_most_recent_record
     
 )
 
