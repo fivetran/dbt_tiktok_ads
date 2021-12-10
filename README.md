@@ -3,7 +3,7 @@
 
 This package models TikTok Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/tiktok-ads). It uses data in the format described by [this ERD](https://fivetran.com/docs/applications/tiktok-ads#schemainformation).
 
-The main focus of the package is to transform the core ad object tables into analytics-ready models, including an 'ad adapter' model that can be easily unioned in to other ad platform packages to get a single view.  This is especially easy using our [Ad Reporting package](https://github.com/fivetran/dbt_ad_reporting).
+The main focus of the package is to transform the core ad object tables into analytics-ready models, including an 'ad adapter' model that can be easily unioned in to other ad platform packages to get a single view. This is especially easy using our [Ad Reporting package](https://github.com/fivetran/dbt_ad_reporting).
 
 ## Models
 
@@ -64,14 +64,16 @@ models:
 ## Contributions
 
 Don't see a model or specific metric you would have liked to be included? Notice any bugs when installing and running the package? If so, we highly encourage and welcome contributions to this package! 
-Please create issues or open PRs against `master`. See [the Discourse post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) for information on how to contribute to a package.
+Please create issues or open PRs against `master`. See [this Discourse post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) for information on how to contribute to a package.
 
 ## Database Support
 
 This package has been tested on BigQuery, Snowflake, Redshift, Postgres, and Databricks.
 
 ### Databricks Dispatch Configuration
-dbt `v0.20.0` introduced a new project-level dispatch configuration that enables an "override" setting for all dispatched macros. If you are using a Databricks destination with this package you will need to add the below (or a variation of the below) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
+
+dbt `v0.20.0` introduced a new project-level dispatch configuration that enables an "override" setting for all dispatched macros. If you are using a Databricks destination with this package, you will need to add the following (or a variation of the following) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` and then the `dbt-labs/dbt_utils` packages, respectively.
+
 ```yml
 # dbt_project.yml
 
