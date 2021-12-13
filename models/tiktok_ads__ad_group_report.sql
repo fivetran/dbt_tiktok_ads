@@ -16,6 +16,13 @@ with adapter as (
         adapter.advertiser_id,
         adapter.campaign_id,
         adapter.campaign_name,
+        -- adapter.action_categories,
+        adapter.gender, 
+        adapter.audience_type,
+        -- adapter.budget,
+        -- adapter.age, 
+        -- adapter.languages, 
+        -- adapter.interest_category,
         sum(ad_group_daily.impressions) as impressions,
         sum(ad_group_daily.clicks) as clicks,
         sum(ad_group_daily.spend) as spend,
@@ -37,7 +44,7 @@ with adapter as (
     on adapter.ad_group_id = ad_group_daily.ad_group_id
     and adapter.date_day = cast(ad_group_daily.stat_time_day as date) 
 
-    {{ dbt_utils.group_by(5) }}
+    {{ dbt_utils.group_by(7) }}
 
 )
 
