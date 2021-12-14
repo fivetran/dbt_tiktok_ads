@@ -65,7 +65,10 @@ with hourly as (
         sum(hourly.video_watched_6_s) as video_watched_6_s, 
         sum(hourly.video_views_p_25) as video_views_p_25, 
         sum(hourly.video_views_p_50) as video_views_p_50,
-        sum(hourly.video_views_p_75) as video_views_p_75
+        sum(hourly.video_views_p_75) as video_views_p_75,
+        round(sum(hourly.spend)/nullifzero(sum(hourly.clicks)),2) as daily_cpc,
+        round((sum(hourly.spend)/nullifzero(sum(hourly.impressions))),2)*1000 as daily_cpm,
+        round((sum(hourly.clicks)/nullifzero(sum(hourly.impressions))),2)* 100 as daily_ctr
     from hourly
     left join ads
         on hourly.ad_id = ads.ad_id

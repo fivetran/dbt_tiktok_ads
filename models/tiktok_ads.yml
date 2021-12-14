@@ -72,6 +72,12 @@ models:
         description: The number of times your video was played at 50% of its length. Replays will not be counted.
       - name: video_views_p_75
         description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: daily_cpc
+        description: The average amount of money you've spent on a click.
+      - name: daily_cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: daily_ctr
+        description: The percentage of times people saw your ad and performed a click.
 
   - name: tiktok_ads__ad_group_report
     description: Each record in this table represents the daily performance of ads at the ad group level.
@@ -124,38 +130,12 @@ models:
         description: The number of times your video was played at 50% of its length. Replays will not be counted.
       - name: video_views_p_75
         description: The number of times your video was played at 75% of its length. Replays will not be counted.
-        
-  - name: tiktok_ads__ad_group_audience_report
-    description: Each record in this table represents enhanced audience data for each ad group.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - ad_group_id
-    columns:
-      - name: ad_group_id
-        description: Ad group ID
-      - name: ad_group_name
-        description: Ad group name
-      - name: advertiser_id
-        description: Advertiser ID
-      - name: campaign_id
-        description: Campaign ID
-      - name: gender
-        description: The gender of the audience
-      - name: age
-        description: The age of the audience
-      - name: country_code
-        description: The country of the audience
-      - name: language
-        description: The language of the audience
-      - name: interest_category
-        description: Interest classification. 
-      - name: spend
-        description: The amount of spend that occurred on the day of the record.
-      - name: clicks
-        description: The number of clicks that occurred on the day of the record.
-      - name: impressions
-        description: The number of impressions that occurred on the day of the record.
+      - name: daily_cpc
+        description: The average amount of money you've spent on a click.
+      - name: daily_cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: daily_ctr
+        description: The percentage of times people saw your ad and performed a click.
 
   - name: tiktok_ads__campaign_report
     description: Each record in this table represents the daily performance at the campaign level.
@@ -206,3 +186,9 @@ models:
         description: The number of times your video was played at 50% of its length. Replays will not be counted.
       - name: video_views_p_75
         description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: daily_cpc
+        description: The average amount of money you've spent on a click.
+      - name: daily_cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: daily_daily_ctr
+        description: The percentage of times people saw your ad and performed a click.
