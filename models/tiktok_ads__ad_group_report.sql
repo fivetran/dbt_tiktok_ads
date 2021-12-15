@@ -39,7 +39,7 @@ with adapter as (
 
     from adapter
 
-    {{ dbt_utils.group_by(7) }}
+    {{ dbt_utils.group_by(12) }}
 
 )
 

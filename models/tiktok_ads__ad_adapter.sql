@@ -78,7 +78,7 @@ with hourly as (
         on ads.campaign_id = campaigns.campaign_id
     left join advertiser
         on campaigns.advertiser_id = advertiser.advertiser_id
-    {{ dbt_utils.group_by(19) }}
+    {{ dbt_utils.group_by(24) }}
     
 
 
