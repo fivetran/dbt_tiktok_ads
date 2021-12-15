@@ -25,9 +25,9 @@ with adapter as (
         sum(adapter.video_views_p_25) as video_views_p_25,
         sum(adapter.video_views_p_50) as video_views_p_50, 
         sum(adapter.video_views_p_75) as video_views_p_75,
-        round(sum(adapter.spend)/nullif(sum(adapter.clicks),0),2) as daily_cpc,
-        round((sum(adapter.spend)/nullif(sum(adapter.impressions),0))*1000,2) as daily_cpm,
-        round((sum(adapter.clicks)/nullif(sum(adapter.impressions),0))*100,2) as daily_ctr
+        sum(adapter.spend)/nullif(sum(adapter.clicks),0) as daily_cpc,
+        (sum(adapter.spend)/nullif(sum(adapter.impressions),0))*1000 as daily_cpm,
+        (sum(adapter.clicks)/nullif(sum(adapter.impressions),0))*100 as daily_ctr
 
     from adapter
 
