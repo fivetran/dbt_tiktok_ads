@@ -44,6 +44,13 @@ with hourly as (
         ads.utm_campaign,
         ads.utm_content,
         ads.utm_term,
+        ad_groups.action_categories,
+        ad_groups.gender, 
+        ad_groups.audience_type,
+        ad_groups.budget,
+        ad_groups.age, 
+        ad_groups.languages, 
+        ad_groups.interest_category,
         sum(hourly.spend) as spend,
         sum(hourly.clicks) as clicks,
         sum(hourly.impressions) as impressions,
@@ -58,7 +65,10 @@ with hourly as (
         sum(hourly.video_watched_6_s) as video_watched_6_s, 
         sum(hourly.video_views_p_25) as video_views_p_25, 
         sum(hourly.video_views_p_50) as video_views_p_50,
-        sum(hourly.video_views_p_75) as video_views_p_75
+        sum(hourly.video_views_p_75) as video_views_p_75,
+        sum(hourly.spend)/nullif(sum(hourly.clicks),0) as daily_cpc,
+        (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
+        (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
     from hourly
     left join ads
         on hourly.ad_id = ads.ad_id
@@ -68,7 +78,7 @@ with hourly as (
         on ads.campaign_id = campaigns.campaign_id
     left join advertiser
         on campaigns.advertiser_id = advertiser.advertiser_id
-    {{ dbt_utils.group_by(17) }}
+    {{ dbt_utils.group_by(24) }}
     
 
 
