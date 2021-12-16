@@ -17,5 +17,5 @@ vars:
     advertiser: "{{ ref('stg_tiktok_ads__advertiser') }}"
     ad_report_hourly: "{{ ref('stg_tiktok_ads__ad_report_hourly') }}"
     campaign_report_hourly: "{{ ref('stg_tiktok_ads__campaign_report_hourly') }}"
-    ad_group_report_hourly: "{{ ref('stg_tiktok_ads__ad_group_report_hourly') }}"
+    ad_group_hourly: "{{ ref('stg_tiktok_ads__ad_group_report_hourly') }}"
     
