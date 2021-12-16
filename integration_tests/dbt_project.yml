@@ -9,11 +9,8 @@ vars:
     ad_history: "{{ ref('tiktok_ad_history_data') }}"
     advertiser: "{{ ref('tiktok_advertiser_data') }}"
     campaign_history: "{{ ref('tiktok_campaign_history_data') }}"
-    ad_report_daily: "{{ ref('tiktok_ad_report_daily_data') }}"
     ad_report_hourly: "{{ ref('tiktok_ad_report_hourly_data') }}"
-    ad_group_daily: "{{ ref('tiktok_adgroup_report_daily_data') }}"
     ad_group_hourly: "{{ ref('tiktok_adgroup_report_hourly_data') }}"
-    campaign_report_daily: "{{ ref('tiktok_campaign_report_daily_data') }}"
     campaign_report_hourly: "{{ ref('tiktok_campaign_report_hourly_data') }}"
 
 seeds:
