@@ -11,10 +11,9 @@ This package contains transformation models, designed to work simultaneously wit
 
 | **model**                    | **description**                                                                                                        |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| [tiktok_ads__ad_adapter](insert)                          | Each record represents the daily ad performance, including information about the UTM parameters. |
-| [tiktok_ads__ad_group_report](insert)                     | Each record represents the daily ad performance for each ad group. | 
-| [tiktok_ads__ad_group_audience_report](insert)            | Each record represents the daily ad performance with metrics for audience segmentation. | 
-| [tiktok_ads__campaign_report](insert)                     | Each record represents the daily ad performance for each campaign. | 
+| [tiktok_ads__ad_adapter](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_adapter.sql)                          | Each record represents the daily ad performance, including information about the UTM parameters. |
+| [tiktok_ads__ad_group_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_group_report.sql)                     | Each record represents the daily ad performance for each ad group. This also includes additional data on the demographics you want to target. | 
+| [tiktok_ads__campaign_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql)                     | Each record represents the daily ad performance for each campaign. | 
 
 ## Installation Instructions
 

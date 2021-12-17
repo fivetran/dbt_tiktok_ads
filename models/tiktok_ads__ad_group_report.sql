@@ -3,6 +3,11 @@ with adapter as (
     select *
     from {{ ref('tiktok_ads__ad_adapter') }}
 
+), ad_groups as (
+
+    select *
+    from {{ ref('int_tiktok_ads__most_recent_ad_group') }}
+
 ), aggregated as (
 
     select
@@ -11,13 +16,13 @@ with adapter as (
         adapter.advertiser_id,
         adapter.campaign_id,
         adapter.campaign_name,
-        adapter.action_categories,
-        adapter.gender, 
-        adapter.audience_type,
-        adapter.budget,
-        adapter.age, 
-        adapter.languages, 
-        adapter.interest_category,
+        ad_groups.action_categories,
+        ad_groups.gender, 
+        ad_groups.audience_type,
+        ad_groups.budget,
+        ad_groups.age, 
+        ad_groups.languages, 
+        ad_groups.interest_category,
         sum(adapter.impressions) as impressions,
         sum(adapter.clicks) as clicks,
         sum(adapter.spend) as spend,
@@ -38,6 +43,8 @@ with adapter as (
         (sum(adapter.clicks)/nullif(sum(adapter.impressions),0))*100 as daily_ctr
 
     from adapter
+    left join ad_groups 
+    on adapter.ad_group_id = ad_groups.ad_group_id
 
     {{ dbt_utils.group_by(12) }}
 

@@ -136,6 +136,20 @@ models:
         description: The average amount of money you've spent per 1,000 impressions.
       - name: daily_ctr
         description: The percentage of times people saw your ad and performed a click.
+      - name: action_categories
+        description: IDs of the action categories (behaviors) that you want to target.
+      - name: gender
+        description: Gender that you want to target. 
+      - name: audience_type
+        description: Audience Type
+      - name: budget
+        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
+      - name: age
+        description: Age groups you want to target. 
+      - name: languages
+        description: Codes of the languages that you want to target.
+      - name: interest_category
+        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
 
   - name: tiktok_ads__campaign_report
     description: Each record in this table represents the daily performance at the campaign level.
