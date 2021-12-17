@@ -41,6 +41,8 @@ models:
         description: Gender that you want to target. 
       - name: landing_page_url
         description: Landing page URL.
+      - name: video_download
+        description: Whether the video is allowed to be downloaded. 
       - name: languages
         description: Codes of the languages that you want to target.
       - name: _fivetran_synced
@@ -66,6 +68,8 @@ models:
         description: Ad group ID
       - name: advertiser_id
         description: Advertiser ID
+      - name: base_url
+        description: The base URL of the ad, extracted from the `landing page url`.
       - name: campaign_id
         description: Campaign ID
       - name: ad_name
