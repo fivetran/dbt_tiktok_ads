@@ -19,7 +19,7 @@ models:
         description: Campaign ID.
       - name: campaign_name
         description: Campaign name.
-      - name: company_name
+      - name: advertiser_name
         description: Advertiser name.
       - name: advertiser_id
         description: Advertiser ID. 

@@ -29,7 +29,7 @@ with hourly as (
     select 
         cast(hourly.stat_time_hour as date) as date_day,
         advertiser.advertiser_id,
-        advertiser.company as company_name,
+        advertiser.name as advertiser_name,
         campaigns.campaign_id,
         campaigns.campaign_name,
         ad_groups.ad_group_id,

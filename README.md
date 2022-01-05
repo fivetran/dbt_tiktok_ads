@@ -39,8 +39,8 @@ By default, this package will look for your TikTok Ads data in the `tiktok_ads` 
 config-version: 2
 
 vars:
-    tiktok_schema: tiktok_ads_schema
-    tiktok_database: tiktok_ads_database 
+    tiktok_ads_schema: your_database_name
+    tiktok_ads_database: your_schema_name
 ```
 
 For additional configurations for the source models, visit the [Tiktok Ads source package](https://github.com/fivetran/dbt_tiktok_ads_source).
