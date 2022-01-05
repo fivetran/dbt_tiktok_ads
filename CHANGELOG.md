@@ -1,3 +1,7 @@
+# dbt_tiktok_ads v0.1.1
+## Under the Hood
+- Updated package yml to point to live source 
+
 # dbt_tiktok_ads v0.1.0
 
 ## Initial Release
