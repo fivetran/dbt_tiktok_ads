@@ -34,7 +34,14 @@ with hourly as (
         sum(hourly.video_watched_6_s) as video_watched_6_s, 
         sum(hourly.video_views_p_25) as video_views_p_25, 
         sum(hourly.video_views_p_50) as video_views_p_50,
-        sum(hourly.video_views_p_75) as video_views_p_75
+        sum(hourly.video_views_p_75) as video_views_p_75,
+        sum(hourly.spend)/nullif(sum(hourly.clicks),0) as daily_cpc,
+        (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
+        (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
+        
+        {% for metric in var('tiktok_ads__ad_hourly_passthrough_metrics', []) %}
+        , {{ metric }}
+        {% endfor %}
     from hourly
     left join ads
         on hourly.ad_id = ads.ad_id

@@ -1,27 +1,57 @@
 with hourly as (
     
     select *
-    from {{ var('campaign_report_hourly') }}
+    from {{ var('ad_report_hourly') }}
+
+), ads as (
+
+    select *
+    from {{ ref('int_tiktok_ads__most_recent_ad') }}
+
+), ad_groups as (
+
+    select *
+    from {{ ref('int_tiktok_ads__most_recent_ad_group') }}
+
+), advertiser as (
+
+    select *
+    from {{ var('advertiser') }}
 
 ), campaigns as (
 
     select *
     from {{ ref('int_tiktok_ads__most_recent_campaign') }}
 
-), advertiser as (
-
-    select *
-    from {{ var('advertiser') }}
-    
 ), aggregated as (
 
     select
         cast(hourly.stat_time_hour as date) as date_day,
-        advertiser.advertiser_id,
+        ad_groups.advertiser_id,
         advertiser.advertiser_name,
         campaigns.campaign_id,
         campaigns.campaign_name,
+        ad_groups.ad_group_id,
+        ad_groups.ad_group_name,
+        ads.ad_id,
+        ads.ad_name,
+        ads.base_url,
+        ads.url_host,
+        ads.url_path,
+        ads.utm_source,
+        ads.utm_medium,
+        ads.utm_campaign,
+        ads.utm_content,
+        ads.utm_term,
         advertiser.currency,
+        ad_groups.action_categories,
+        ad_groups.category,
+        ad_groups.gender,
+        ad_groups.audience_type,
+        ad_groups.budget,
+        ad_groups.age,
+        ad_groups.languages,
+        ad_groups.interest_category,
         sum(hourly.impressions) as impressions,
         sum(hourly.clicks) as clicks,
         sum(hourly.spend) as spend,
@@ -40,13 +70,23 @@ with hourly as (
         sum(hourly.spend)/nullif(sum(hourly.clicks),0) as daily_cpc,
         (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
-
+        
+        {% for metric in var('tiktok_ads__ad_hourly_passthrough_metrics', []) %}
+        , {{ metric }}
+        {% endfor %}
     from hourly
-    left join campaigns
-        on hourly.campaign_id = campaigns.campaign_id
+    left join ads
+        on hourly.ad_id = ads.ad_id
+    left join ad_groups 
+        on ads.ad_group_id = ad_groups.ad_group_id
     left join advertiser
-        on campaigns.advertiser_id = advertiser.advertiser_id
-    {{ dbt_utils.group_by(6) }}
+        on ads.advertiser_id = advertiser.advertiser_id
+    left join campaigns
+        on ads.campaign_id = campaigns.campaign_id
+
+    -- We only want utm ads to populate this report. Therefore, we filter where url ads are populated.
+    where ads.landing_page_url is not null
+    {{ dbt_utils.group_by(26) }}
 
 )
 

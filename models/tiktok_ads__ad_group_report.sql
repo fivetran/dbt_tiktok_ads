@@ -30,6 +30,7 @@ with hourly as (
         ad_groups.ad_group_name,
         advertiser.currency,
         ad_groups.action_categories,
+        ad_groups.category,
         ad_groups.gender,
         ad_groups.audience_type,
         ad_groups.budget,
@@ -54,7 +55,10 @@ with hourly as (
         sum(hourly.spend)/nullif(sum(hourly.clicks),0) as daily_cpc,
         (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
-
+        
+        {% for metric in var('tiktok_ads__ad_group_hourly_passthrough_metrics', []) %}
+        , {{ metric }}
+        {% endfor %}
     from hourly
     left join ad_groups 
         on hourly.ad_group_id = ad_groups.ad_group_id
@@ -62,7 +66,7 @@ with hourly as (
         on ad_groups.advertiser_id = advertiser.advertiser_id
     left join campaigns
         on ad_groups.campaign_id = campaigns.campaign_id
-    {{ dbt_utils.group_by(15) }}
+    {{ dbt_utils.group_by(16) }}
 
 )
 
