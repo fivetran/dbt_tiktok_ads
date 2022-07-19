@@ -1,52 +1,68 @@
-with adapter as (
-
+with hourly as (
+    
     select *
-    from {{ ref('tiktok_ads__ad_adapter') }}
+    from {{ var('ad_group_report_hourly') }}
 
 ), ad_groups as (
 
     select *
     from {{ ref('int_tiktok_ads__most_recent_ad_group') }}
 
+), advertiser as (
+
+    select *
+    from {{ var('advertiser') }}
+
+), campaigns as (
+
+    select *
+    from {{ ref('int_tiktok_ads__most_recent_campaign') }}
+
 ), aggregated as (
 
     select
-        adapter.date_day,
-        adapter.ad_group_id,
-        adapter.advertiser_id,
-        adapter.campaign_id,
-        adapter.campaign_name,
+        cast(hourly.stat_time_hour as date) as date_day,
+        ad_groups.advertiser_id,
+        advertiser.advertiser_name,
+        campaigns.campaign_id,
+        campaigns.campaign_name,
+        ad_groups.ad_group_id,
+        ad_groups.ad_group_name,
+        advertiser.currency,
         ad_groups.action_categories,
-        ad_groups.gender, 
+        ad_groups.gender,
         ad_groups.audience_type,
         ad_groups.budget,
-        ad_groups.age, 
-        ad_groups.languages, 
+        ad_groups.age,
+        ad_groups.languages,
         ad_groups.interest_category,
-        sum(adapter.impressions) as impressions,
-        sum(adapter.clicks) as clicks,
-        sum(adapter.spend) as spend,
-        sum(adapter.reach) as reach,
-        sum(adapter.conversion) as conversion,
-        sum(adapter.likes) as likes,
-        sum(adapter.comments) as comments,
-        sum(adapter.shares) as shares,
-        sum(adapter.profile_visits) as profile_visits,
-        sum(adapter.follows) as follows,
-        sum(adapter.video_watched_2_s) as video_watched_2_s,
-        sum(adapter.video_watched_6_s) as video_watched_6_s,
-        sum(adapter.video_views_p_25) as video_views_p_25,
-        sum(adapter.video_views_p_50) as video_views_p_50, 
-        sum(adapter.video_views_p_75) as video_views_p_75,
-        sum(adapter.spend)/nullif(sum(adapter.clicks),0) as daily_cpc,
-        (sum(adapter.spend)/nullif(sum(adapter.impressions),0))*1000 as daily_cpm,
-        (sum(adapter.clicks)/nullif(sum(adapter.impressions),0))*100 as daily_ctr
+        sum(hourly.impressions) as impressions,
+        sum(hourly.clicks) as clicks,
+        sum(hourly.spend) as spend,
+        sum(hourly.reach) as reach,
+        sum(hourly.conversion) as conversion,
+        sum(hourly.likes) as likes,
+        sum(hourly.comments) as comments,
+        sum(hourly.shares) as shares,
+        sum(hourly.profile_visits) as profile_visits,
+        sum(hourly.follows) as follows,
+        sum(hourly.video_watched_2_s) as video_watched_2_s,
+        sum(hourly.video_watched_6_s) as video_watched_6_s,
+        sum(hourly.video_views_p_25) as video_views_p_25,
+        sum(hourly.video_views_p_50) as video_views_p_50, 
+        sum(hourly.video_views_p_75) as video_views_p_75,
+        sum(hourly.spend)/nullif(sum(hourly.clicks),0) as daily_cpc,
+        (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
+        (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
 
-    from adapter
+    from hourly
     left join ad_groups 
-    on adapter.ad_group_id = ad_groups.ad_group_id
-
-    {{ dbt_utils.group_by(12) }}
+        on hourly.ad_group_id = ad_groups.ad_group_id
+    left join advertiser
+        on ad_groups.advertiser_id = advertiser.advertiser_id
+    left join campaigns
+        on ad_groups.campaign_id = campaigns.campaign_id
+    {{ dbt_utils.group_by(15) }}
 
 )
 
