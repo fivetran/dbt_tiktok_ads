@@ -11,8 +11,12 @@ models:
     columns:
       - name: date_day
         description: Day of record.
+        tests:
+          - not_null
       - name: advertiser_name
         description: Advertiser name.
+        tests:
+          - not_null
       - name: advertiser_id
         description: Advertiser ID.
       - name: currency
@@ -67,8 +71,12 @@ models:
     columns:
       - name: date_day
         description: Day of record.
+        tests:
+          - not_null
       - name: ad_id
         description: Ad ID.
+        tests:
+          - not_null
       - name: ad_name
         description: Ad name.
       - name: campaign_id
@@ -151,8 +159,12 @@ models:
     columns:
       - name: date_day
         description: Day of record
+        tests:
+          - not_null
       - name: ad_group_id
         description: Ad group ID
+        tests:
+          - not_null
       - name: ad_group_name
         description: Ad group name
       - name: campaign_id
@@ -231,8 +243,12 @@ models:
     columns:
       - name: date_day
         description: Day of record
+        tests:
+          - not_null
       - name: campaign_id
         description: Campaign ID
+        tests:
+          - not_null
       - name: campaign_name
         description: Campaign name
       - name: advertiser_id
@@ -289,8 +305,12 @@ models:
     columns:
       - name: date_day
         description: Day of record.
+        tests:
+          - not_null
       - name: ad_id
         description: Ad ID.
+        tests:
+          - not_null
       - name: ad_name
         description: Ad name.
       - name: campaign_id
