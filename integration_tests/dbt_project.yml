@@ -5,7 +5,7 @@ config-version: 2
 
 vars: 
   tiktok_ads_source:
-    tiktok_schema: tiktok_ads_integration_tests
+    tiktok_ads_schema: tiktok_ads_integration_tests
     tiktok_ads__ad_group_history_identifier: "tiktok_adgroup_history_data"
     tiktok_ads__ad_history_identifier: "tiktok_ad_history_data"
     tiktok_ads__advertiser_identifier: "tiktok_advertiser_data"
