@@ -11,7 +11,7 @@ vars:
     tiktok_ads__advertiser_identifier: "tiktok_advertiser_data"
     tiktok_ads__campaign_history_identifier: "tiktok_campaign_history_data"
     tiktok_ads__ad_report_hourly_identifier: "tiktok_ad_report_hourly_data"
-    tiktok_ads__ad_group_hourly_identifier: "tiktok_adgroup_report_hourly_data"
+    tiktok_ads__ad_group_report_hourly_identifier: "tiktok_adgroup_report_hourly_data"
     tiktok_ads__campaign_report_hourly_identifier: "tiktok_campaign_report_hourly_data"
 
 seeds:
