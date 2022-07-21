@@ -33,7 +33,7 @@ with hourly as (
         campaigns.campaign_name,
         ad_groups.ad_group_id,
         ad_groups.ad_group_name,
-        ads.ad_id,
+        hourly.ad_id,
         ads.ad_name,
         ads.base_url,
         ads.url_host,

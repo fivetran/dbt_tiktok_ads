@@ -19,7 +19,7 @@ with hourly as (
         cast(hourly.stat_time_hour as date) as date_day,
         advertiser.advertiser_id,
         advertiser.advertiser_name,
-        campaigns.campaign_id,
+        hourly.campaign_id,
         campaigns.campaign_name,
         advertiser.currency,
         sum(hourly.impressions) as impressions,

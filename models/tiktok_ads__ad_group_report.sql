@@ -26,7 +26,7 @@ with hourly as (
         advertiser.advertiser_name,
         campaigns.campaign_id,
         campaigns.campaign_name,
-        ad_groups.ad_group_id,
+        hourly.ad_group_id,
         ad_groups.ad_group_name,
         advertiser.currency,
         ad_groups.action_categories,
