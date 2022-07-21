@@ -15,7 +15,7 @@ with hourly as (
 
 ), joined as (
 
-    select 
+    select
         cast(hourly.stat_time_hour as date) as date_day,
         advertiser.advertiser_id,
         advertiser.advertiser_name,

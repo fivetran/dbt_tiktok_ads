@@ -15,10 +15,10 @@ models:
           - not_null
       - name: advertiser_name
         description: Advertiser name.
-        tests:
-          - not_null
       - name: advertiser_id
         description: Advertiser ID.
+        tests:
+          - not_null
       - name: currency
         description: Advertiser's currency.
       - name: impressions
