@@ -42,7 +42,7 @@ with hourly as (
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
         
         {% for metric in var('tiktok_ads__campaign_hourly_passthrough_metrics', []) %}
-        , {{ metric }}
+        , sum(hourly.{{ metric }}) as {{ metric }}
         {% endfor %}
     from hourly
     left join campaigns
