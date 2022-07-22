@@ -17,7 +17,7 @@ with hourly as (
 
     select
         cast(hourly.stat_time_hour as date) as date_day,
-        advertiser.advertiser_id,
+        ads.advertiser_id,
         advertiser.advertiser_name,
         advertiser.currency,
         sum(hourly.clicks) as clicks,
