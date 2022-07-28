@@ -23,7 +23,7 @@ The following table provides a detailed list of all models materialized within t
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [tiktok_ads__ad_group_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_group_report.sql)                     | Each record represents the daily performance for each ad group. This also includes additional data on the demographics you are targeting. | 
 | [tiktok_ads__campaign_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql)                     | Each record represents the daily performance for each campaign. |
-| [tiktok_ads__account_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__account_report.sql)                     | Each record represents the daily performance for each account. |
+| [tiktok_ads__advertiser_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__account_report.sql)                     | Each record represents the daily performance for each account. |
 | [tiktok_ads__ad_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql)                     | Each record represents the daily performance for each ad. This also includes additional data on the demographics you are targeting. | 
 | [tiktok_ads__url_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql)                     | Each record represents the daily performance for each UTM parameter, for ads with url fields. This also includes additional data on the demographics you are targeting. |
 
@@ -46,8 +46,7 @@ packages:
 ```
 
 ## Step 3: Define database and schema variables
-By default, this package will look for your TikTok Ads data in the `tiktok_ads` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your TikTok Ads data is, please add the following configuration to your 
-`dbt_project.yml` file:
+By default, this package will look for your TikTok Ads data in the `tiktok_ads` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your TikTok Ads data is, you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
 
 ```yml
 # dbt_project.yml

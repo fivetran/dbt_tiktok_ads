@@ -2,18 +2,21 @@ with hourly as (
     
     select *
     from {{ var('ad_report_hourly') }}
+),
 
-), advertiser as (
+advertiser as (
 
     select *
     from {{ var('advertiser') }}
+), 
 
-), ads as (
+ads as (
 
     select *
     from {{ ref('int_tiktok_ads__most_recent_ad') }}
+), 
 
-), joined as (
+joined as (
 
     select
         cast(hourly.stat_time_hour as date) as date_day,
@@ -48,8 +51,6 @@ with hourly as (
     left join advertiser
         on ads.advertiser_id = advertiser.advertiser_id
     {{ dbt_utils.group_by(4) }}
-    
-
 
 )
 

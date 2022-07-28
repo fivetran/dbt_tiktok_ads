@@ -2,28 +2,33 @@ with hourly as (
     
     select *
     from {{ var('ad_report_hourly') }}
+), 
 
-), ads as (
+ads as (
 
     select *
     from {{ ref('int_tiktok_ads__most_recent_ad') }}
+), 
 
-), ad_groups as (
+ad_groups as (
 
     select *
     from {{ ref('int_tiktok_ads__most_recent_ad_group') }}
+), 
 
-), advertiser as (
+advertiser as (
 
     select *
     from {{ var('advertiser') }}
+), 
 
-), campaigns as (
+campaigns as (
 
     select *
     from {{ ref('int_tiktok_ads__most_recent_campaign') }}
+), 
 
-), aggregated as (
+aggregated as (
 
     select
         cast(hourly.stat_time_hour as date) as date_day,
@@ -84,7 +89,7 @@ with hourly as (
     left join campaigns
         on ads.campaign_id = campaigns.campaign_id
 
-    -- We only want utm ads to populate this report. Therefore, we filter where url ads are populated.
+    -- We are filtering for only ads where url fields are populated.
     where ads.landing_page_url is not null
     {{ dbt_utils.group_by(26) }}
 

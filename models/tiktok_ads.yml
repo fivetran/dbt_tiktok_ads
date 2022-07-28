@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: tiktok_ads__account_report
+  - name: tiktok_ads__advertiser_report
     description: Each record in this table represents the daily performance of ads at the account level.
     tests:
       - dbt_utils.unique_combination_of_columns:
