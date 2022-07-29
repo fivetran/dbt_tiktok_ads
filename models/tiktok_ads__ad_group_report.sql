@@ -7,7 +7,8 @@ with hourly as (
 ad_groups as (
 
     select *
-    from {{ ref('int_tiktok_ads__most_recent_ad_group') }}
+    from {{ var('ad_group_history') }}
+    where is_most_recent_record
 ), 
 
 advertiser as (
@@ -19,7 +20,8 @@ advertiser as (
 campaigns as (
 
     select *
-    from {{ ref('int_tiktok_ads__most_recent_campaign') }}
+    from {{ var('campaign_history') }}
+    where is_most_recent_record
 ), 
 
 aggregated as (

@@ -13,7 +13,8 @@ advertiser as (
 ads as (
 
     select *
-    from {{ ref('int_tiktok_ads__most_recent_ad') }}
+    from {{ var('ad_history') }}
+    where is_most_recent_record
 ), 
 
 joined as (
