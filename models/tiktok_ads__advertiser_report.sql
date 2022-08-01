@@ -26,7 +26,7 @@ joined as (
         advertiser.currency,
         sum(hourly.clicks) as clicks,
         sum(hourly.impressions) as impressions,
-        sum(hourly.spend) as spend,
+        round(sum(hourly.spend),2) as spend,
         sum(hourly.reach) as reach,
         sum(hourly.conversion) as conversion,
         sum(hourly.likes) as likes,
