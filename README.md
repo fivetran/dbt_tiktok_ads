@@ -17,7 +17,7 @@
 - Generates a comprehensive data dictionary of your source and modeled Tiktok Ads data through the [dbt docs site](https://fivetran.github.io/dbt_tiktok_ads/).
 
 The following table provides a detailed list of all models materialized within this package by default. 
-> TIP: See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_tiktok/#!/overview?g_v=1&g_e=seeds).
+> TIP: See more details about these models in the package's [dbt docs site](https://fivetran.github.io/dbt_tiktok_ads/#!/overview?g_v=1&g_e=seeds).
 
 | **model**                    | **description**                                                                                                        |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -25,7 +25,7 @@ The following table provides a detailed list of all models materialized within t
 | [tiktok_ads__campaign_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql)                     | Each record represents the daily performance for each campaign. |
 | [tiktok_ads__advertiser_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__account_report.sql)                     | Each record represents the daily performance for each account. |
 | [tiktok_ads__ad_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql)                     | Each record represents the daily performance for each ad. This also includes additional data on the demographics you are targeting. | 
-| [tiktok_ads__url_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql)                     | Each record represents the daily performance for each UTM parameter, for ads with url fields. This also includes additional data on the demographics you are targeting. |
+| [tiktok_ads__url_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql)                     | Each record in this table represents the daily performance of URLs at the ad level. This also includes additional data on the demographics you are targeting.
 
 # 🎯 How do I use the dbt package?
 
