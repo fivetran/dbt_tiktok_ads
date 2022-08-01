@@ -1,13 +1,21 @@
 # dbt_tiktok_ads v0.2.0
-- This PR ([#5](https://github.com/fivetran/dbt_tiktok_ads/pull/5)) applies the Ad Reporting V2 updates to provide further flexibility in your ad reporting. Additionally, these new end models will be leveraged in the respective downstream [dbt_ad_reporting](https://github.com/fivetran/dbt_ad_reporting) models. 
-
-- Adds in the `account_report`, `url_report`, `ad_report` models and the respective field descriptions and tests for the new models in the yml files
+This PR ([#5](https://github.com/fivetran/dbt_tiktok_ads/pull/5)) applies the following updates to provide further flexibility in your ad reporting. Additionally, these new end models will be leveraged in the respective downstream [dbt_ad_reporting](https://github.com/fivetran/dbt_ad_reporting) models. 
+## 🚨 Breaking Changes 🚨
+- Updates `ad_group_hourly` variable to `ad_group_report_hourly`
+- Removes intermediate models and instead incorporates previous logic into end models
+- Renames the `tikok_ads__ad_adapter` model to `tiktok_ads__url_report` 
+- Removes dependency of models on the `tikok_ads__ad_adapter` model and moves that previous logic into each model, using corresponding hourly reports for each model's granularity (e.g. `tikok_ads__campaign_report` now uses the `campaign_report_hourly`)
+## 🎉 Feature Enhancements 🎉
+- Adds in the following models and respective field descriptions and tests:
+    - `tiktok_ads__account_report`
+    - `tiktok_ads__url_report`
+    - `tiktok_ads__ad_report`
 - Adds additional fields to existing models `ad_group_report` and `campaign_report` that were previously not brought in
-- Removes the ad_adapter model and the respective dependencies the other models have on it, instead using that model's level of granularity's hourly report.
-- Add passthrough metrics for respective models: ([#5](https://github.com/fivetran/dbt_tiktok_ads/pull/5))
+- Add passthrough metrics for their respective models:
     - `tiktok_ads__ad_hourly_passthrough_metrics`
     - `tiktok_ads__ad_group_hourly_passthrough_metrics`
     - `tiktok_ads__campaign_hourly_passthrough_metrics`
+- Adds not-null tests to key fields
 - Applies standardization updates 
 
 # dbt_tiktok_ads v0.1.1
