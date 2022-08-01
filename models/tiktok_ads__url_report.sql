@@ -62,7 +62,7 @@ aggregated as (
         ad_groups.interest_category,
         sum(hourly.impressions) as impressions,
         sum(hourly.clicks) as clicks,
-        round(sum(hourly.spend),2) as spend,
+        sum(hourly.spend) as spend,
         sum(hourly.reach) as reach,
         sum(hourly.conversion) as conversion,
         sum(hourly.likes) as likes,
