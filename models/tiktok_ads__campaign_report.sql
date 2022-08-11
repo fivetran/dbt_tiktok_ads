@@ -44,10 +44,8 @@ aggregated as (
         sum(hourly.spend)/nullif(sum(hourly.clicks),0) as daily_cpc,
         (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
-        
-        {% for metric in var('tiktok_ads__campaign_hourly_passthrough_metrics', []) %}
-        , sum(hourly.{{ metric }}) as {{ metric }}
-        {% endfor %}
+
+        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='tiktok_ads__campaign_hourly_passthrough_metrics', transform = 'sum') }}
     from hourly
     left join campaigns
         on hourly.campaign_id = campaigns.campaign_id
