@@ -17,6 +17,7 @@ This PR ([#5](https://github.com/fivetran/dbt_tiktok_ads/pull/5)) applies the fo
     - `tiktok_ads__campaign_hourly_passthrough_metrics`
 - Adds not-null tests to key fields
 - Applies standardization updates 
+- Add enable configs for this specific ad platform, for use in the Ad Reporting rollup package 
 
 # dbt_tiktok_ads v0.1.1
 ## Under the Hood
