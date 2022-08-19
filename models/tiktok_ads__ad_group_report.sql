@@ -1,3 +1,5 @@
+{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true)) }}
+
 with hourly as (
     
     select *
