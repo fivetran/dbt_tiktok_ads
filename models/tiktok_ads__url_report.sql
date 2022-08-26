@@ -82,6 +82,7 @@ aggregated as (
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
 
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='tiktok_ads__ad_hourly_passthrough_metrics', transform = 'sum') }}
+    
     from hourly
     left join ads
         on hourly.ad_id = ads.ad_id
