@@ -3,7 +3,14 @@
 with hourly as (
     
     select *
-    from {{ var('ad_group_report_hourly') }}
+    from {{ var('ad_report_hourly') }}
+), 
+
+ads as (
+
+    select *
+    from {{ var('ad_history') }}
+    where is_most_recent_record
 ), 
 
 ad_groups as (
@@ -34,8 +41,18 @@ aggregated as (
         advertiser.advertiser_name,
         campaigns.campaign_id,
         campaigns.campaign_name,
-        hourly.ad_group_id,
+        ad_groups.ad_group_id,
         ad_groups.ad_group_name,
+        hourly.ad_id,
+        ads.ad_name,
+        ads.base_url,
+        ads.url_host,
+        ads.url_path,
+        ads.utm_source,
+        ads.utm_medium,
+        ads.utm_campaign,
+        ads.utm_content,
+        ads.utm_term,
         advertiser.currency,
         ad_groups.action_categories,
         ad_groups.category,
@@ -64,16 +81,21 @@ aggregated as (
         (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
 
-        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='tiktok_ads__ad_group_hourly_passthrough_metrics', transform = 'sum') }}
+        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='tiktok_ads__ad_hourly_passthrough_metrics', transform = 'sum') }}
     
     from hourly
+    left join ads
+        on hourly.ad_id = ads.ad_id
     left join ad_groups 
-        on hourly.ad_group_id = ad_groups.ad_group_id
+        on ads.ad_group_id = ad_groups.ad_group_id
     left join advertiser
-        on ad_groups.advertiser_id = advertiser.advertiser_id
+        on ads.advertiser_id = advertiser.advertiser_id
     left join campaigns
-        on ad_groups.campaign_id = campaigns.campaign_id
-    {{ dbt_utils.group_by(16) }}
+        on ads.campaign_id = campaigns.campaign_id
+
+    -- We are filtering for only ads where url fields are populated.
+    where ads.landing_page_url is not null
+    {{ dbt_utils.group_by(26) }}
 
 )
 

@@ -1,17 +1,18 @@
 name: 'tiktok_ads_integration_tests'
-version: '0.1.1'
+version: '0.2.0'
 profile: 'integration_tests'
 config-version: 2
 
 vars: 
   tiktok_ads_source:
-    ad_group_history: "{{ ref('tiktok_adgroup_history_data') }}"
-    ad_history: "{{ ref('tiktok_ad_history_data') }}"
-    advertiser: "{{ ref('tiktok_advertiser_data') }}"
-    campaign_history: "{{ ref('tiktok_campaign_history_data') }}"
-    ad_report_hourly: "{{ ref('tiktok_ad_report_hourly_data') }}"
-    ad_group_hourly: "{{ ref('tiktok_adgroup_report_hourly_data') }}"
-    campaign_report_hourly: "{{ ref('tiktok_campaign_report_hourly_data') }}"
+    tiktok_ads_schema: tiktok_ads_integration_tests_1
+    tiktok_ads__ad_group_history_identifier: "tiktok_adgroup_history_data"
+    tiktok_ads__ad_history_identifier: "tiktok_ad_history_data"
+    tiktok_ads__advertiser_identifier: "tiktok_advertiser_data"
+    tiktok_ads__campaign_history_identifier: "tiktok_campaign_history_data"
+    tiktok_ads__ad_report_hourly_identifier: "tiktok_ad_report_hourly_data"
+    tiktok_ads__ad_group_report_hourly_identifier: "tiktok_adgroup_report_hourly_data"
+    tiktok_ads__campaign_report_hourly_identifier: "tiktok_campaign_report_hourly_data"
 
 seeds:
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"

@@ -1,52 +1,34 @@
+{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true)) }}
 
 with hourly as (
     
     select *
     from {{ var('ad_report_hourly') }}
+),
 
-), campaigns as (
-
-    select *
-    from {{ ref('int_tiktok_ads__most_recent_campaign') }}
-
-), advertiser as (
+advertiser as (
 
     select *
     from {{ var('advertiser') }}
+), 
 
-), ad_groups as (
-
-    select *
-    from {{ ref('int_tiktok_ads__most_recent_ad_group') }}
-
-), ads as (
+ads as (
 
     select *
-    from {{ ref('int_tiktok_ads__most_recent_ad') }}
+    from {{ var('ad_history') }}
+    where is_most_recent_record
+), 
 
-), joined as (
+joined as (
 
-    select 
+    select
         cast(hourly.stat_time_hour as date) as date_day,
-        advertiser.advertiser_id,
-        advertiser.name as advertiser_name,
-        campaigns.campaign_id,
-        campaigns.campaign_name,
-        ad_groups.ad_group_id,
-        ad_groups.ad_group_name,
-        ads.ad_id,
-        ads.ad_name,
-        ads.base_url,
-        ads.url_host,
-        ads.url_path,
-        ads.utm_source,
-        ads.utm_medium,
-        ads.utm_campaign,
-        ads.utm_content,
-        ads.utm_term,
-        sum(hourly.spend) as spend,
+        ads.advertiser_id,
+        advertiser.advertiser_name,
+        advertiser.currency,
         sum(hourly.clicks) as clicks,
         sum(hourly.impressions) as impressions,
+        sum(hourly.spend) as spend,
         sum(hourly.reach) as reach,
         sum(hourly.conversion) as conversion,
         sum(hourly.likes) as likes,
@@ -62,18 +44,15 @@ with hourly as (
         sum(hourly.spend)/nullif(sum(hourly.clicks),0) as daily_cpc,
         (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
+
+        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='tiktok_ads__ad_hourly_passthrough_metrics', transform = 'sum') }}
+    
     from hourly
     left join ads
         on hourly.ad_id = ads.ad_id
-    left join ad_groups 
-        on ads.ad_group_id = ad_groups.ad_group_id
-    left join campaigns
-        on ads.campaign_id = campaigns.campaign_id
     left join advertiser
-        on campaigns.advertiser_id = advertiser.advertiser_id
-    {{ dbt_utils.group_by(17) }}
-    
-
+        on ads.advertiser_id = advertiser.advertiser_id
+    {{ dbt_utils.group_by(4) }}
 
 )
 

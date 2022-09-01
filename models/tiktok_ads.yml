@@ -1,18 +1,85 @@
 version: 2
 
 models:
-  - name: tiktok_ads__ad_adapter
-    description: Each record in this table represents the daily performance of ads at the ad level and URL level.
+  - name: tiktok_ads__advertiser_report
+    description: Each record in this table represents the daily performance of ads at the account level.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - ad_id
+            - advertiser_id
             - date_day
     columns:
       - name: date_day
         description: Day of record.
+        tests:
+          - not_null
+      - name: advertiser_name
+        description: Advertiser name.
+      - name: advertiser_id
+        description: Advertiser ID.
+        tests:
+          - not_null
+      - name: currency
+        description: Advertiser's currency.
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: reach
+        description: The number of unique users who saw your ads at least once. This metric is estimated.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+      - name: likes
+        description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
+      - name: comments
+        description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
+      - name: shares
+        description: The number of shares that occurred on the day of the record.
+      - name: profile_visits
+        description: The number of profile visits that occurred on the day of the record.
+      - name: follows
+        description: The number of follows that occurred on the day of the record.
+      - name: video_watched_2_s
+        description: The number of times your video played for at least 2 seconds, or completely played. Replays will not be counted.
+      - name: video_watched_6_s
+        description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
+      - name: video_views_p_25
+        description: The number of times your video was played at 25% of its length. Replays will not be counted.
+      - name: video_views_p_50
+        description: The number of times your video was played at 50% of its length. Replays will not be counted.
+      - name: video_views_p_75
+        description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: daily_cpc
+        description: The average amount of money you've spent on a click.
+      - name: daily_cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: daily_ctr
+        description: The percentage of times people saw your ad and performed a click.
+
+  - name: tiktok_ads__ad_report
+    description: Each record in this table represents the daily performance of ads at the ad level.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_id
+            - ad_group_id
+            - campaign_id
+            - advertiser_id
+            - date_day
+    columns:
+      - name: date_day
+        description: Day of record.
+        tests:
+          - not_null
       - name: ad_id
         description: Ad ID.
+        tests:
+          - not_null
       - name: ad_name
         description: Ad name.
       - name: campaign_id
@@ -27,22 +94,26 @@ models:
         description: Ad group ID.
       - name: ad_group_name
         description: Ad group name.
-      - name: base_url
-        description: The base URL of the ad, extracted from the `landing page url`.
-      - name: url_host
-        description: The URL host of the ad, extracted from the `landing page url`.
-      - name: url_path
-        description: The URL path of the ad, extracted from the `landing page url`.
-      - name: utm_source
-        description: The utm_source parameter of the ad, extracted from the `landing page url`.
-      - name: utm_medium
-        description: The utm_medium parameter of the ad, extracted from the `landing page url`.
-      - name: utm_campaign
-        description: The utm_campaign parameter of the ad, extracted from the `landing page url`.
-      - name: utm_content
-        description: The utm_content parameter of the ad, extracted from the `landing page url`.
-      - name: utm_term
-        description: The utm_term parameter of the ad, extracted from the `landing page url`.
+      - name: action_categories
+        description: IDs of the action categories (behaviors) that you want to target.
+      - name: age
+        description: Age groups you want to target. 
+      - name: audience_type
+        description: Audience Type
+      - name: budget
+        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
+      - name: category
+        description: Ad group category.
+      - name: interest_category
+        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
+      - name: gender
+        description: Gender that you want to target.
+      - name: languages
+        description: Codes of the languages that you want to target.
+      - name: currency
+        description: Advertiser's currency.
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
       - name: clicks
         description: The number of clicks that occurred on the day of the record.
       - name: spend
@@ -87,18 +158,46 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - ad_group_id
+            - campaign_id
+            - advertiser_id
             - date_day
     columns:
       - name: date_day
         description: Day of record
+        tests:
+          - not_null
       - name: ad_group_id
         description: Ad group ID
+        tests:
+          - not_null
+      - name: ad_group_name
+        description: Ad group name
       - name: campaign_id
         description: Campaign ID
       - name: campaign_name
         description: Campaign name
       - name: advertiser_id
         description: Advertiser ID
+      - name: advertiser_name
+        description: Advertiser name.
+      - name: currency
+        description: Advertiser's currency.
+      - name: action_categories
+        description: IDs of the action categories (behaviors) that you want to target.
+      - name: age
+        description: Age groups you want to target. 
+      - name: audience_type
+        description: Audience Type
+      - name: budget
+        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
+      - name: category
+        description: Ad group category.
+      - name: interest_category
+        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
+      - name: gender
+        description: Gender that you want to target.
+      - name: languages
+        description: Codes of the languages that you want to target.
       - name: impressions
         description: The number of impressions that occurred on the day of the record.
       - name: clicks
@@ -138,20 +237,6 @@ models:
         description: The average amount of money you've spent per 1,000 impressions.
       - name: daily_ctr
         description: The percentage of times people saw your ad and performed a click.
-      - name: action_categories
-        description: IDs of the action categories (behaviors) that you want to target.
-      - name: gender
-        description: Gender that you want to target. 
-      - name: audience_type
-        description: Audience Type
-      - name: budget
-        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
-      - name: age
-        description: Age groups you want to target. 
-      - name: languages
-        description: Codes of the languages that you want to target.
-      - name: interest_category
-        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
 
   - name: tiktok_ads__campaign_report
     description: Each record in this table represents the daily performance at the campaign level.
@@ -159,16 +244,23 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - campaign_id
+            - advertiser_id
             - date_day
     columns:
       - name: date_day
         description: Day of record
+        tests:
+          - not_null
       - name: campaign_id
         description: Campaign ID
+        tests:
+          - not_null
       - name: campaign_name
         description: Campaign name
       - name: advertiser_id
         description: Advertiser ID
+      - name: advertiser_name
+        description: Advertiser name
       - name: impressions
         description: The number of impressions that occurred on the day of the record.
       - name: clicks
@@ -207,4 +299,111 @@ models:
       - name: daily_cpm
         description: The average amount of money you've spent per 1,000 impressions.
       - name: daily_daily_ctr
+        description: The percentage of times people saw your ad and performed a click.
+
+  - name: tiktok_ads__url_report
+    description: Each record in this table represents the daily performance of ads at the URL level.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_id
+            - ad_group_id
+            - campaign_id
+            - advertiser_id
+            - date_day
+    columns:
+      - name: date_day
+        description: Day of record.
+        tests:
+          - not_null
+      - name: ad_id
+        description: Ad ID.
+        tests:
+          - not_null
+      - name: ad_name
+        description: Ad name.
+      - name: campaign_id
+        description: Campaign ID.
+      - name: campaign_name
+        description: Campaign name.
+      - name: advertiser_name
+        description: Advertiser name.
+      - name: advertiser_id
+        description: Advertiser ID. 
+      - name: ad_group_id
+        description: Ad group ID.
+      - name: ad_group_name
+        description: Ad group name.
+      - name: base_url
+        description: The base URL of the ad, extracted from the `landing page url`.
+      - name: url_host
+        description: The URL host of the ad, extracted from the `landing page url`.
+      - name: url_path
+        description: The URL path of the ad, extracted from the `landing page url`.
+      - name: utm_source
+        description: The utm_source parameter of the ad, extracted from the `landing page url`.
+      - name: utm_medium
+        description: The utm_medium parameter of the ad, extracted from the `landing page url`.
+      - name: utm_campaign
+        description: The utm_campaign parameter of the ad, extracted from the `landing page url`.
+      - name: utm_content
+        description: The utm_content parameter of the ad, extracted from the `landing page url`.
+      - name: utm_term
+        description: The utm_term parameter of the ad, extracted from the `landing page url`.
+      - name: action_categories
+        description: IDs of the action categories (behaviors) that you want to target.
+      - name: age
+        description: Age groups you want to target. 
+      - name: audience_type
+        description: Audience Type
+      - name: budget
+        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
+      - name: category
+        description: Ad group category.
+      - name: interest_category
+        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
+      - name: gender
+        description: Gender that you want to target.
+      - name: languages
+        description: Codes of the languages that you want to target.
+      - name: currency
+        description: Advertiser's currency.
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: reach
+        description: The number of unique users who saw your ads at least once. This metric is estimated.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+      - name: likes
+        description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
+      - name: comments
+        description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
+      - name: shares
+        description: The number of shares that occurred on the day of the record.
+      - name: profile_visits
+        description: The number of profile visits that occurred on the day of the record.
+      - name: follows
+        description: The number of follows that occurred on the day of the record.
+      - name: video_watched_2_s
+        description: The number of times your video played for at least 2 seconds, or completely played. Replays will not be counted.
+      - name: video_watched_6_s
+        description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
+      - name: video_views_p_25
+        description: The number of times your video was played at 25% of its length. Replays will not be counted.
+      - name: video_views_p_50
+        description: The number of times your video was played at 50% of its length. Replays will not be counted.
+      - name: video_views_p_75
+        description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: daily_cpc
+        description: The average amount of money you've spent on a click.
+      - name: daily_cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: daily_ctr
         description: The percentage of times people saw your ad and performed a click.
