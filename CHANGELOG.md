@@ -1,3 +1,6 @@
+# dbt_tiktok_ads v0.2.1
+
+This PR ([#6](https://github.com/fivetran/dbt_tiktok_ads/pull/6)) updates the source package version.
 # dbt_tiktok_ads v0.2.0
 This PR ([#5](https://github.com/fivetran/dbt_tiktok_ads/pull/5)) applies the following updates to provide further flexibility in your ad reporting. Additionally, these new end models will be leveraged in the respective downstream [dbt_ad_reporting](https://github.com/fivetran/dbt_ad_reporting) models. 
 ## 🚨 Breaking Changes 🚨
