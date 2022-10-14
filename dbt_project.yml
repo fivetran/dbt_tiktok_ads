@@ -1,8 +1,7 @@
 name: 'tiktok_ads'
-version: '0.2.1'
+version: '0.3.0'
 config-version: 2
-require-dbt-version: [">=1.0.0", "<2.0.0"]
-
+require-dbt-version: [">=1.2.0", "<2.0.0"]
 models:
   tiktok_ads:
     +schema: tiktok_ads
@@ -16,8 +15,6 @@ vars:
     ad_report_hourly: "{{ ref('stg_tiktok_ads__ad_report_hourly') }}"
     ad_history: "{{ ref('stg_tiktok_ads__ad_history') }}"
     advertiser: "{{ ref('stg_tiktok_ads__advertiser') }}"
-
   tiktok_ads__ad_group_hourly_passthrough_metrics: []
   tiktok_ads__ad_hourly_passthrough_metrics: []
   tiktok_ads__campaign_hourly_passthrough_metrics: []
-    
