@@ -93,8 +93,8 @@ aggregated as (
     left join campaigns
         on ads.campaign_id = campaigns.campaign_id
 
-    {% if (var('include_tiktok_ads_null_urls', False)) or
-        (var('include_ad_reporting_null_urls', False))  %}
+    {% if (var('allow_tiktok_ads_null_urls', False)) or
+        (var('allow_ad_reporting_null_urls', False))  %}
         -- In this case, skip where clause to include all rows whether or not the url field is populated.
     {% else %}
          -- We are filtering for only ads where url fields are populated.
