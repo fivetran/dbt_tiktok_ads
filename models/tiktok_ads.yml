@@ -336,6 +336,17 @@ models:
         description: Ad group name.
       - name: base_url
         description: The base URL of the ad, extracted from the `landing page url`.
+        tests:
+          - not_null:
+              config:
+                # Below is so we don't run this test if the user has allowed urls to have null entries
+                enabled: >
+                  {%- if (var('allow_snapchat_ads_null_urls', False)) 
+                  or (var('allow_ad_reporting_null_urls', False)) -%}
+                  {{ 'False' | as_bool }}
+                  {%- else -%}
+                  {{ 'True' | as_bool }}
+                  {%- endif -%}
       - name: url_host
         description: The URL host of the ad, extracted from the `landing page url`.
       - name: url_path
