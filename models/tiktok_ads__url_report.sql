@@ -97,7 +97,7 @@ aggregated as (
         (var('allow_ad_reporting_null_urls', False))  %}
         -- In this case, skip where clause to include all rows whether or not the url field is populated.
     {% else %}
-         -- We are filtering for only ads where url fields are populated.
+        -- We are filtering for only ads where url fields are populated.
         where ads.landing_page_url is not null
     {% endif %}
 
