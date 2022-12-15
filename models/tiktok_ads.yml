@@ -257,6 +257,8 @@ models:
           - not_null
       - name: campaign_name
         description: Campaign name
+      - name: currency
+        description: Advertiser's currency.
       - name: advertiser_id
         description: Advertiser ID
       - name: advertiser_name
@@ -298,7 +300,7 @@ models:
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
         description: The average amount of money you've spent per 1,000 impressions.
-      - name: daily_daily_ctr
+      - name: daily_ctr
         description: The percentage of times people saw your ad and performed a click.
 
   - name: tiktok_ads__url_report
@@ -311,6 +313,9 @@ models:
             - campaign_id
             - advertiser_id
             - date_day
+          config:
+            # Below is so we don't run this test if the user has allowed urls to have null entries
+            enabled: "{{ var('ad_reporting__url_report__using_null_filter', True) }}"
     columns:
       - name: date_day
         description: Day of record.
@@ -336,6 +341,11 @@ models:
         description: Ad group name.
       - name: base_url
         description: The base URL of the ad, extracted from the `landing page url`.
+        tests:
+          - not_null:
+              config:
+                # Below is so we don't run this test if the user has allowed urls to have null entries
+                enabled: "{{ var('ad_reporting__url_report__using_null_filter', True) }}"
       - name: url_host
         description: The URL host of the ad, extracted from the `landing page url`.
       - name: url_path
