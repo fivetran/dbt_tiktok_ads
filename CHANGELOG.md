@@ -1,4 +1,4 @@
-# dbt_tiktok_ads v0.4.0
+# dbt_tiktok_ads v0.3.0
 
 ## 🚨 Breaking Changes 🚨:
 [PR #7](https://github.com/fivetran/dbt_tiktok_ads/pull/7) includes the following breaking changes:
