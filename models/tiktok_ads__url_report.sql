@@ -93,8 +93,11 @@ aggregated as (
     left join campaigns
         on ads.campaign_id = campaigns.campaign_id
 
-    -- We are filtering for only ads where url fields are populated.
-    where ads.landing_page_url is not null
+    {% if var('ad_reporting__url_report__using_null_filter', True) %}
+        -- We are filtering for only ads where url fields are populated.
+        where ads.landing_page_url is not null
+    {% endif %}
+
     {{ dbt_utils.group_by(26) }}
 
 )
