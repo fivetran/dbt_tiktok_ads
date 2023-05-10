@@ -52,6 +52,7 @@ packages:
     version: [">=0.3.0", "<0.4.0"]
 
 ```
+Do **NOT** include the `tiktok_ads_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well. 
 
 ## Step 3: Define database and schema variables
 By default, this package will look for your TikTok Ads data in the `tiktok_ads` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your TikTok Ads data is, you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
