@@ -36,15 +36,11 @@ aggregated as (
         campaigns.campaign_name,
         hourly.ad_group_id,
         ad_groups.ad_group_name,
-        advertiser.currency,
-        ad_groups.action_categories,
+        advertiser.currency, 
         ad_groups.category,
         ad_groups.gender,
         ad_groups.audience_type,
         ad_groups.budget,
-        ad_groups.age,
-        ad_groups.languages,
-        ad_groups.interest_category,
         sum(hourly.impressions) as impressions,
         sum(hourly.clicks) as clicks,
         sum(hourly.spend) as spend,
@@ -73,7 +69,7 @@ aggregated as (
         on ad_groups.advertiser_id = advertiser.advertiser_id
     left join campaigns
         on ad_groups.campaign_id = campaigns.campaign_id
-    {{ dbt_utils.group_by(16) }}
+    {{ dbt_utils.group_by(12) }}
 
 )
 

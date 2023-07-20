@@ -1,9 +1,15 @@
-# dbt_tiktok_ads v0.UPDATE.UPDATE
+# dbt_tiktok_ads v0.4.0
+[PR #10](https://github.com/fivetran/dbt_tiktok_ads/pull/10) includes the following changes:
+
+## 🚨 Breaking Changes 🚨:
+- In the [July 2023 connector update for TikTok Ads](https://fivetran.com/docs/applications/tiktok-ads/changelog), we upgraded the connector to the v1.3 API. As a result the dependent fields and field names from the downstream staging models have changed.
+- None of the renamed fields were brought into the `dbt_tiktok_ads` package other than `age ` to `age_groups`, but it was subsequently removed due to an additional issue. We did need to update seed files with the renamed field names.
+- Removed JSON array fields (`action_categories`, `age_groups`, `interest_category` and `language`) from our models that were causing issues with BigQuery, which currently does not support JSON arrays in group by functions. Most of these fields were deemed non-essential
 
  ## Under the Hood:
-
 - Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
 - Updated the pull request [templates](/.github).
+
 # dbt_tiktok_ads v0.3.0
 
 ## 🚨 Breaking Changes 🚨:

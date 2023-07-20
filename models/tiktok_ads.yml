@@ -94,22 +94,14 @@ models:
         description: Ad group ID.
       - name: ad_group_name
         description: Ad group name.
-      - name: action_categories
-        description: IDs of the action categories (behaviors) that you want to target.
-      - name: age
-        description: Age groups you want to target. 
       - name: audience_type
         description: Audience Type
       - name: budget
         description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
       - name: category
         description: Ad group category.
-      - name: interest_category
-        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
       - name: gender
         description: Gender that you want to target.
-      - name: languages
-        description: Codes of the languages that you want to target.
       - name: currency
         description: Advertiser's currency.
       - name: impressions
@@ -182,22 +174,14 @@ models:
         description: Advertiser name.
       - name: currency
         description: Advertiser's currency.
-      - name: action_categories
-        description: IDs of the action categories (behaviors) that you want to target.
-      - name: age
-        description: Age groups you want to target. 
       - name: audience_type
         description: Audience Type
       - name: budget
         description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
       - name: category
         description: Ad group category.
-      - name: interest_category
-        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
       - name: gender
         description: Gender that you want to target.
-      - name: languages
-        description: Codes of the languages that you want to target.
       - name: impressions
         description: The number of impressions that occurred on the day of the record.
       - name: clicks
@@ -360,22 +344,14 @@ models:
         description: The utm_content parameter of the ad, extracted from the `landing page url`.
       - name: utm_term
         description: The utm_term parameter of the ad, extracted from the `landing page url`.
-      - name: action_categories
-        description: IDs of the action categories (behaviors) that you want to target.
-      - name: age
-        description: Age groups you want to target. 
       - name: audience_type
         description: Audience Type
       - name: budget
         description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
       - name: category
         description: Ad group category.
-      - name: interest_category
-        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
       - name: gender
         description: Gender that you want to target.
-      - name: languages
-        description: Codes of the languages that you want to target.
       - name: currency
         description: Advertiser's currency.
       - name: impressions
