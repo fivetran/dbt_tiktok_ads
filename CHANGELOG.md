@@ -2,11 +2,17 @@
 [PR #11](https://github.com/fivetran/dbt_tiktok_ads/pull/11) includes the following changes:
 
 ## 🚨 Breaking Changes 🚨:
-- In the [July 2023 connector update for TikTok Ads](https://fivetran.com/docs/applications/tiktok-ads/changelog), we upgraded the connector to the v1.3 API. As a result the dependent fields and field names from the downstream staging models have changed.
-- None of the renamed fields were brought into the `dbt_tiktok_ads` package other than `age ` to `age_groups`, but it was subsequently removed due to an additional issue. We did need to update seed files with the renamed field names.
-- Removed JSON array fields (`action_categories`, `age_groups`, `interest_category` and `language`) from our models that were causing issues with BigQuery, which currently does not support JSON arrays in group by functions
+- In the [July 2023 connector update for TikTok Ads](https://fivetran.com/docs/applications/tiktok-ads/changelog), the connector was updated to support the TikTok Ads v1.3 API. As a result breaking changes exist within the dependent [v0.4.0 dbt_tiktok_ads_source](https://github.com/fivetran/dbt_tiktok_ads_source/releases/tag/v0.4.0) release in addition to the following breaking changes within this package release:
 
- ## Under the Hood:
+| **Updated model** | **Removed fields** |
+| ----------| -------------------- |
+| [tiktok_ads__ad_group_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__ad_group_report) | `action_categories`, `age`, `languages`, `interest_category` |
+| [tiktok_ads__ad_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__ad_report) | `action_categories`, `age`, `languages`, `interest_category` |
+| [tiktok_ads__url_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__url_report) | `action_categories`, `age`, `languages`, `interest_category` |
+
+>**Note**: Some of the above fields were also removed due to complications with the BigQuery JSON datatype causing errors during compilation.
+
+ ## 🔧 Under the Hood 🔩
 - Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
 - Updated the pull request [templates](/.github).
 
