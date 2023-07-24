@@ -1,7 +1,7 @@
 # dbt_tiktok_ads v0.4.0
 [PR #11](https://github.com/fivetran/dbt_tiktok_ads/pull/11) includes the following changes:
 
-## 🚨 Breaking Changes 🚨:
+## 🚨 Breaking Changes 🚨
 - In the [July 2023 connector update for TikTok Ads](https://fivetran.com/docs/applications/tiktok-ads/changelog), the connector was updated to support the TikTok Ads v1.3 API. As a result breaking changes exist within the dependent [v0.4.0 dbt_tiktok_ads_source](https://github.com/fivetran/dbt_tiktok_ads_source/releases/tag/v0.4.0) release in addition to the following breaking changes within this package release:
 
 | **Updated model** | **Removed fields** |
