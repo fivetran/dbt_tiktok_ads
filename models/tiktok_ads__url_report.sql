@@ -54,14 +54,10 @@ aggregated as (
         ads.utm_content,
         ads.utm_term,
         advertiser.currency,
-        ad_groups.action_categories,
         ad_groups.category,
         ad_groups.gender,
         ad_groups.audience_type,
         ad_groups.budget,
-        ad_groups.age,
-        ad_groups.languages,
-        ad_groups.interest_category,
         sum(hourly.impressions) as impressions,
         sum(hourly.clicks) as clicks,
         sum(hourly.spend) as spend,
@@ -98,7 +94,7 @@ aggregated as (
         where ads.landing_page_url is not null
     {% endif %}
 
-    {{ dbt_utils.group_by(26) }}
+    {{ dbt_utils.group_by(22) }}
 
 )
 
