@@ -10,7 +10,7 @@
 | [tiktok_ads__ad_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__ad_report) | `action_categories`, `age`, `languages`, `interest_category` |
 | [tiktok_ads__url_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__url_report) | `action_categories`, `age`, `languages`, `interest_category` |
 
->**Note**: Some of the above fields were also removed due to complications with the BigQuery JSON datatype causing errors during compilation.
+>**Note**: All of the above fields were also removed due to complications with the BigQuery JSON datatype causing errors during compilation.
 
  ## 🔧 Under the Hood 🔩
 - Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
