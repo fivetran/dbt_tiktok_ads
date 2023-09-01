@@ -1,3 +1,5 @@
+ADD source_relation WHERE NEEDED + CHECK JOINS AND WINDOW FUNCTIONS! (Delete this line when done.)
+
 {{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true)) }}
 
 with hourly as (
@@ -36,6 +38,7 @@ campaigns as (
 aggregated as (
 
     select
+        hourly.source_relation,
         cast(hourly.stat_time_hour as date) as date_day,
         ad_groups.advertiser_id,
         advertiser.advertiser_name,
@@ -74,13 +77,17 @@ aggregated as (
     from hourly
     left join ads
         on hourly.ad_id = ads.ad_id
+        and hourly.source_relation = ads.source_relation
     left join ad_groups 
         on ads.ad_group_id = ad_groups.ad_group_id
+        and ads.source_relation = ad_groups.source_relation
     left join advertiser
         on ads.advertiser_id = advertiser.advertiser_id
+        and ads.source_relation = advertiser.source_relation
     left join campaigns
         on ads.campaign_id = campaigns.campaign_id
-    {{ dbt_utils.group_by(14) }}
+        and ads.source_relation = campaigns.source_relation
+    {{ dbt_utils.group_by(15) }}
 
 )
 
