@@ -7,7 +7,7 @@
 - In the source package, updated tmp models to union source data using the `fivetran_utils.union_data` macro. 
 - To distinguish which source each field comes from, added `source_relation` column in each staging and downstream model and applied the `fivetran_utils.source_relation` macro.
 - Updated tests to account for the new `source_relation` column.
-    - The `source_relation` column is included in all joins and window function partition clauses in the transform package. 
+    - The `source_relation` column is included in all joins in the transform package. 
 
 # dbt_tiktok_ads v0.4.0
 [PR #11](https://github.com/fivetran/dbt_tiktok_ads/pull/11) includes the following changes:
