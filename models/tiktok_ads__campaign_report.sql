@@ -22,6 +22,7 @@ advertiser as (
 aggregated as (
 
     select
+        hourly.source_relation,
         cast(hourly.stat_time_hour as date) as date_day,
         advertiser.advertiser_id,
         advertiser.advertiser_name,
@@ -52,9 +53,11 @@ aggregated as (
     from hourly
     left join campaigns
         on hourly.campaign_id = campaigns.campaign_id
+        and hourly.source_relation = campaigns.source_relation
     left join advertiser
         on campaigns.advertiser_id = advertiser.advertiser_id
-    {{ dbt_utils.group_by(6) }}
+        and campaigns.source_relation = advertiser.source_relation
+    {{ dbt_utils.group_by(7) }}
 
 )
 

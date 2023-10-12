@@ -6,9 +6,12 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
+            - source_relation
             - advertiser_id
             - date_day
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
         tests:
@@ -66,12 +69,15 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
+            - source_relation
             - ad_id
             - ad_group_id
             - campaign_id
             - advertiser_id
             - date_day
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
         tests:
@@ -149,11 +155,14 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
+            - source_relation
             - ad_group_id
             - campaign_id
             - advertiser_id
             - date_day
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record
         tests:
@@ -227,10 +236,13 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
+            - source_relation
             - campaign_id
             - advertiser_id
             - date_day
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record
         tests:
@@ -292,6 +304,7 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
+            - source_relation
             - ad_id
             - ad_group_id
             - campaign_id
@@ -301,6 +314,8 @@ models:
             # Below is so we don't run this test if the user has allowed urls to have null entries
             enabled: "{{ var('ad_reporting__url_report__using_null_filter', True) }}"
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
         tests:

@@ -1,3 +1,31 @@
+# dbt_tiktok_ads v0.5.0
+[PR #13](https://github.com/fivetran/dbt_tiktok_ads/pull/13) includes the following updates:
+
+## Breaking changes
+- Updated the source identifier format for consistency with other packages and for compatibility with the `fivetran_utils.union_data` macro. Identifiers now are:
+
+| current  | previous |
+|----------|----------|
+|tiktok_ads_adgroup_history_identifier | tiktok_ads__ad_group_history_identifier |
+|tiktok_ads_ad_history_identifier | tiktok_ads__ad_history_identifier
+|tiktok_ads_advertiser_identifier | tiktok_ads__advertiser_identifier|
+|tiktok_ads_campaign_history_identifier | tiktok_ads__campaign_history_identifier|
+|tiktok_ads_ad_report_hourly_identifier | tiktok_ads__ad_report_hourly_identifier|
+|tiktok_ads_adgroup_report_hourly_identifier | tiktok_ads__ad_group_report_hourly_identifier|
+|tiktok_ads_campaign_report_hourly_identifier | tiktok_ads__campaign_report_hourly_identifier|
+
+- If you are using the previous identifier, be sure to update to the current version!
+
+## Feature update 🎉
+- Unioning capability! This adds the ability to union source data from multiple tiktok_ads connectors. Refer to the [Union Multiple Connectors README section](https://github.com/fivetran/dbt_tiktok_ads/blob/main/README.md#union-multiple-connectors) for more details.
+
+## Under the hood 🚘
+- In the source package, updated tmp models to union source data using the `fivetran_utils.union_data` macro. 
+- To distinguish which source each field comes from, added `source_relation` column in each staging and downstream model and applied the `fivetran_utils.source_relation` macro.
+  - The `source_relation` column is included in all joins in the transform package. 
+- Updated tests to account for the new `source_relation` column.
+
+
 # dbt_tiktok_ads v0.4.0
 [PR #11](https://github.com/fivetran/dbt_tiktok_ads/pull/11) includes the following changes:
 
