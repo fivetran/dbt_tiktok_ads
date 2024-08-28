@@ -8,3 +8,11 @@ destination_configurations:
     dispatch:
       - macro_namespace: dbt_utils
         search_order: [ 'spark_utils', 'dbt_utils' ]
+
+public_models: [
+  "tiktok_ads__ad_group_report",
+  "tiktok_ads__url_report",
+  "tiktok_ads__campaign_report",
+  "tiktok_ads__ad_report",
+  "tiktok_ads__advertiser_report"
+]
