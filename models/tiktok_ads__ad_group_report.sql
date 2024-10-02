@@ -57,12 +57,16 @@ aggregated as (
         sum(hourly.video_views_p_25) as video_views_p_25,
         sum(hourly.video_views_p_50) as video_views_p_50, 
         sum(hourly.video_views_p_75) as video_views_p_75,
+        sum(hourly.real_time_conversion) as real_time_conversion,
+        sum(hourly.total_purchase_value) as total_purchase_value,
+        sum(hourly.total_sales_lead_value) as total_sales_lead_value,  
+        sum(hourly.total_purchase_value + hourly.total_sales_lead_value) as total_conversion_value, 
         sum(hourly.spend)/nullif(sum(hourly.clicks),0) as daily_cpc,
         (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
+        
+        {{ tiktok_ads_persist_pass_through_columns(pass_through_variable='tiktok_ads__ad_group_hourly_passthrough_metrics', identifier='stats', transform='sum', coalesce_with=0, exclude_fields=['real_time_conversion','total_purchase_value','total_sales_lead_value']) }}    
 
-        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='tiktok_ads__ad_group_hourly_passthrough_metrics', transform = 'sum') }}
-    
     from hourly
     left join ad_groups 
         on hourly.ad_group_id = ad_groups.ad_group_id
