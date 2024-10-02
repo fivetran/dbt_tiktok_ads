@@ -1,5 +1,5 @@
 # dbt_tiktok_ads v0.6.0
-[PR #19](https://github.com/fivetran/dbt_tiktok_ads/pull/19) includes the following updates:
+[PR #20](https://github.com/fivetran/dbt_tiktok_ads/pull/20) includes the following updates:
 
 # Feature Updates: Conversion Support!
 - We have added the following source fields to each `tiktok_ads` end model:
