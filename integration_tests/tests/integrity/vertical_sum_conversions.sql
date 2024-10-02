@@ -16,7 +16,7 @@ ad_model as (
 
     select 
         sum(coalesce(total_conversion_value, 0)) as total_value,
-        sum(coalesce(conversions, 0)) as conversions,
+        sum(coalesce(conversion, 0)) as conversions,
         sum(coalesce(real_time_conversion, 0)) as real_time_conversions
     from {{ ref('tiktok_ads__ad_report') }}
 ),
@@ -34,7 +34,7 @@ ad_group_model as (
 
     select 
         sum(coalesce(total_conversion_value, 0)) as total_value,
-        sum(coalesce(conversions, 0)) as conversions,
+        sum(coalesce(conversion, 0)) as conversions,
         sum(coalesce(real_time_conversion, 0)) as real_time_conversions
     from {{ ref('tiktok_ads__ad_group_report') }}
 ),
@@ -52,7 +52,7 @@ campaign_model as (
 
     select 
         sum(coalesce(total_conversion_value, 0)) as total_value,
-        sum(coalesce(conversions, 0)) as conversions,
+        sum(coalesce(conversion, 0)) as conversions,
         sum(coalesce(real_time_conversion, 0)) as real_time_conversions
     from {{ ref('tiktok_ads__campaign_report') }}
 ) 
@@ -80,7 +80,7 @@ union all
 select 
     'campaigns' as comparison
 from campaign_model 
-join campaign_source on true
-where abs(campaign_model.total_value - campaign_source.total_value) >= .01
-    or abs(campaign_model.conversions - campaign_source.conversions) >= .01
-    or abs(campaign_model.real_time_conversions - campaign_source.real_time_conversions) >= .01
+join campaign_hourly_source on true
+where abs(campaign_model.total_value - campaign_hourly_source.total_value) >= .01
+    or abs(campaign_model.conversions - campaign_hourly_source.conversions) >= .01
+    or abs(campaign_model.real_time_conversions - campaign_hourly_source.real_time_conversions) >= .01

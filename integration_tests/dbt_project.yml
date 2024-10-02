@@ -1,7 +1,10 @@
 name: 'tiktok_ads_integration_tests'
-version: '0.5.0'
+version: '0.6.0'
 profile: 'integration_tests'
 config-version: 2
+
+models:
+  +schema: "tiktok_ads_{{ var('directed_schema','dev') }}"
 
 vars: 
   tiktok_ads_source:

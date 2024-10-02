@@ -51,14 +51,14 @@ url_report as (
 ad_w_url_report as (
 
     select 
-        sum(conversion) as total_conversions,
-        sum(total_conversion_value) as total_value,
-        sum(real_time_conversion) as total_real_time_conversions
+        sum(ads.conversion) as total_conversions,
+        sum(ads.total_conversion_value) as total_value,
+        sum(ads.real_time_conversion) as total_real_time_conversions
     from {{ ref('tiktok_ads__ad_report') }} ads
     join {{ ref('tiktok_ads__url_report') }} urls
         on ads.ad_id = urls.ad_id
         and ads.date_day = urls.date_day
-), 
+)
 
 select 
     'ad vs advertiser' as comparison
