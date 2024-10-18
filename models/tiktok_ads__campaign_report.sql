@@ -52,7 +52,7 @@ aggregated as (
         (sum(hourly.spend)/nullif(sum(hourly.impressions),0))*1000 as daily_cpm,
         (sum(hourly.clicks)/nullif(sum(hourly.impressions),0))*100 as daily_ctr
 
-        {{ tiktok_ads_persist_pass_through_columns(pass_through_variable='tiktok_ads__campaign_hourly_passthrough_metrics', identifier='stats', transform='sum', coalesce_with=0, exclude_fields=['real_time_conversion','total_purchase_value','total_sales_lead_value']) }}        
+        {{ tiktok_ads_persist_pass_through_columns(pass_through_variable='tiktok_ads__campaign_hourly_passthrough_metrics', identifier='hourly', transform='sum', coalesce_with=0, exclude_fields=['real_time_conversion','total_purchase_value','total_sales_lead_value']) }}        
 
     from hourly
     left join campaigns
