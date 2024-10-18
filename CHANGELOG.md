@@ -1,7 +1,7 @@
 # dbt_tiktok_ads v0.6.0
-[PR #20](https://github.com/fivetran/dbt_tiktok_ads/pull/20) includes the following updates:
+[PR #20](https://github.com/fivetran/dbt_tiktok_ads/pull/20) includes the following **BREAKING CHANGE** updates:
 
-# Feature Updates: Conversion Support!
+# Feature Updates: Conversion Support
 - We have added the following source fields to each `tiktok_ads` end model:
   - `real_time_conversion`: Number of times your ad resulted in the optimization event you selected.
   - `total_purchase_value`: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
