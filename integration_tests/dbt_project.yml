@@ -1,11 +1,14 @@
 name: 'tiktok_ads_integration_tests'
-version: '0.5.0'
+version: '0.6.0'
 profile: 'integration_tests'
 config-version: 2
 
+models:
+  +schema: "tiktok_ads_{{ var('directed_schema','dev') }}"
+
 vars: 
   tiktok_ads_source:
-    tiktok_ads_schema: tiktok_ads_integration_tests_4
+    tiktok_ads_schema: tiktok_ads_integration_tests_5
     tiktok_ads_adgroup_history_identifier: "tiktok_adgroup_history_data"
     tiktok_ads_ad_history_identifier: "tiktok_ad_history_data"
     tiktok_ads_advertiser_identifier: "tiktok_advertiser_data"
@@ -14,6 +17,11 @@ vars:
     tiktok_ads_adgroup_report_hourly_identifier: "tiktok_adgroup_report_hourly_data"
     tiktok_ads_campaign_report_hourly_identifier: "tiktok_campaign_report_hourly_data"
 
+  tiktok_ads__ad_group_hourly_passthrough_metrics:
+    - name: total_purchase_value
+    - name: total_sales_lead_value
+      alias: total_sales_lead_value_aliased
+      
 seeds:
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"
 
