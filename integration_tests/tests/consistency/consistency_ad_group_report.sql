@@ -9,6 +9,8 @@ with prod as (
         sum(clicks) as clicks, 
         sum(impressions) as impressions,
         sum(spend) as spend
+        {# sum(conversion) as conversion,
+        sum(total_conversion_value) as total_conversion_value #}
     from {{ target.schema }}_tiktok_ads_prod.tiktok_ads__ad_group_report
     group by 1
 ),
@@ -19,6 +21,8 @@ dev as (
         sum(clicks) as clicks, 
         sum(impressions) as impressions,
         sum(spend) as spend
+        {# sum(conversion) as conversion,
+        sum(total_conversion_value) as total_conversion_value #}
     from {{ target.schema }}_tiktok_ads_dev.tiktok_ads__ad_group_report
     group by 1
 ),
@@ -32,6 +36,10 @@ final as (
         dev.impressions as dev_impressions,
         prod.spend as prod_spend,
         dev.spend as dev_spend
+        {# prod.conversion as prod_conversion,
+        dev.conversion as dev_conversion,
+        prod.total_conversion_value as prod_total_conversion_value,
+        dev.total_conversion_value as dev_total_conversion_value #}
     from prod
     full outer join dev 
         on dev.ad_group_id = prod.ad_group_id
@@ -43,3 +51,5 @@ where
     abs(prod_clicks - dev_clicks) >= .01
     or abs(prod_impressions - dev_impressions) >= .01
     or abs(prod_spend - dev_spend) >= .01
+    {# or abs(prod_conversion - dev_conversion) >= .01
+    or abs(prod_total_conversion_value - dev_total_conversion_value) >= .01 #}

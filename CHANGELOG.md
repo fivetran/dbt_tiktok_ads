@@ -2,8 +2,8 @@
 [PR #20](https://github.com/fivetran/dbt_tiktok_ads/pull/20) includes the following **BREAKING CHANGE** updates:
 
 # Feature Updates: Conversion Support
-- We have added the following source fields to each `tiktok_ads` end model:
-  - `real_time_conversion`: Number of times your ad resulted in the optimization event you selected.
+- We have added the following source fields to each `tiktok_ads` end model (note that the `conversion` field was already present):
+  - `real_time_conversion`: Number of times your ad resulted in the optimization event and timeframe you selected.
   - `total_purchase_value`: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
   - `total_sales_lead_value`: The monetary worth or potential value assigned to a lead generated through ads.
   - `total_conversion_value`: The accumulated value of `total_purchase_value` and `total_sales_lead_value`.
@@ -13,7 +13,7 @@
 
 ## Under the Hood
 - Created `tiktok_ads_persist_pass_through_columns` macro to ensure that the new conversion fields are backwards compatible with users who have already included them via passthrough fields.
-- Updated `conversion` to be an integer rather than a numeric data type in the `tiktok_ads_source` package, as is the expected behavior of the field. To reflect that data type change, **you will need to do a `--full-refresh`. This is a breaking change.**
+- Updated `conversion` field to be an integer rather than a numeric data type in the `tiktok_ads_source` package, as is the expected behavior of the field. **This is a breaking change.**
 - Added integrity and consistency validation tests within `integration_tests` folder for the transformation models (to be used by maintainers only).
 - Updated seed data to adequately test new field additions in integration tests.
 
