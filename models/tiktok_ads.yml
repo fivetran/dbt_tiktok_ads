@@ -57,6 +57,14 @@ models:
         description: The number of times your video was played at 50% of its length. Replays will not be counted.
       - name: video_views_p_75
         description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
+      - name: total_purchase_value
+        description: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+      - name: total_sales_lead_value
+        description: The monetary worth or potential value assigned to a lead generated through ads.
+      - name: total_conversion_value
+        description: The accumulated value of `total_purchase_value` and `total_sales_lead_value`.            
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
@@ -143,6 +151,14 @@ models:
         description: The number of times your video was played at 50% of its length. Replays will not be counted.
       - name: video_views_p_75
         description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
+      - name: total_purchase_value
+        description: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+      - name: total_sales_lead_value
+        description: The monetary worth or potential value assigned to a lead generated through ads.
+      - name: total_conversion_value
+        description: The accumulated value of `total_purchase_value` and `total_sales_lead_value`.            
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
@@ -224,6 +240,14 @@ models:
         description: The number of times your video was played at 50% of its length. Replays will not be counted.
       - name: video_views_p_75
         description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
+      - name: total_purchase_value
+        description: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+      - name: total_sales_lead_value
+        description: The monetary worth or potential value assigned to a lead generated through ads.
+      - name: total_conversion_value
+        description: The accumulated value of `total_purchase_value` and `total_sales_lead_value`.      
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
@@ -292,6 +316,14 @@ models:
         description: The number of times your video was played at 50% of its length. Replays will not be counted.
       - name: video_views_p_75
         description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
+      - name: total_purchase_value
+        description: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+      - name: total_sales_lead_value
+        description: The monetary worth or potential value assigned to a lead generated through ads.
+      - name: total_conversion_value
+        description: The accumulated value of `total_purchase_value` and `total_sales_lead_value`.
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
@@ -402,6 +434,14 @@ models:
         description: The number of times your video was played at 50% of its length. Replays will not be counted.
       - name: video_views_p_75
         description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
+      - name: total_purchase_value
+        description: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+      - name: total_sales_lead_value
+        description: The monetary worth or potential value assigned to a lead generated through ads.
+      - name: total_conversion_value
+        description: The accumulated value of `total_purchase_value` and `total_sales_lead_value`.
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm

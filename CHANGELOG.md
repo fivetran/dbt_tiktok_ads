@@ -1,3 +1,25 @@
+# dbt_tiktok_ads v0.6.0
+[PR #20](https://github.com/fivetran/dbt_tiktok_ads/pull/20) includes the following **BREAKING CHANGE** updates:
+
+# Feature Updates: Conversion Support
+- We have added the following source fields to each `tiktok_ads` end model (note that the `conversion` field was already present):
+  - `real_time_conversion`: Number of times your ad resulted in the optimization event and timeframe you selected.
+  - `total_purchase_value`: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+  - `total_sales_lead_value`: The monetary worth or potential value assigned to a lead generated through ads.
+  - `total_conversion_value`: The accumulated value of `total_purchase_value` and `total_sales_lead_value`.
+
+- In the event that you were already passing the above fields in via our [passthrough columns](https://github.com/fivetran/dbt_tiktok_ads?tab=readme-ov-file#passing-through-additional-metrics), the package will dynamically avoid "duplicate column" errors.
+> The above new field additions are **breaking changes**  for users who were not already bringing in conversion fields via passthrough columns.
+
+## Under the Hood
+- Created `tiktok_ads_persist_pass_through_columns` macro to ensure that the new conversion fields are backwards compatible with users who have already included them via passthrough fields.
+- Updated `conversion` field to be an integer rather than a numeric data type in the `tiktok_ads_source` package, as is the expected behavior of the field. **This is a breaking change.**
+- Added integrity and consistency validation tests within `integration_tests` folder for the transformation models (to be used by maintainers only).
+- Updated seed data to adequately test new field additions in integration tests.
+
+## Contributors
+- [Seer Interactive](https://www.seerinteractive.com/?utm_campaign=Fivetran%20%7C%20Models&utm_source=Fivetran&utm_medium=Fivetran%20Documentation)
+
 # dbt_tiktok_ads v0.5.0
 [PR #13](https://github.com/fivetran/dbt_tiktok_ads/pull/13) includes the following updates:
 
