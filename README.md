@@ -1,4 +1,6 @@
-<p align="center">
+# Tiktok Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_tiktok_ads/))
+
+<p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_tiktok_ads/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -10,7 +12,6 @@
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
 
-# Tiktok Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_tiktok_ads/))
 ## What does this dbt package do?
 - Produces modeled tables that leverage Tiktok Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/tiktok-ads) in the format described by [this ERD](https://fivetran.com/docs/applications/tiktok-ads#schemainformation) and builds off the output of our [Tiktok Ads source package](https://github.com/fivetran/dbt_tiktok_ads_source).
 - Creates reports on daily marketing performance across various levels of granularity.

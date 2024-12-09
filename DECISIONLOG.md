@@ -17,5 +17,4 @@ In the [July 2023 TikTok Ads connector update](https://fivetran.com/docs/connect
 - The change simplifies logic and resolves data inconsistency issues caused by merging fields with different data types.
 
 ### Action for Customers Requiring Historical `age` Data
-Customers who still need the historical `age` column data can:
-1. Resync the `ADGROUP_HISTORY` table in their TikTok Ads connector. TikTok provides all historical data in the `age_groups` column, allowing the data to be fully populated.
+Customers who still need the historical `age` column data can resync the `ADGROUP_HISTORY` table in their TikTok Ads connector. TikTok provides all historical data in the `age_groups` column, allowing the data to be fully populated.
