@@ -30,6 +30,8 @@ The following table provides a detailed list of all tables materialized within t
 | [tiktok_ads__ad_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql)                     | Each record represents the daily performance for each ad. This also includes additional data on the demographics you are targeting. |
 | [tiktok_ads__url_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql)                     | Each record in this table represents the daily performance of URLs at the ad level. This also includes additional data on the demographics you are targeting.
 
+### Materialized Models
+Each Quickstart transformation job run materializes 19 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
 <!--section-end-->
 
 ## How do I use the dbt package?
@@ -37,7 +39,7 @@ The following table provides a detailed list of all tables materialized within t
 ### Step 1: Prerequisites
 To use this dbt package, you must have the following:
 
-- At least one Fivetran Tiktok Ads connector syncing data into your destination.
+- At least one Fivetran Tiktok Ads connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
 
 #### Databricks Dispatch Configuration
@@ -75,8 +77,8 @@ For additional configurations for the source models, visit the [Tiktok Ads sourc
 
 <details open><summary>Expand/Collapse details</summary>
 
-#### Union multiple connectors
-If you have multiple tiktok_ads connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `tiktok_ads_union_schemas` OR `tiktok_ads_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
+#### Union multiple connections
+If you have multiple tiktok_ads connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `tiktok_ads_union_schemas` OR `tiktok_ads_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
 
 ```yml
 vars:
@@ -118,7 +120,7 @@ models:
 ```
 
 #### Change the source table references
-If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable. This is not available when running the package on multiple unioned connectors.
+If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable. This is not available when running the package on multiple unioned connections.
 
 > IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/dbt_project.yml) variable declarations to see the expected names.
 
