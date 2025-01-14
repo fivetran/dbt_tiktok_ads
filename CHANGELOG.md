@@ -1,3 +1,9 @@
+# dbt_tiktok_ads version.version
+
+## Documentation
+- Added Quickstart model counts to README. ([#23](https://github.com/fivetran/dbt_tiktok_ads/pull/23))
+- Corrected references to connectors and connections in the README. ([#23](https://github.com/fivetran/dbt_tiktok_ads/pull/23))
+
 # dbt_tiktok_ads v0.7.0
 [PR #22](https://github.com/fivetran/dbt_tiktok_ads/pull/22) includes the following updates:
 
