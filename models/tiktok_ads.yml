@@ -448,3 +448,72 @@ models:
         description: The average amount of money you've spent per 1,000 impressions.
       - name: daily_ctr
         description: The percentage of times people saw your ad and performed a click.
+
+  - name: tiktok_ads__campaign_country_report
+    description: Each record in this table represents the daily performance of a campaign at the country/geographic region level.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - campaign_id
+            - advertiser_id
+            - date_day
+            - currency
+            - objective_type
+            - budget_mode
+            - split_test_variable
+    columns:
+      - name: source_relation
+        description: Source table or view from which the country-level data was derived.
+      - name: date_day
+        description: Day of record.
+        tests:
+          - not_null
+      - name: campaign_id
+        description: Unique identifier for the campaign.
+        tests:
+          - not_null
+      - name: campaign_name
+        description: Name of the campaign.
+      - name: campaign_type
+        description: Type/category of the campaign.
+      - name: created_at
+        description: Timestamp when the campaign was created.
+      - name: country_code
+        description: ISO country code where the ad was served.
+      - name: advertiser_id
+        description: Unique identifier for the advertiser.
+      - name: advertiser_name
+        description: Name of the advertiser account.
+      - name: currency
+        description: Currency in which spend and cost metrics are reported.
+      - name: objective_type
+        description: Objective type of the campaign (e.g., conversions, traffic).
+      - name: status
+        description: Current status of the campaign.
+      - name: split_test_variable
+        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION , CREATIVE.
+      - name: budget
+        description: Total budget allocated to the campaign.
+      - name: budget_mode
+        description: Budget pacing mode (e.g., daily, total).
+      - name: clicks
+        description: Total number of clicks.
+      - name: impressions
+        description: Total number of impressions.
+      - name: spend
+        description: Total spend in the advertiser’s currency.
+      - name: conversion
+        description: Total number of tracked conversions.
+      - name: conversion_rate
+        description: Conversion rate as a percentage.
+      - name: cost_per_conversion
+        description: Average cost per conversion.
+      - name: daily_cpc
+        description: Cost per click.
+      - name: daily_cpm
+        description: Cost per mille (1,000 impressions).
+      - name: daily_ctr
+        description: Click-through rate.
+      - name: real_time_conversion
+        description: Total number of real-time conversions reported.

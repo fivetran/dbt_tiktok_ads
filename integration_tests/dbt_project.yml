@@ -1,5 +1,5 @@
 name: 'tiktok_ads_integration_tests'
-version: '0.7.0'
+version: '0.8.0'
 profile: 'integration_tests'
 config-version: 2
 
@@ -16,14 +16,17 @@ vars:
     tiktok_ads_ad_report_hourly_identifier: "tiktok_ad_report_hourly_data"
     tiktok_ads_adgroup_report_hourly_identifier: "tiktok_adgroup_report_hourly_data"
     tiktok_ads_campaign_report_hourly_identifier: "tiktok_campaign_report_hourly_data"
+    tiktok_ads_campaign_country_report_identifier: "tiktok_campaign_country_report_data"
 
   tiktok_ads__ad_group_hourly_passthrough_metrics:
     - name: total_purchase_value
     - name: total_sales_lead_value
       alias: total_sales_lead_value_aliased
-      
+
 seeds:
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"
+  +docs:
+    show: false
 
 dispatch:
   - macro_namespace: dbt_utils
