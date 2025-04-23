@@ -1,5 +1,6 @@
 # dbt_tiktok_ads v0.8.0
 
+[PR #24](https://github.com/fivetran/dbt_tiktok_ads/pull/24) includes the following updates:
 ## Schema Changes
 **4 total changes • 0 possible breaking changes
 | Table/Column                                      | Change Type | Old Name | New Name                                  | Notes                                                             |

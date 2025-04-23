@@ -480,7 +480,7 @@ models:
       - name: created_at
         description: Timestamp when the campaign was created.
       - name: country_code
-        description: ISO country code where the ad was served.
+        description: Audience country or region code.
       - name: advertiser_id
         description: Unique identifier for the advertiser.
       - name: advertiser_name
