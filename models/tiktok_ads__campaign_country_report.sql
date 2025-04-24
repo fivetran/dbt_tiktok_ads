@@ -48,7 +48,7 @@ aggregated as (
         (sum(country_report.clicks)/nullif(sum(country_report.impressions),0))*100 as daily_ctr,
         sum(country_report.real_time_conversion) as real_time_conversion
 
-        {{ tiktok_ads_persist_pass_through_columns(pass_through_variable='tiktok_ads__campaign_country_report_passthrough_metrics', identifier='country_report', transform='sum', coalesce_with=0) }}        
+        {{ tiktok_ads_persist_pass_through_columns(pass_through_variable='tiktok_ads__campaign_country_report_passthrough_metrics', identifier='country_report', transform='sum', coalesce_with=0, exclude_fields=['real_time_conversion','total_purchase_value','total_sales_lead_value']) }}        
 
     from country_report
     left join campaigns
