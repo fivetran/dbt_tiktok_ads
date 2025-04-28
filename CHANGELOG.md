@@ -21,7 +21,7 @@
 - Corrected references to connectors and connections in the README. ([#23](https://github.com/fivetran/dbt_tiktok_ads/pull/23))
 
 ## Under the Hood
-- Added vertical integrity test to ensure data accuracy of the new tiktok_ads__campaign_country_report.
+- Added vertical integrity test to ensure data accuracy of the new `tiktok_ads__campaign_country_report`.  ([#24](https://github.com/fivetran/dbt_tiktok_ads/pull/24))
 
 # dbt_tiktok_ads v0.7.0
 [PR #22](https://github.com/fivetran/dbt_tiktok_ads/pull/22) includes the following updates:

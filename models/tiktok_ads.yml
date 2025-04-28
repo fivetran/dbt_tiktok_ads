@@ -466,7 +466,7 @@ models:
       - name: source_relation
         description: Source table or view from which the country-level data was derived.
       - name: date_day
-        description: Day of record.
+        description: The reporting date for the campaign data (in YYYY-MM-DD format).
         tests:
           - not_null
       - name: campaign_id
@@ -492,7 +492,7 @@ models:
       - name: status
         description: Current status of the campaign.
       - name: split_test_variable
-        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION , CREATIVE.
+        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION, CREATIVE.
       - name: budget
         description: Total budget allocated to the campaign.
       - name: budget_mode
