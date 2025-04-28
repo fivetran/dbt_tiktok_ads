@@ -497,23 +497,26 @@ models:
         description: Total budget allocated to the campaign.
       - name: budget_mode
         description: Budget pacing mode (e.g., daily, total).
-      - name: clicks
-        description: Total number of clicks.
       - name: impressions
-        description: Total number of impressions.
+        description: The number of impressions that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
       - name: spend
-        description: Total spend in the advertiser’s currency.
+        description: The amount of spend that occurred on the day of the record.
       - name: conversion
-        description: Total number of tracked conversions.
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
       - name: conversion_rate
         description: Conversion rate as a percentage.
       - name: cost_per_conversion
         description: Average cost per conversion.
       - name: daily_cpc
-        description: Cost per click.
+        description: The average amount of money you've spent on a click.
       - name: daily_cpm
-        description: Cost per mille (1,000 impressions).
+        description: The average amount of money you've spent per 1,000 impressions.
       - name: daily_ctr
-        description: Click-through rate.
+        description: The percentage of times people saw your ad and performed a click.
       - name: real_time_conversion
-        description: Total number of real-time conversions reported.
+        description: Number of times your ad resulted in the optimization event you selected.

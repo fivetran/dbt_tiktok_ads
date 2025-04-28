@@ -5,16 +5,15 @@
 **4 total changes • 0 possible breaking changes
 | Table/Column                                      | Change Type | Old Name | New Name                                  | Notes                                                             |
 |---------------------------------------------------|-------------|----------|-------------------------------------------|-------------------------------------------------------------------|
-| tiktok_ads__campaign_country_report       | New Model   |          |  | New table that represents the daily performance of a campaign at the country/geographic region level.               |
-| stg_tiktok_ads__campaign_country_report_tmp       | New Model   |          |  | Temp model added for `campaign_country_report`.               |
-| stg_tiktok_ads__campaign_country_report           | New Model   |          |    | Staging model added for `campaign_country_report`.         |
-| objective_type, status, budget, budget_mode, created_at, is_new_structure           | New Columns   |          |    | New columns added to the stg_tiktok_ads__campaign_history model.         |
+| [tiktok_ads__campaign_country_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__campaign_country_report)       | New Transformation Model   |          |  | New table that represents the daily performance of a campaign at the country/geographic region level.               |
+| [stg_tiktok_ads__campaign_country_report_tmp](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads_source.stg_tiktok_ads__campaign_country_report_tmp)       | New Temp Model   |          |  | Temp model added for `campaign_country_report`.               |
+| [stg_tiktok_ads__campaign_country_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads_source.stg_tiktok_ads__campaign_country_report)           | New Staging Model   |          |    | Staging model added for `campaign_country_report`.         |
+| objective_type, status, budget, budget_mode, created_at, is_new_structure           | New Columns   |          |    | New columns added to the [stg_tiktok_ads__campaign_history](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads_source.stg_tiktok_ads__campaign_history) model.         |
 
 ## Feature Updates
 - Added the `tiktok_ads__campaign_country_report` end model and upstream staging models. See above for schema change details and new models added.
-  - For dbt Core users: If you do not sync this table or would like disable these new models you can disable the models by setting the  `tiktok_ads__using_campaign_country_report` variable to `false` in your `dbt_project.yml` file (`true` by default).
+  - For dbt Core users: If you do not sync this table or would like disable these new models you can disable the models by setting the  `tiktok_ads__using_campaign_country_report` variable to `false` in your `dbt_project.yml` file (`true` by default).  See [README](https://github.com/fivetran/dbt_tiktok_ads?tab=readme-ov-file#disable-country-reports) for more details.
 - Included the `tiktok_ads__campaign_country_report_passthrough_metrics` passthrough variable in the above mentioned new staging models. Refer to the [README](https://github.com/fivetran/dbt_tiktok_ads/tree/main?tab=readme-ov-file#passing-through-additional-metrics) for more details.
-- Introduced the above mentioned new columns to the `stg_tiktok_ads__campaign_history` model.
 
 ## Documentation
 - Added Quickstart model counts to README. ([#23](https://github.com/fivetran/dbt_tiktok_ads/pull/23))

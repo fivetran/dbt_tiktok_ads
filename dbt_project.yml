@@ -15,10 +15,8 @@ vars:
     ad_report_hourly: "{{ ref('stg_tiktok_ads__ad_report_hourly') }}"
     ad_history: "{{ ref('stg_tiktok_ads__ad_history') }}"
     advertiser: "{{ ref('stg_tiktok_ads__advertiser') }}"
-    ad_country_report: "{{ ref('stg_tiktok_ads__ad_country_report') }}"
     campaign_country_report: "{{ ref('stg_tiktok_ads__campaign_country_report') }}"
   tiktok_ads__ad_group_hourly_passthrough_metrics: []
   tiktok_ads__ad_hourly_passthrough_metrics: []
   tiktok_ads__campaign_hourly_passthrough_metrics: []
   tiktok_ads__campaign_country_report_passthrough_metrics: []
-  tiktok_ads__ad_country_report_passthrough_metrics: []
