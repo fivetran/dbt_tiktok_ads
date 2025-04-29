@@ -37,16 +37,16 @@ aggregated as (
         campaigns.split_test_variable,
         campaigns.budget,
         campaigns.budget_mode,
-        sum(country_report.clicks) as clicks,
-        sum(country_report.impressions) as impressions,
-        sum(country_report.spend) as spend,
-        sum(country_report.conversion) as conversion,
-        sum(country_report.conversion_rate) as conversion_rate,
-        sum(country_report.cost_per_conversion) as cost_per_conversion,
-        sum(country_report.spend)/nullif(sum(country_report.clicks),0) as daily_cpc,
-        (sum(country_report.spend)/nullif(sum(country_report.impressions),0))*1000 as daily_cpm,
-        (sum(country_report.clicks)/nullif(sum(country_report.impressions),0))*100 as daily_ctr,
-        sum(country_report.real_time_conversion) as real_time_conversion
+        coalesce(country_report.clicks, 0) as clicks,
+        coalesce(country_report.impressions, 0) as impressions,
+        coalesce(country_report.spend, 0) as spend,
+        coalesce(country_report.conversion, 0) as conversion,
+        coalesce(country_report.conversion_rate, 0) as conversion_rate,
+        coalesce(country_report.cost_per_conversion, 0) as cost_per_conversion,
+        coalesce(country_report.cpc, 0) as daily_cpc,
+        coalesce(country_report.cpm, 0) as daily_cpm,
+        coalesce(country_report.ctr, 0) as daily_ctr,
+        coalesce(country_report.real_time_conversion, 0) as real_time_conversion
 
         {{ tiktok_ads_persist_pass_through_columns(pass_through_variable='tiktok_ads__campaign_country_report_passthrough_metrics', identifier='country_report', transform='sum', coalesce_with=0) }}        
 
@@ -57,8 +57,6 @@ aggregated as (
     left join advertiser
         on campaigns.advertiser_id = advertiser.advertiser_id
         and campaigns.source_relation = advertiser.source_relation
-    {{ dbt_utils.group_by(15) }}
-
 )
 
 select *
