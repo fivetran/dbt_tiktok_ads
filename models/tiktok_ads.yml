@@ -508,10 +508,6 @@ models:
           The number of times your ad achieved an outcome, based on the secondary goal you selected.  
           As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
           Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
-      - name: conversion_rate
-        description: Conversion rate as a percentage.
-      - name: cost_per_conversion
-        description: Average cost per conversion.
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
