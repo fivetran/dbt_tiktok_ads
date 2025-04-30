@@ -26,12 +26,13 @@ The following table provides a detailed list of all tables materialized within t
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [tiktok_ads__ad_group_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_group_report.sql)                     | Each record represents the daily performance for each ad group. This also includes additional data on the demographics you are targeting. |
 | [tiktok_ads__campaign_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql)                     | Each record represents the daily performance for each campaign. |
+| [tiktok_ads__campaign_country_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_country_report.sql)                     | Each record in this table represents the daily performance of a campaign at the country/geographic region level. |
 | [tiktok_ads__advertiser_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__advertiser_report.sql)                     | Each record represents the daily performance for each account. |
 | [tiktok_ads__ad_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql)                     | Each record represents the daily performance for each ad. This also includes additional data on the demographics you are targeting. |
 | [tiktok_ads__url_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql)                     | Each record in this table represents the daily performance of URLs at the ad level. This also includes additional data on the demographics you are targeting.
 
 ### Materialized Models
-Each Quickstart transformation job run materializes 19 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
+Each Quickstart transformation job run materializes 22 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
 <!--section-end-->
 
 ## How do I use the dbt package?
@@ -57,7 +58,7 @@ Include the following tiktok_ads package version in your `packages.yml` file _if
 ```yaml
 packages:
   - package: fivetran/tiktok_ads
-    version: [">=0.7.0", "<0.8.0"]
+    version: [">=0.8.0", "<0.9.0"]
 
 ```
 Do **NOT** include the `tiktok_ads_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
@@ -89,6 +90,13 @@ vars:
 
 To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
+#### Disable Country Reports
+This package leverages the `campaign_country_report` table to help report on ad and campaign performance by country/geographic region level. However, if you are not actively syncing this report from your TikTok Ads connection, you may disable the transformations for the `campaign_country_report` by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    tiktok_ads__using_campaign_country_report: False # True by default
+```
+
 #### Passing Through Additional Metrics
 By default, this package will select `clicks`, `impressions`, `spend` , `conversion`, `real_time_conversion`, `total_purchase_value`, and `total_sales_lead_value` from the source reporting tables to store into the staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) if desired, but not required. Use the below format for declaring the respective pass-through variables:
 
@@ -102,6 +110,9 @@ vars:
       - name: "my_other_field"
     tiktok_ads__ad_hourly_passthrough_metrics:
       - name: "this_field"
+    tiktok_ads__campaign_country_report_passthrough_metrics:
+      - name: "unique_string_field"
+        alias: "field_id"
     tiktok_ads__campaign_hourly_passthrough_metrics:
       - name: "unique_string_field"
         alias: "field_id"
@@ -146,7 +157,7 @@ This dbt package is dependent on the following dbt packages. These dependencies 
 ```yml
 packages:
     - package: fivetran/tiktok_ads_source
-      version: [">=0.7.0", "<0.8.0"]
+      version: [">=0.8.0", "<0.9.0"]
 
     - package: fivetran/fivetran_utils
       version: [">=0.4.0", "<0.5.0"]

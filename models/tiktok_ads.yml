@@ -448,3 +448,71 @@ models:
         description: The average amount of money you've spent per 1,000 impressions.
       - name: daily_ctr
         description: The percentage of times people saw your ad and performed a click.
+
+  - name: tiktok_ads__campaign_country_report
+    description: Each record in this table represents the daily performance of a campaign at the country/geographic region level.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - source_relation
+            - campaign_id
+            - advertiser_id
+            - date_day
+            - currency
+            - objective_type
+            - budget_mode
+            - split_test_variable
+    columns:
+      - name: source_relation
+        description: Source table or view from which the country-level data was derived.
+      - name: date_day
+        description: The reporting date for the campaign data (in YYYY-MM-DD format).
+        tests:
+          - not_null
+      - name: campaign_id
+        description: Unique identifier for the campaign.
+        tests:
+          - not_null
+      - name: campaign_name
+        description: Name of the campaign.
+      - name: campaign_type
+        description: Type/category of the campaign.
+      - name: created_at
+        description: Timestamp when the campaign was created.
+      - name: country_code
+        description: Audience country or region code.
+      - name: advertiser_id
+        description: Unique identifier for the advertiser.
+      - name: advertiser_name
+        description: Name of the advertiser account.
+      - name: currency
+        description: Currency in which spend and cost metrics are reported.
+      - name: objective_type
+        description: Objective type of the campaign (e.g., conversions, traffic).
+      - name: status
+        description: Current status of the campaign.
+      - name: split_test_variable
+        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION, CREATIVE.
+      - name: budget
+        description: Total budget allocated to the campaign.
+      - name: budget_mode
+        description: Budget pacing mode (e.g., daily, total).
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+      - name: daily_cpc
+        description: The average amount of money you've spent on a click.
+      - name: daily_cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: daily_ctr
+        description: The percentage of times people saw your ad and performed a click.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
