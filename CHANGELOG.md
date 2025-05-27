@@ -1,3 +1,12 @@
+# dbt_tiktok_ads v0.8.1
+
+[PR #26](https://github.com/fivetran/dbt_tiktok_ads/pull/26) includes the following updates:
+## Under the Hood
+- Updated `unique_combination_of_columns` test for `tiktok_ads__campaign_country_report` to include `country_code` column.  ([#26](https://github.com/fivetran/dbt_tiktok_ads/pull/26))
+
+## Contributors
+- [@timvyas](https://github.com/timvyas) ([PR #26](https://github.com/fivetran/dbt_ad_reporting/pull/26))
+
 # dbt_tiktok_ads v0.8.0
 
 [PR #24](https://github.com/fivetran/dbt_tiktok_ads/pull/24) includes the following updates:
