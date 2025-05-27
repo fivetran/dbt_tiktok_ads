@@ -1,3 +1,14 @@
+# dbt_tiktok_ads v0.8.1
+
+## Bug Fix
+- Corrected the `unique_combination_of_columns` test for `tiktok_ads__campaign_country_report` to include `country_code` column.  ([#26](https://github.com/fivetran/dbt_tiktok_ads/pull/26))
+
+## Under the Hood
+- Updated the `tiktok_campaign_country_report_data` seed data to reflect campaigns with ads served in multiple country regions. ([#27](https://github.com/fivetran/dbt_tiktok_ads/pull/27))
+
+## Contributors
+- [@timvyas](https://github.com/timvyas) ([PR #26](https://github.com/fivetran/dbt_tiktok_ads/pull/26))
+
 # dbt_tiktok_ads v0.8.0
 
 [PR #24](https://github.com/fivetran/dbt_tiktok_ads/pull/24) includes the following updates:
