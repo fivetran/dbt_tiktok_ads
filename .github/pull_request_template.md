@@ -1,39 +1,35 @@
-**Please provide your name and company**
+<!--
+Pre-Submission Reminders  
+Before marking this PR as "ready for review":
 
-**Link the issue/feature request which this PR is meant to address**
-<!--- If an issue was not created, please create one first so we may discuss the PR prior to opening one. -->
+- `dbt run --full-refresh && dbt test`  
+- `dbt run` && `dbt test` (if incremental models are present)  
+- The related issue is linked, tagged, and appropriately assigned  
+- Documentation and version updates are included, if applicable  
+- `docs` have been regenerated (unless there are no code or YAML changes)  
+- BuildKite integration tests are passing
+-->
 
-**Detail what changes this PR introduces and how this addresses the issue/feature request linked above.**
+## PR Overview 
+**Package version introduced in this PR:** 
+ 
+**This PR addresses the following Issue/Feature(s):**
+<!-- Add Issue # or internal ticket reference -->
 
-**How did you validate the changes introduced within this PR?**
+**Summary of changes:**  
+<!-- 1-2 sentences describing PR changes. -->
 
-**Which warehouse did you use to develop these changes?**
 
-**Did you update the CHANGELOG?**
-<!--- Please update the new package version’s CHANGELOG entry detailing the changes included in this PR. -->
-<!--- To select a checkbox you simply need to add an "x" with no spaces between the brackets (eg. [x] Yes). -->
-- [ ] Yes
+### Submission Checklist  
+- [ ] Alignment meeting with the reviewer (if needed)  
+  - [ ] Timeline and validation requirements discussed  
+- [ ] Provide validation details:  
+  - [ ] **Validation Steps:** Check for unintentional effects (e.g., add/run consistency & integrity tests)
+  - [ ] **Testing Instructions:** Confirm the change addresses the issue(s)
+  - [ ] **Focus Areas:** Complex logic or queries that need extra attention  
 
-**Did you update the dbt_project.yml files with the version upgrade (please leverage standard semantic versioning)? (In both your main project and integration_tests)**
-<!--- The dbt_project.yml and the integration_tests/dbt_project.yml files contain the version number. Be sure to upgrade it accordingly -->
-<!--- To select a checkbox you simply need to add an "x" with no spaces between the brackets (eg. [x] Yes). -->
-- [ ] Yes
-
-**Typically there are additional maintenance changes required before this will be ready for an upcoming release. Are you comfortable with the Fivetran team making a few commits directly to your branch?**
-<!--- If you select Yes this will help expedite your PR in case there are small changes required before approval. We encourage you not to use this branch in a production environment as we may make additional updates.  -->
-<!--- If you select No, we will not make any changes directly to your branch and will either communicate any planned changes via the PR thread or will merge your PR into a separate branch so we may make changes without modifying your branch.. -->
-- [ ] Yes
-- [ ] No
-
-**If you had to summarize this PR in an emoji, which would it be?**
-<!--- For a complete list of markdown compatible emojis check our this git repo (https://gist.github.com/rxaviers/7360908)  --> 
-:dancer:
-
-**Feedback**
-
-We are so excited you decided to contribute to the Fivetran community dbt package! We continue to work to improve the packages and would greatly appreciate your [feedback](https://www.surveymonkey.com/r/DQ7K7WW) on our existing dbt packages or what you'd like to see next.
-
-**PR Template** 
-- [Community Pull Request Template](?expand=1&template=pull_request_template.md) (default)
-
-- [Maintainer Pull Request Template](?expand=1&template=maintainer_pull_request_template.md) (to be used by maintainers)
+### Changelog  
+<!-- Recommend drafting changelog notes, then refining via ChatGPT using:  
+"Draft a changelog entry based on the following notes." -->
+- [ ] Draft changelog for PR  
+- [ ] Final changelog for release review
