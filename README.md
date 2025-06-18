@@ -58,7 +58,7 @@ Include the following tiktok_ads package version in your `packages.yml` file _if
 ```yaml
 packages:
   - package: fivetran/tiktok_ads
-    version: [">=0.8.0", "<0.9.0"]
+    version: [">=0.9.0", "<0.10.0"]
 
 ```
 Do **NOT** include the `tiktok_ads_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
@@ -157,7 +157,7 @@ This dbt package is dependent on the following dbt packages. These dependencies 
 ```yml
 packages:
     - package: fivetran/tiktok_ads_source
-      version: [">=0.8.0", "<0.9.0"]
+      version: [">=0.9.0", "<0.10.0"]
 
     - package: fivetran/fivetran_utils
       version: [">=0.4.0", "<0.5.0"]
