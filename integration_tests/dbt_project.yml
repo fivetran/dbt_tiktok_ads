@@ -7,7 +7,7 @@ models:
   +schema: "tiktok_ads_{{ var('directed_schema','dev') }}"
 
 vars: 
-  tiktok_ads_source:
+  tiktok_ads:
     tiktok_ads_schema: tiktok_ads_integration_tests_5
     tiktok_ads_adgroup_history_identifier: "tiktok_adgroup_history_data"
     tiktok_ads_ad_history_identifier: "tiktok_ad_history_data"

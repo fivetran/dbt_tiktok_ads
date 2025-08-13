@@ -8,7 +8,8 @@ models:
     +materialized: table
     staging:
       +schema: tiktok_ads_source
-      +materialized: view
+      tmp:
+        +materialized: view
 vars:
   tiktok_ads:
     ad_group_report_hourly: "{{ source('tiktok_ads', 'ad_group_report_hourly') }}"

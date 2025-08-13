@@ -75,8 +75,6 @@ vars:
     tiktok_ads_database: your_schema_name
 ```
 
-For additional configurations for the source models, visit the [Tiktok Ads source package](https://github.com/fivetran/dbt_tiktok_ads_source).
-
 ### (Optional) Step 4: Additional configurations
 
 <details open><summary>Expand/Collapse details</summary>
