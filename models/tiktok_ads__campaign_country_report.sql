@@ -3,20 +3,20 @@
 with country_report as (
     
     select *
-    from {{ var('campaign_country_report') }}
+    from {{ ref('stg_tiktok_ads__campaign_country_report') }}
 ), 
 
 campaigns as (
 
     select *
-    from {{ var('campaign_history') }}
+    from {{ ref('stg_tiktok_ads__campaign_history') }}
     where is_most_recent_record
 ), 
 
 advertiser as (
 
     select *
-    from {{ var('advertiser') }}
+    from {{ ref('stg_tiktok_ads__advertiser') }}
 ), 
 
 aggregated as (

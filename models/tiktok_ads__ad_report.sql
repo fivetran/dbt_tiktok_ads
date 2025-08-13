@@ -3,33 +3,33 @@
 with hourly as (
     
     select *
-    from {{ var('ad_report_hourly') }}
+    from {{ ref('stg_tiktok_ads__ad_report_hourly') }}
 ), 
 
 ads as (
 
     select *
-    from {{ var('ad_history') }}
+    from {{ ref('stg_tiktok_ads__ad_history') }}
     where is_most_recent_record
 ), 
 
 ad_groups as (
 
     select *
-    from {{ var('ad_group_history') }}
+    from {{ ref('stg_tiktok_ads__ad_group_history') }}
     where is_most_recent_record
 ), 
 
 advertiser as (
 
     select *
-    from {{ var('advertiser') }}
+    from {{ ref('stg_tiktok_ads__advertiser') }}
 ), 
 
 campaigns as (
 
     select *
-    from {{ var('campaign_history') }}
+    from {{ ref('stg_tiktok_ads__campaign_history') }}
     where is_most_recent_record
 ),
 
