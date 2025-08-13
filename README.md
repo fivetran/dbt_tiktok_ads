@@ -1,4 +1,4 @@
-# Tiktok Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_tiktok_ads/))
+# Tiktok Ads dbt Package ([Docs](https://fivetran.github.io/dbt_tiktok_ads/))
 
 <p align="left">
     <a alt="License"
