@@ -3,20 +3,20 @@
 with hourly as (
     
     select *
-    from {{ var('campaign_report_hourly') }}
+    from {{ ref('stg_tiktok_ads__campaign_report_hourly') }}
 ), 
 
 campaigns as (
 
     select *
-    from {{ var('campaign_history') }}
+    from {{ ref('stg_tiktok_ads__campaign_history') }}
     where is_most_recent_record
 ), 
 
 advertiser as (
 
     select *
-    from {{ var('advertiser') }}
+    from {{ ref('stg_tiktok_ads__advertiser') }}
 ), 
 
 aggregated as (
