@@ -19,6 +19,10 @@
   - Removed all `accepted_values` tests.
   - Moved `loaded_at_field: _fivetran_synced` under the `config:` block in `src_tiktok_ads.yml`.
 
+## Under the Hood
+- Updated conditions in `.github/workflows/auto-release.yml`.
+- Added `.github/workflows/generate-docs.yml`.
+
 # dbt_tiktok_ads v0.9.0
 
 [PR #29](https://github.com/fivetran/dbt_tiktok_ads/pull/29) incorporates the following updates:
