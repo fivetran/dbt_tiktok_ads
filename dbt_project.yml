@@ -7,7 +7,8 @@ models:
     +schema: tiktok_ads
     +materialized: table
     staging:
-      +schema: tiktok_ads_source
+      +materialized: table
+      +schema: stg_tiktok_ads
       tmp:
         +materialized: view
 vars:
