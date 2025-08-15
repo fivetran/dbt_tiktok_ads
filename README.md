@@ -120,7 +120,7 @@ vars:
 ```
 
 #### Change the build schema
-By default, this package will build the TikTok Ads staging models (7 views, 7 tables) within a schema titled (`<target_schema>` + `_stg_tiktok_ads`) and the final TikTok Ads models (5 tables) within a schema titled (`<target_schema>` + `_tiktok_ads`) in your target database. If this is not where you would like your modeled TikTok data to be written to, add the following configuration to your `dbt_project.yml` file:
+By default, this package will build the TikTok Ads staging models (8 views, 8 tables) within a schema titled (`<target_schema>` + `_stg_tiktok_ads`) and the final TikTok Ads models (6 tables) within a schema titled (`<target_schema>` + `_tiktok_ads`) in your target database. If this is not where you would like your modeled TikTok data to be written to, add the following configuration to your `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml
