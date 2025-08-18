@@ -1,0 +1,433 @@
+version: 2
+
+models:
+  - name: stg_tiktok_ads__advertiser
+    description: Each record represents data for each advertiser.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: advertiser_id
+        description: Advertiser ID
+        tests:
+          - not_null
+      - name: address
+        description: Advertiser address information
+      - name: balance
+        description: Account available balance
+      - name: company
+        description: Advertiser's company name
+      - name: contacter
+        description: Contact Person
+      - name: country
+        description: The advertiser's country
+      - name: create_time
+        description: Advertiser's create time
+      - name: currency
+        description: Type of currency used by advertisers
+      - name: description
+        description: Brand description, i.e. promotional content
+      - name: email
+        description: Advertiser contact email, desensitised data
+      - name: industry
+        description: Advertiser industry category
+      - name: language
+        description: Language used by advertisers
+      - name: license_no
+        description: License number
+      - name: license_url
+        description: License preview address, the link is valid for an hour by default.
+      - name: advertiser_name
+        description: Advertiser name
+      - name: cellphone_number
+        description: Contact mobile number, desensitised data
+      - name: telephone_number
+        description: Fixed phone number, desensitised data
+      - name: timezone
+        description: Ad account time zone including GMT offset
+          
+
+  - name: stg_tiktok_ads__ad_group_history
+    description: Each record represents data for each ad group.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: ad_group_id
+        description: Ad group ID
+        tests:
+          - not_null
+      - name: updated_at
+        description: Time the record was updated.
+      - name: advertiser_id
+        description: Advertiser ID
+      - name: action_categories
+        description: IDs of the action categories (behaviors) that you want to target.
+      - name: campaign_id
+        description: The Ad group's campaign ID.
+      - name: action_days
+        description: Action days
+      - name: ad_group_name
+        description: Ad group name. Character limit is 512 and cannot contain emoji.
+      - name: age_groups
+        description: Age groups you want to target. 
+      - name: audience_type
+        description: Audience Type
+      - name: budget
+        description: Ad budget. Returns 0.0 when Campaign Budget Optimization (budget_optimize_switch) is on.
+      - name: category
+        description: Ad group category.
+      - name: display_name
+        description: Display name of ad group.
+      - name: interest_category
+        description: Interest classification. If the interest is specified, users that do not meet interest target will be excluded during delivery.
+      - name: frequency
+        description: >
+          frequency, together with frequency_schedule, controls how often people see your ad (only available for REACH ads). 
+          For example, frequency = 2 frequency_schedule = 3 means "show ads no more than twice every 3 day".
+      - name: frequency_schedule
+        description: frequency, together with frequency, controls how often people see your ad (only available for REACH ads).
+      - name: gender
+        description: Gender that you want to target. 
+      - name: landing_page_url
+        description: Landing page URL.
+      - name: languages
+        description: Codes of the languages that you want to target.
+      - name: is_most_recent_record
+        description: Whether record is the most recent one for this particular grain.
+
+  - name: stg_tiktok_ads__ad_history
+    description: Each record represents data for each ad.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: ad_id
+        description: Ad ID
+        tests:
+          - not_null
+      - name: updated_at
+        description: Time the record was updated.
+      - name: ad_group_id
+        description: Ad group ID
+      - name: advertiser_id
+        description: Advertiser ID
+      - name: base_url
+        description: The base URL of the ad, extracted from the `landing page url`.
+      - name: campaign_id
+        description: Campaign ID
+      - name: ad_name
+        description: Ad Name.
+      - name: call_to_action
+        description: Call to action values. 
+      - name: click_tracking_url
+        description: Click monitoring URL.
+      - name: impression_tracking_url
+        description: Display monitoring URL. 
+      - name: landing_page_url
+        description: Landing page URL.
+      - name: url_host
+        description: The URL host of the ad, extracted from the `landing_page_url`.
+      - name: url_path
+        description: The URL path of the ad, extracted from the `landing_page_url`.
+      - name: utm_source
+        description: The utm_source parameter of the ad, extracted from the `landing_page_url`.
+      - name: utm_medium
+        description: The utm_medium parameter of the ad, extracted from the `landing_page_url`.
+      - name: utm_campaign
+        description: The utm_campaign parameter of the ad, extracted from the `landing_page_url`.
+      - name: utm_content
+        description: The utm_content parameter of the ad, extracted from the `landing_page_url`.
+      - name: utm_term
+        description: The utm_term parameter of the ad, extracted from the `landing_page_url`.
+      - name: is_most_recent_record
+        description: Whether record is the most recent one for this particular grain.
+          
+
+  - name: stg_tiktok_ads__campaign_history
+    description: Each record represents data for each campaign.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: campaign_id
+        description: Campaign ID
+        tests:
+          - not_null
+      - name: updated_at
+        description: Time the record was updated.
+      - name: advertiser_id
+        description: Advertiser ID
+      - name: campaign_name
+        description: Campaign name
+      - name: campaign_type
+        description: Campaign Type, indicates the campaign is a regular campaign or iOS 14 campaign.
+      - name: split_test_variable
+        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION, CREATIVE.
+      - name: budget
+        description: Campaign budget
+      - name: budget_mode
+        description: Budget type
+      - name: created_at
+        description: Time at which the campaign was created.
+      - name: is_new_structure
+        description: Whether the campaign is a new structure (for the same campaign, the structure of campaign, adgroups and ads are the same)
+      - name: objective_type
+        description: Advertising objective.
+      - name: opt_status
+        description: Operation status. 
+      - name: status
+        description: Campaign status.
+      - name: is_most_recent_record
+        description: Whether record is the most recent one for this particular grain.
+
+  - name: stg_tiktok_ads__ad_report_hourly
+    description: Each record represents data for each ad for each hour.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: ad_id
+        description: Ad id
+        tests:
+          - not_null
+      - name: stat_time_hour
+        description: Hour of activity
+        tests:
+          - not_null
+      - name: cost_per_conversion
+        description: >
+          The average amount of money you've spent on a conversion. 
+          (The total count is calculated based on the time each ad impression occurred.)
+      - name: cpc
+        description: The average amount of money you've spent on a click.
+      - name: video_play_actions
+        description: The number of times your video starts to play. Replays will not be counted.
+      - name: conversion_rate
+        description: >
+          The percentage of results you received out of all the clicks of your ads.  
+          (The total count is calculated based on the time each ad impression occurred.)
+      - name: video_views_p_75
+        description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: video_views_p_50
+        description: The number of times your video was played at 50% of its length. Replays will not be counted.
+      - name: impressions
+        description: The number of times your ads were on screen.
+      - name: comments
+        description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+      - name: shares
+        description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
+      - name: clicks
+        description: The number of clicks on your ads.
+      - name: video_views_p_25
+        description: The number of times your video was played at 25% of its length. Replays will not be counted.
+      - name: reach
+        description: The number of unique users who saw your ads at least once. This metric is estimated.
+      - name: average_video_play
+        description: The average time your video was played per single video view, including any time spent replaying the video.
+      - name: average_video_play_per_user
+        description: The average time per user your video was played per single video view, including any time spent replaying the video.
+      - name: profile_visits
+        description: The number of profile visits the ad drove during the campaign. This metric is only for Boosted TikToks.
+      - name: cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: ctr
+        description: The percentage of times people saw your ad and performed a click.
+      - name: video_watched_2_s
+        description: The number of times your video played for at least 2 seconds. Replays will not be counted.
+      - name: follows
+        description: The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.
+      - name: video_watched_6_s
+        description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
+      - name: spend
+        description: The estimated total amount of money you've spent on your campaign, ad group or ad during its schedule.
+      - name: likes
+        description: The number of likes your video creative received within 1 day of a user seeing a paid ad. 
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
+      - name: total_purchase_value
+        description: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+      - name: total_sales_lead_value
+        description: The monetary worth or potential value assigned to a lead generated through ads.
+
+
+  - name: stg_tiktok_ads__ad_group_report_hourly
+    description: Each record represents data for each ad group for each hour.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: ad_group_id
+        description: Ad group id
+        tests:
+          - not_null
+      - name: stat_time_hour
+        description: Hour of activity
+        tests:
+          - not_null
+      - name: cost_per_conversion
+        description: >
+          The average amount of money you've spent on a conversion. 
+          (The total count is calculated based on the time each ad impression occurred.)
+      - name: cpc
+        description: The average amount of money you've spent on a click.
+      - name: video_play_actions
+        description: The number of times your video starts to play. Replays will not be counted.
+      - name: conversion_rate
+        description: >
+          The percentage of results you received out of all the clicks of your ads.  
+          (The total count is calculated based on the time each ad impression occurred.)
+      - name: video_views_p_75
+        description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: video_views_p_50
+        description: The number of times your video was played at 50% of its length. Replays will not be counted.
+      - name: impressions
+        description: The number of times your ads were on screen.
+      - name: comments
+        description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+      - name: shares
+        description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
+      - name: clicks
+        description: The number of clicks on your ads.
+      - name: video_views_p_25
+        description: The number of times your video was played at 25% of its length. Replays will not be counted.
+      - name: reach
+        description: The number of unique users who saw your ads at least once. This metric is estimated.
+      - name: average_video_play
+        description: The average time your video was played per single video view, including any time spent replaying the video.
+      - name: average_video_play_per_user
+        description: The average time per user your video was played per single video view, including any time spent replaying the video.
+      - name: profile_visits
+        description: The number of profile visits the ad drove during the campaign. This metric is only for Boosted TikToks.
+      - name: cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: ctr
+        description: The percentage of times people saw your ad and performed a click.
+      - name: video_watched_2_s
+        description: The number of times your video played for at least 2 seconds. Replays will not be counted.
+      - name: follows
+        description: The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.
+      - name: video_watched_6_s
+        description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
+      - name: spend
+        description: The estimated total amount of money you've spent on your campaign, ad group or ad during its schedule.
+      - name: likes
+        description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
+      - name: total_purchase_value
+        description: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+      - name: total_sales_lead_value
+        description: The monetary worth or potential value assigned to a lead generated through ads.
+
+  
+  - name: stg_tiktok_ads__campaign_report_hourly
+    description: Each record represent data for each campaign for each hour.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: campaign_id
+        description: Campaign id
+        tests:
+          - not_null
+      - name: stat_time_hour
+        description: Hour of activity
+        tests:
+          - not_null
+      - name: cost_per_conversion
+        description: >
+          The average amount of money you've spent on a conversion. 
+          (The total count is calculated based on the time each ad impression occurred.)
+      - name: cpc
+        description: The average amount of money you've spent on a click.
+      - name: video_play_actions
+        description: The number of times your video starts to play. Replays will not be counted.
+      - name: conversion_rate
+        description: >
+          The percentage of results you received out of all the clicks of your ads.  
+          (The total count is calculated based on the time each ad impression occurred.)
+      - name: video_views_p_75
+        description: The number of times your video was played at 75% of its length. Replays will not be counted.
+      - name: video_views_p_50
+        description: The number of times your video was played at 50% of its length. Replays will not be counted.
+      - name: impressions
+        description: The number of times your ads were on screen.
+      - name: comments
+        description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
+      - name: conversion
+        description: >
+          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
+          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+      - name: shares
+        description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
+      - name: clicks
+        description: The number of clicks on your ads.
+      - name: video_views_p_25
+        description: The number of times your video was played at 25% of its length. Replays will not be counted.
+      - name: reach
+        description: The number of unique users who saw your ads at least once. This metric is estimated.
+      - name: average_video_play
+        description: The average time your video was played per single video view, including any time spent replaying the video.
+      - name: average_video_play_per_user
+        description: The average time per user your video was played per single video view, including any time spent replaying the video.
+      - name: profile_visits
+        description: The number of profile visits the ad drove during the campaign. This metric is only for Boosted TikToks.
+      - name: cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: ctr
+        description: The percentage of times people saw your ad and performed a click.
+      - name: video_watched_2_s
+        description: The number of times your video played for at least 2 seconds. Replays will not be counted.
+      - name: follows
+        description: The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.
+      - name: video_watched_6_s
+        description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
+      - name: spend
+        description: The estimated total amount of money you've spent on your campaign, ad group or ad during its schedule.
+      - name: likes
+        description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
+      - name: total_purchase_value
+        description: The total value of purchase events that occurred in your app that were recorded by your measurement partner.
+      - name: total_sales_lead_value
+        description: The monetary worth or potential value assigned to a lead generated through ads.
+
+  - name: stg_tiktok_ads__campaign_country_report
+    description: Each record provides country-level reporting metrics at the campaign level.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: _fivetran_synced
+        description: Timestamp indicating when the record was last synced.
+      - name: campaign_id
+        description: Unique identifier of the campaign.
+      - name: clicks
+        description: Total number of times users clicked on ads within the campaign.
+      - name: conversion
+        description: Number of attributed conversions from ads in the campaign based on the TikTok attribution model.
+      - name: conversion_rate
+        description: Ratio of conversions to impressions, calculated as conversions divided by impressions.
+      - name: cost_per_conversion
+        description: Average cost per conversion, calculated as total spend divided by conversions.
+      - name: country_code
+        description: Audience country or region code.
+      - name: cpc
+        description: Cost per click, calculated as spend divided by the number of clicks.
+      - name: cpm
+        description: Cost per thousand impressions, calculated as (spend / impressions) * 1000.
+      - name: ctr
+        description: Click-through rate, calculated as clicks divided by impressions.
+      - name: impressions
+        description: Total number of times ads in the campaign were shown.
+      - name: real_time_conversion
+        description: Number of real-time conversions tracked by TikTok.
+      - name: spend
+        description: Total amount spent for the campaign in the account currency.
+      - name: stat_time_day
+        description: The reporting date for the campaign data (in YYYY-MM-DD format).

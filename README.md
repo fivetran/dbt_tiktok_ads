@@ -1,4 +1,4 @@
-# Tiktok Ads Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_tiktok_ads/))
+# Tiktok Ads dbt Package ([Docs](https://fivetran.github.io/dbt_tiktok_ads/))
 
 <p align="left">
     <a alt="License"
@@ -10,10 +10,13 @@
         <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
     <a alt="PRs">
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
+    <a alt="Fivetran Quickstart Compatible"
+        href="https://fivetran.com/docs/transformations/dbt/quickstart">
+        <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
 
 ## What does this dbt package do?
-- Produces modeled tables that leverage Tiktok Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/tiktok-ads) in the format described by [this ERD](https://fivetran.com/docs/applications/tiktok-ads#schemainformation) and builds off the output of our [Tiktok Ads source package](https://github.com/fivetran/dbt_tiktok_ads_source).
+- Produces modeled tables that leverage Tiktok Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/tiktok-ads) in the format described by [this ERD](https://fivetran.com/docs/applications/tiktok-ads#schemainformation).
 - Creates reports on daily marketing performance across various levels of granularity.
 - Generates a comprehensive data dictionary of your source and modeled Tiktok Ads data through the [dbt docs site](https://fivetran.github.io/dbt_tiktok_ads/).
 
@@ -58,10 +61,10 @@ Include the following tiktok_ads package version in your `packages.yml` file _if
 ```yaml
 packages:
   - package: fivetran/tiktok_ads
-    version: [">=0.9.0", "<0.10.0"]
+    version: [">=1.0.0", "<1.1.0"]
 
 ```
-Do **NOT** include the `tiktok_ads_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
+> All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/tiktok_ads_source` in your `packages.yml` since this package has been deprecated.
 
 ### Step 3: Define database and schema variables
 By default, this package will look for your TikTok Ads data in the `tiktok_ads` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your TikTok Ads data is, you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
@@ -71,8 +74,6 @@ vars:
     tiktok_ads_schema: your_database_name
     tiktok_ads_database: your_schema_name
 ```
-
-For additional configurations for the source models, visit the [Tiktok Ads source package](https://github.com/fivetran/dbt_tiktok_ads_source).
 
 ### (Optional) Step 4: Additional configurations
 
@@ -119,15 +120,15 @@ vars:
 ```
 
 #### Change the build schema
-By default, this package will build the TikTok Ads staging models (7 views, 7 tables) within a schema titled (`<target_schema>` + `_stg_tiktok_ads`) and the final TikTok Ads models (5 tables) within a schema titled (`<target_schema>` + `_tiktok_ads`) in your target database. If this is not where you would like your modeled TikTok data to be written to, add the following configuration to your `dbt_project.yml` file:
+By default, this package will build the TikTok Ads staging models (8 views, 8 tables) within a schema titled (`<target_schema>` + `_stg_tiktok_ads`) and the final TikTok Ads models (6 tables) within a schema titled (`<target_schema>` + `_tiktok_ads`) in your target database. If this is not where you would like your modeled TikTok data to be written to, add the following configuration to your `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml
 models:
     tiktok_ads:
-        +schema: my_new_schema_name # leave blank for just the target_schema
-    tiktok_ads_source:
-        +schema: my_new_schema_name # leave blank for just the target_schema
+      +schema: my_new_schema_name # Leave +schema: blank to use the default target_schema.
+      staging:
+        +schema: my_new_schema_name # Leave +schema: blank to use the default target_schema.
 ```
 
 #### Change the source table references
@@ -145,7 +146,7 @@ vars:
 ### (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for more details</summary>
 <br>
-    
+
 Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
 
 </details>
@@ -153,12 +154,9 @@ Fivetran offers the ability for you to orchestrate your dbt project through [Fiv
 ## Does this package have dependencies?
 This dbt package is dependent on the following dbt packages. These dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
 > IMPORTANT: If you have any of these dependent packages in your own `packages.yml` file, we highly recommend that you remove them from your root `packages.yml` to avoid package version conflicts.
-    
+
 ```yml
 packages:
-    - package: fivetran/tiktok_ads_source
-      version: [">=0.9.0", "<0.10.0"]
-
     - package: fivetran/fivetran_utils
       version: [">=0.4.0", "<0.5.0"]
 
