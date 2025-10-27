@@ -25,14 +25,26 @@
 The following table provides a detailed list of all tables materialized within this package by default.
 > TIP: See more details about these tables in the package's [dbt docs site](https://fivetran.github.io/dbt_tiktok_ads/#!/overview?g_v=1&g_e=seeds).
 
-| **Table**                    | **Description**                                                                                                        |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| [tiktok_ads__ad_group_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_group_report.sql)                     | Each record represents the daily performance for each ad group. This also includes additional data on the demographics you are targeting. |
-| [tiktok_ads__campaign_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql)                     | Each record represents the daily performance for each campaign. |
-| [tiktok_ads__campaign_country_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_country_report.sql)                     | Each record in this table represents the daily performance of a campaign at the country/geographic region level. |
-| [tiktok_ads__advertiser_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__advertiser_report.sql)                     | Each record represents the daily performance for each account. |
-| [tiktok_ads__ad_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql)                     | Each record represents the daily performance for each ad. This also includes additional data on the demographics you are targeting. |
-| [tiktok_ads__url_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql)                     | Each record in this table represents the daily performance of URLs at the ad level. This also includes additional data on the demographics you are targeting.
+| **Table** | **Details** |
+|-----------|-------------|
+| [`tiktok_ads__ad_group_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_group_report.sql) | Represents daily performance aggregated at the ad group level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which ad groups have the strongest engagement relative to their budget?</li><li>Do certain ad groups dominate impressions within a campaign?</li><li>Are new ad groups ramping up as expected after launch?</li></ul> |
+| [`tiktok_ads__campaign_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql) | Represents daily performance aggregated at the campaign level, including `spend`, `clicks`, `impressions`, and `conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which campaigns are most efficient in terms of cost per conversion?</li><li>Are paused or limited-status campaigns still accruing impressions?</li><li>Which campaigns contribute most to overall spend or conversions?</li></ul> |
+| [`tiktok_ads__campaign_country_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_country_report.sql) | Represents daily performance aggregated at the campaign level by country, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which countries are delivering the highest return on ad spend for each campaign?</li><li>Are there seasonal performance variations by geographic region?</li></ul> |
+| [`tiktok_ads__advertiser_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__advertiser_report.sql) | Represents daily performance aggregated at the advertiser level (equivalent to account level), including `spend`, `clicks`, `impressions`, and `conversions`.<br><br>**Example Analytics Questions:**<ul><li>How does performance compare across different accounts by account manager?</li><li>Are currency fluctuations affecting results across markets?</li></ul> |
+| [`tiktok_ads__ad_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql) | Represents daily performance at the individual ad level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which ad creatives are driving the lowest cost per click?</li><li>Do expanded text ads perform better than responsive search ads?</li><li>How do performance trends change after refreshing ad copy?</li></ul> |
+| [`tiktok_ads__url_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql) | Represents daily performance of URLs at the ad level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with ad context and demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which landing pages are driving the highest conversion rates?</li><li>Are certain URLs performing better with specific ad creative combinations?</li></ul> |
+
+Many of the above reports are now configurable for [visualization via Streamlit](https://github.com/fivetran/streamlit_ad_reporting). Check out some [sample reports here](https://fivetran-ad-reporting.streamlit.app/ad_performance).
+
+### Example Visualizations
+
+Curious what these tables can do? The Tiktok Ads models provide advertising performance data that can be visualized to track key metrics like spend, impressions, click-through rates, conversion rates, and return on ad spend across different campaign structures and time periods. Check out example visualizations in the [Fivetran Ad Reporting Streamlit App](https://fivetran-ad-reporting.streamlit.app/ad_performance), and see how you can use these tables in your own reporting. Below is a screenshot of an example dashboard; explore the app for more.
+
+<p align="center">
+  <a href="https://fivetran-ad-reporting.streamlit.app/ad_performance">
+    <img src="https://raw.githubusercontent.com/fivetran/dbt_tiktok_ads/main/images/streamlit_example.png" alt="Fivetran Ad Reporting Streamlit App" width="100%">
+  </a>
+</p>
 
 ### Materialized Models
 Each Quickstart transformation job run materializes 22 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
