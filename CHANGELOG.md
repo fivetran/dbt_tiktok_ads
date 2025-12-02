@@ -1,3 +1,10 @@
+# dbt_tiktok_ads v1.1.0
+
+[PR #37](https://github.com/fivetran/dbt_tiktok_ads/pull/37) includes the following updates:
+
+## Features
+  - Increases the required dbt version upper limit to v3.0.0
+
 # dbt_tiktok_ads v1.0.0
 
 [PR #34](https://github.com/fivetran/dbt_tiktok_ads/pull/34) includes the following updates:
