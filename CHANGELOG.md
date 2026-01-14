@@ -3,12 +3,12 @@
 [PR #39](https://github.com/fivetran/dbt_tiktok_ads/pull/39) includes the following updates:
 
 ## Documentation
-- Updates README with standardized Fivetran formatting
+- Updates README with standardized Fivetran formatting.
 
 ## Under the Hood
 - In the `quickstart.yml` file:
   - Adds `table_variables` for relevant sources to prevent missing sources from blocking downstream Quickstart models.
-  - Adds `supported_vars` for Quickstart UI customization,
+  - Adds `supported_vars` for Quickstart UI customization.
 
 # dbt_tiktok_ads v1.1.0
 
