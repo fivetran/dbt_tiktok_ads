@@ -4,10 +4,10 @@
 
 ## Documentation
 - Updates README with standardized Fivetran formatting.
+- Removes duplicative column yml definitions.
 
 ## Under the Hood
 - In the `quickstart.yml` file:
-  - Adds `table_variables` for relevant sources to prevent missing sources from blocking downstream Quickstart models.
   - Adds `supported_vars` for Quickstart UI customization.
 
 # dbt_tiktok_ads v1.1.0
