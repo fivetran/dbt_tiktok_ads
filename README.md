@@ -1,4 +1,5 @@
-# Tiktok Ads dbt Package ([Docs](https://fivetran.github.io/dbt_tiktok_ads/))
+<!--section="tiktok-ads_transformation_model"-->
+# Tiktok Ads dbt Package
 
 <p align="left">
     <a alt="License"
@@ -11,34 +12,53 @@
     <a alt="PRs">
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
     <a alt="Fivetran Quickstart Compatible"
-        href="https://fivetran.com/docs/transformations/dbt/quickstart">
+        href="https://fivetran.com/docs/transformations/data-models/quickstart-management#quickstartmanagement">
         <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
 
+This dbt package transforms data from Fivetran's Tiktok Ads connector into analytics-ready tables.
+
+## Resources
+
+- Number of materialized models¹: 22
+- Connector documentation
+  - [Tiktok Ads connector documentation](https://fivetran.com/docs/connectors/applications/tiktok-ads)
+  - [Tiktok Ads ERD](https://fivetran.com/docs/connectors/applications/tiktok-ads#schemainformation)
+- dbt package documentation
+  - [GitHub repository](https://github.com/fivetran/dbt_tiktok_ads)
+  - [dbt Docs](https://fivetran.github.io/dbt_tiktok_ads/#!/overview)
+  - [DAG](https://fivetran.github.io/dbt_tiktok_ads/#!/overview?g_v=1)
+  - [Changelog](https://github.com/fivetran/dbt_tiktok_ads/blob/main/CHANGELOG.md)
+
 ## What does this dbt package do?
-- Produces modeled tables that leverage Tiktok Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/tiktok-ads) in the format described by [this ERD](https://fivetran.com/docs/applications/tiktok-ads#schemainformation).
-- Creates reports on daily marketing performance across various levels of granularity.
-- Generates a comprehensive data dictionary of your source and modeled Tiktok Ads data through the [dbt docs site](https://fivetran.github.io/dbt_tiktok_ads/).
+This package enables you to produce modeled tables, create reports on daily marketing performance, and generate comprehensive data dictionaries. It creates enriched models with metrics focused on spend, clicks, impressions, and conversions across various levels of granularity.
 
-<!--section=“tiktok_ads_transformation_model"-->
+### Output schema
+Final output tables are generated in the following target schema:
 
-The following table provides a detailed list of all tables materialized within this package by default.
-> TIP: See more details about these tables in the package's [dbt docs site](https://fivetran.github.io/dbt_tiktok_ads/#!/overview?g_v=1&g_e=seeds).
+```
+<your_database>.<connector/schema_name>_tiktok_ads
+```
 
-| **Table** | **Details** |
-|-----------|-------------|
-| [`tiktok_ads__ad_group_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_group_report.sql) | Represents daily performance aggregated at the ad group level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which ad groups have the strongest engagement relative to their budget?</li><li>Do certain ad groups dominate impressions within a campaign?</li><li>Are new ad groups ramping up as expected after launch?</li></ul> |
-| [`tiktok_ads__campaign_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql) | Represents daily performance aggregated at the campaign level, including `spend`, `clicks`, `impressions`, and `conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which campaigns are most efficient in terms of cost per conversion?</li><li>Are paused or limited-status campaigns still accruing impressions?</li><li>Which campaigns contribute most to overall spend or conversions?</li></ul> |
-| [`tiktok_ads__campaign_country_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_country_report.sql) | Represents daily performance aggregated at the campaign level by country, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which countries are delivering the highest return on ad spend for each campaign?</li><li>Are there seasonal performance variations by geographic region?</li></ul> |
-| [`tiktok_ads__advertiser_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__advertiser_report.sql) | Represents daily performance aggregated at the advertiser level (equivalent to account level), including `spend`, `clicks`, `impressions`, and `conversions`.<br><br>**Example Analytics Questions:**<ul><li>How does performance compare across different accounts by account manager?</li><li>Are currency fluctuations affecting results across markets?</li></ul> |
-| [`tiktok_ads__ad_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql) | Represents daily performance at the individual ad level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which ad creatives are driving the lowest cost per click?</li><li>Do expanded text ads perform better than responsive search ads?</li><li>How do performance trends change after refreshing ad copy?</li></ul> |
-| [`tiktok_ads__url_report`](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql) | Represents daily performance of URLs at the ad level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with ad context and demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which landing pages are driving the highest conversion rates?</li><li>Are certain URLs performing better with specific ad creative combinations?</li></ul> |
+### Final output tables
 
+By default, this package materializes the following final tables:
+
+| Table | Description |
+| :---- | :---- |
+| [tiktok_ads__ad_group_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_group_report.sql) | Represents daily performance aggregated at the ad group level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which ad groups have the strongest engagement relative to their budget?</li><li>Do certain ad groups dominate impressions within a campaign?</li><li>Are new ad groups ramping up as expected after launch?</li></ul> |
+| [tiktok_ads__campaign_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql) | Represents daily performance aggregated at the campaign level, including `spend`, `clicks`, `impressions`, and `conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which campaigns are most efficient in terms of cost per conversion?</li><li>Are paused or limited-status campaigns still accruing impressions?</li><li>Which campaigns contribute most to overall spend or conversions?</li></ul> |
+| [tiktok_ads__campaign_country_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_country_report.sql) | Represents daily performance aggregated at the campaign level by country, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which countries are delivering the highest return on ad spend for each campaign?</li><li>Are there seasonal performance variations by geographic region?</li></ul> |
+| [tiktok_ads__advertiser_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__advertiser_report.sql) | Represents daily performance aggregated at the advertiser level (equivalent to account level), including `spend`, `clicks`, `impressions`, and `conversions`.<br><br>**Example Analytics Questions:**<ul><li>How does performance compare across different accounts by account manager?</li><li>Are currency fluctuations affecting results across markets?</li></ul> |
+| [tiktok_ads__ad_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql) | Represents daily performance at the individual ad level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which ad creatives are driving the lowest cost per click?</li><li>Do expanded text ads perform better than responsive search ads?</li><li>How do performance trends change after refreshing ad copy?</li></ul> |
+| [tiktok_ads__url_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql) | Represents daily performance of URLs at the ad level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with ad context and demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which landing pages are driving the highest conversion rates?</li><li>Are certain URLs performing better with specific ad creative combinations?</li></ul> |
+
+¹ Each Quickstart transformation job run materializes these models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
+
+---
+
+## Visualizations
 Many of the above reports are now configurable for [visualization via Streamlit](https://github.com/fivetran/streamlit_ad_reporting). Check out some [sample reports here](https://fivetran-ad-reporting.streamlit.app/ad_performance).
-
-### Example Visualizations
-
-Curious what these tables can do? The Tiktok Ads models provide advertising performance data that can be visualized to track key metrics like spend, impressions, click-through rates, conversion rates, and return on ad spend across different campaign structures and time periods. Check out example visualizations in the [Fivetran Ad Reporting Streamlit App](https://fivetran-ad-reporting.streamlit.app/ad_performance), and see how you can use these tables in your own reporting. Below is a screenshot of an example dashboard; explore the app for more.
 
 <p align="center">
   <a href="https://fivetran-ad-reporting.streamlit.app/ad_performance">
@@ -46,17 +66,31 @@ Curious what these tables can do? The Tiktok Ads models provide advertising perf
   </a>
 </p>
 
-### Materialized Models
-Each Quickstart transformation job run materializes 22 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
-<!--section-end-->
-
-## How do I use the dbt package?
-
-### Step 1: Prerequisites
+## Prerequisites
 To use this dbt package, you must have the following:
 
 - At least one Fivetran Tiktok Ads connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
+
+## How do I use the dbt package?
+You can either add this dbt package in the Fivetran dashboard or import it into your dbt project:
+
+- To add the package in the Fivetran dashboard, follow our [Quickstart guide](https://fivetran.com/docs/transformations/data-models/quickstart-management).
+- To add the package to your dbt project, follow the setup instructions in the dbt package's [README file](https://github.com/fivetran/dbt_tiktok_ads/blob/main/README.md#how-do-i-use-the-dbt-package) to use this package.
+
+<!--section-end-->
+
+### Install the package (skip if also using the `ad_reporting` combo package)
+Include the following tiktok_ads package version in your `packages.yml` file _if_ you are not also using the upstream [Ad Reporting combination package](https://github.com/fivetran/dbt_ad_reporting):
+> TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
+
+```yaml
+packages:
+  - package: fivetran/tiktok_ads
+    version: [">=1.2.0", "<1.3.0"]
+
+```
+> All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/tiktok_ads_source` in your `packages.yml` since this package has been deprecated.
 
 #### Databricks Dispatch Configuration
 If you are using a Databricks destination with this package you will need to add the below (or a variation of the below) dispatch configuration within your `dbt_project.yml`. This is required in order for the package to accurately search for macros within the `dbt-labs/spark_utils` then the `dbt-labs/dbt_utils` packages respectively.
@@ -66,19 +100,7 @@ dispatch:
     search_order: ['spark_utils', 'dbt_utils']
 ```
 
-### Step 2: Install the package (skip if also using the `ad_reporting` combo package)
-Include the following tiktok_ads package version in your `packages.yml` file _if_ you are not also using the upstream [Ad Reporting combination package](https://github.com/fivetran/dbt_ad_reporting):
-> TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
-
-```yaml
-packages:
-  - package: fivetran/tiktok_ads
-    version: [">=1.1.0", "<1.2.0"]
-
-```
-> All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/tiktok_ads_source` in your `packages.yml` since this package has been deprecated.
-
-### Step 3: Define database and schema variables
+### Define database and schema variables
 By default, this package will look for your TikTok Ads data in the `tiktok_ads` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your TikTok Ads data is, you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
 
 ```yml
@@ -87,7 +109,7 @@ vars:
     tiktok_ads_database: your_schema_name
 ```
 
-### (Optional) Step 4: Additional configurations
+### (Optional) Additional configurations
 
 <details open><summary>Expand/Collapse details</summary>
 
@@ -155,11 +177,11 @@ vars:
 
 </details>
 
-### (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
+### (Optional) Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for more details</summary>
 <br>
 
-Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
+Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt#transformationsfordbtcore). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core setup guides](https://fivetran.com/docs/transformations/dbt/setup-guide#transformationsfordbtcoresetupguide).
 
 </details>
 
@@ -178,19 +200,23 @@ packages:
     - package: dbt-labs/spark_utils
       version: [">=0.3.0", "<0.4.0"]
 ```
+<!--section="tiktok-ads_maintenance"-->
 ## How is this package maintained and can I contribute?
+
 ### Package Maintenance
-The Fivetran team maintaining this package _only_ maintains the latest version of the package. We highly recommend you stay consistent with the [latest version](https://hub.getdbt.com/fivetran/tiktok_ads/latest/) of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_tiktok_ads/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
+The Fivetran team maintaining this package only maintains the [latest version](https://hub.getdbt.com/fivetran/tiktok_ads/latest/) of the package. We highly recommend you stay consistent with the latest version of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_tiktok_ads/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
 
 ### Contributions
 A small team of analytics engineers at Fivetran develops these dbt packages. However, the packages are made better by community contributions.
 
-We highly encourage and welcome contributions to this package. Check out [this dbt Discourse article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package.
+We highly encourage and welcome contributions to this package. Learn how to contribute to a package in dbt's [Contributing to an external dbt package article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657).
 
 #### Contributors
 We thank [everyone](https://github.com/fivetran/dbt_tiktok_ads/graphs/contributors) who has taken the time to contribute. Each PR, bug report, and feature request has made this package better and is truly appreciated.
 
 A special thank you to [Seer Interactive](https://www.seerinteractive.com/?utm_campaign=Fivetran%20%7C%20Models&utm_source=Fivetran&utm_medium=Fivetran%20Documentation), who we closely collaborated with to introduce native conversion support to our Ad packages.
+
+<!--section-end-->
 
 ## Are there any resources available?
 - If you have questions or want to reach out for help, see the [GitHub Issue](https://github.com/fivetran/dbt_tiktok_ads/issues/new/choose) section to find the right avenue of support for you.

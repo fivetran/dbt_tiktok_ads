@@ -21,3 +21,25 @@ public_models: [
   "tiktok_ads__advertiser_report",
   "tiktok_ads__campaign_country_report"
 ]
+
+supported_vars:
+  tiktok_ads__ad_group_hourly_passthrough_metrics:
+    type: dictionary
+    description: "Additional `AD_REPORT_HOURLY` columns to include in `tiktok_ads__ad_report`, `tiktok_ads__advertiser_report`, and `tiktok_ads__url_report`"
+    display_name: "Additional Ad Report Metrics"
+
+  tiktok_ads__ad_hourly_passthrough_metrics:
+    type: dictionary
+    description: "Additional `ADGROUP_REPORT_HOURLY` columns to include in `tiktok_ads__ad_group_report`"
+    display_name: "Additional Ad Group Report Metrics"
+
+  tiktok_ads__campaign_hourly_passthrough_metrics:
+    type: dictionary
+    description: "Additional `CAMPAIGN_REPORT_HOURLY` columns to include in `tiktok_ads__campaign_report`"
+    display_name: "Additional Campaign Report Metrics"
+
+  tiktok_ads__campaign_country_report_passthrough_metrics:
+    type: dictionary
+    description: "Additional `CAMPAIGN_COUNTRY_REPORT` columns to include in `tiktok_ads__campaign_country_report`"
+    display_name: "Additional Campaign Country Report Metrics"
+
