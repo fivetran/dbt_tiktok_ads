@@ -4,6 +4,9 @@ profile: 'integration_tests'
 config-version: 2
 
 models:
+  +persist_docs:
+    relation: true
+    columns: "{{ false if target.type in ('databricks') else true }}"
   +schema: "tiktok_ads_{{ var('directed_schema','dev') }}"
 
 vars: 
