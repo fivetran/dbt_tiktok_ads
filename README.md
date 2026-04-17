@@ -119,6 +119,13 @@ vars:
     tiktok_ads__using_campaign_country_report: False # True by default
 ```
 
+#### Disable the URL null filter
+By default, the `tiktok_ads_url_report` model will filter out records where the URL is null. If you would like to include these records in your final model, you may disable this filter by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    ad_reporting__url_report__using_null_filter: False # True by default
+```
+
 #### Passing Through Additional Metrics
 By default, this package will select `clicks`, `impressions`, `spend` , `conversion`, `real_time_conversion`, `total_purchase_value`, and `total_sales_lead_value` from the source reporting tables to store into the staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) if desired, but not required. Use the below format for declaring the respective pass-through variables:
 
