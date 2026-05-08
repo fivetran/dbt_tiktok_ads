@@ -29,9 +29,8 @@ final as (
 
     select
         source_relation,
-        {{ dbt_utils.generate_surrogate_key(['region_id', 'advertiser_id', 'source_relation']) }} as location_id,
         region_id,
-        cast(advertiser_id as {{ dbt.type_string() }}) as advertiser_id,
+        advertiser_id,
         country_code,
         region_name,
         region_level,

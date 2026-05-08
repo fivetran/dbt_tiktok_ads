@@ -437,11 +437,6 @@ models:
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
-      - name: location_id
-        description: Surrogate key hashed on `region_id`, `advertiser_id`, and `source_relation`.
-        tests:
-          - not_null
-          - unique
       - name: region_id
         description: Unique identifier for the geographic region.
       - name: advertiser_id
