@@ -14,7 +14,7 @@
     {"name": "impressions", "datatype": dbt.type_int()},
     {"name": "real_time_conversion", "datatype": dbt.type_int()},
     {"name": "spend", "datatype": dbt.type_float()},
-    {"name": "stat_time_day", "datatype": "datetime"}
+    {"name": "stat_time_day", "datatype": dbt.type_timestamp()}
 ] %}
 {{ tiktok_ads_add_pass_through_columns(base_columns=columns, pass_through_fields=var('tiktok_ads__campaign_country_report_passthrough_metrics')) }}
 

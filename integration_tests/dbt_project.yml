@@ -1,5 +1,5 @@
 name: 'tiktok_ads_integration_tests'
-version: '1.2.0'
+version: '1.3.0'
 profile: 'integration_tests'
 config-version: 2
 
@@ -20,6 +20,7 @@ vars:
     tiktok_ads_adgroup_report_hourly_identifier: "tiktok_adgroup_report_hourly_data"
     tiktok_ads_campaign_report_hourly_identifier: "tiktok_campaign_report_hourly_data"
     tiktok_ads_campaign_country_report_identifier: "tiktok_campaign_country_report_data"
+    tiktok_ads_location_identifier: "tiktok_location_data"
 
   tiktok_ads__ad_group_hourly_passthrough_metrics:
     - name: total_purchase_value

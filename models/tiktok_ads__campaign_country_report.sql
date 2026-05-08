@@ -17,7 +17,14 @@ advertiser as (
 
     select *
     from {{ ref('stg_tiktok_ads__advertiser') }}
-), 
+),
+
+locations as (
+
+    select *
+    from {{ ref('stg_tiktok_ads__location') }}
+    where upper(region_level) = 'COUNTRY'
+),
 
 aggregated as (
 
@@ -37,6 +44,10 @@ aggregated as (
         campaigns.split_test_variable,
         campaigns.budget,
         campaigns.budget_mode,
+        locations.region_name,
+        locations.area_type,
+        locations.parent_id,
+        locations.support_below_18,
         sum(country_report.clicks) as clicks,
         sum(country_report.impressions) as impressions,
         sum(country_report.spend) as spend,
@@ -55,8 +66,11 @@ aggregated as (
     left join advertiser
         on campaigns.advertiser_id = advertiser.advertiser_id
         and campaigns.source_relation = advertiser.source_relation
+    left join locations
+        on country_report.country_code = locations.country_code
+        and country_report.source_relation = locations.source_relation
 
-    {{ dbt_utils.group_by(15) }}
+    {{ dbt_utils.group_by(19) }}
 )
 
 select *

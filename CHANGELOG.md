@@ -1,3 +1,18 @@
+# dbt_tiktok_ads v1.3.0
+
+[PR #42](https://github.com/fivetran/dbt_tiktok_ads/pull/42) includes the following updates:
+
+## Schema/Data Change
+**3 total changes • 0 possible breaking changes**
+| Data Model | Change Type | Old | New | Notes |
+|------------|-------------|-----|-----|-------|
+| [stg_tiktok_ads__location_tmp](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location_tmp) | New Temp Model | | | Temp model added for the `location` source table. |
+| [stg_tiktok_ads__location](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location) | New Staging Model | | | Surfaces the reference table of geographic regions and locations available for TikTok Ads targeting. |
+| [tiktok_ads__campaign_country_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__campaign_country_report) | New Columns | | `region_name`, `area_type`, `parent_id`, `support_below_18` | Joins the new `stg_tiktok_ads__location` model on `country_code` to add geographic region attributes. |
+
+## Bug Fix
+- Replaces the invalid `"datetime"` datatype on `stat_time_day` with `dbt.type_timestamp()` in the `get_campaign_country_report_columns` macro. Databricks users hit a compilation error when the column was missing from the source table and `fill_staging_columns` generated a cast to the unsupported `datetime` type.
+
 # dbt_tiktok_ads v1.2.0
 
 [PR #39](https://github.com/fivetran/dbt_tiktok_ads/pull/39) includes the following updates:

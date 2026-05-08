@@ -463,3 +463,11 @@ models:
         description: The percentage of times people saw your ad and performed a click.
       - name: real_time_conversion
         description: Number of times your ad resulted in the optimization event you selected.
+      - name: region_name
+        description: Human-readable name of the geographic region associated with the country code.
+      - name: area_type
+        description: Geographic classification of the location (e.g. country, region, city).
+      - name: parent_id
+        description: Identifier of the parent region, enabling hierarchical rollups (city to state to country).
+      - name: support_below_18
+        description: Whether the location supports targeting users under 18. Used for compliance with age-restricted ad targeting rules.
