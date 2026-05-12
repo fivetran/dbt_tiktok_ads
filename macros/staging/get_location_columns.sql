@@ -9,7 +9,7 @@
     {"name": "region_id", "datatype": dbt.type_string()},
     {"name": "region_level", "datatype": dbt.type_string()},
     {"name": "region_name", "datatype": dbt.type_string()},
-    {"name": "support_below_18", "datatype": "boolean"}
+    {"name": "support_below_18", "datatype": dbt.type_boolean()} 
 ] %}
 
 {{ return(columns) }}

@@ -437,21 +437,21 @@ models:
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
-      - name: region_id
+      - name: location_id
         description: Unique identifier for the geographic region.
       - name: advertiser_id
         description: Advertiser ID associated with this location record.
       - name: country_code
-        description: ISO country code for the location.
+        description: Two-letter ISO country code for the location.
       - name: region_name
         description: Human-readable name of the geographic region.
       - name: region_level
         description: Reporting granularity of the location (e.g. COUNTRY, PROVINCE, CITY).
       - name: area_type
-        description: Geographic classification of the location (e.g. country, region, city).
-      - name: parent_id
+        description: Classification of the location, such as administrative region or media market.
+      - name: parent_location_id
         description: Identifier of the parent region, enabling hierarchical rollups (city to state to country).
-      - name: support_below_18
+      - name: has_support_below_18
         description: Whether the location supports targeting users under 18. Used for compliance with age-restricted ad targeting rules.
       - name: _fivetran_synced
         description: Timestamp indicating when the record was last synced.

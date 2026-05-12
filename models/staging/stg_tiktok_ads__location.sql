@@ -1,4 +1,4 @@
-{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true)) }}
+{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_location', true)) }}
 
 with base as (
 
@@ -29,14 +29,14 @@ final as (
 
     select
         source_relation,
-        region_id,
+        region_id as location_id,
         advertiser_id,
         country_code,
         region_name,
         region_level,
         area_type,
-        parent_id,
-        support_below_18,
+        parent_id as parent_location_id,
+        support_below_18 as has_support_below_18,
         _fivetran_synced
 
     from fields

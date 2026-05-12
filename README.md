@@ -5,7 +5,7 @@ This dbt package transforms data from Fivetran's Tiktok Ads connector into analy
 
 ## Resources
 
-- Number of materialized models¹: 22
+- Number of materialized models¹: 24
 - Connector documentation
   - [Tiktok Ads connector documentation](https://fivetran.com/docs/connectors/applications/tiktok-ads)
   - [Tiktok Ads ERD](https://fivetran.com/docs/connectors/applications/tiktok-ads#schemainformation)
@@ -117,6 +117,13 @@ This package leverages the `campaign_country_report` table to help report on ad 
 ```yml
 vars:
     tiktok_ads__using_campaign_country_report: False # True by default
+```
+
+#### Disable Location Enrichment
+This package leverages the `location` table to enrich the `tiktok_ads__campaign_country_report` with geographic region attributes (`country_name`, `parent_location_id`, and `has_support_below_18`). If you are not syncing the `location` table from your TikTok Ads connection, you may disable the location join and the related columns by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    tiktok_ads__using_location: False # True by default
 ```
 
 #### Disable the URL null filter

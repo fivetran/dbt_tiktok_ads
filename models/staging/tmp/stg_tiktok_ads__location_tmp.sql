@@ -1,4 +1,4 @@
-{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true)) }}
+{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_location', true)) }}
 
 {{
     fivetran_utils.union_data(

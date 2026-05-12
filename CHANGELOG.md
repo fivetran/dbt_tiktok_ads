@@ -6,12 +6,15 @@
 **3 total changes • 0 possible breaking changes**
 | Data Model | Change Type | Old | New | Notes |
 |------------|-------------|-----|-----|-------|
-| [stg_tiktok_ads__location_tmp](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location_tmp) | New Temp Model | | | Temp model added for the `location` source table. |
-| [stg_tiktok_ads__location](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location) | New Staging Model | | | Surfaces the reference table of geographic regions and locations available for TikTok Ads targeting. |
-| [tiktok_ads__campaign_country_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__campaign_country_report) | New Columns | | `region_name`, `area_type`, `parent_id`, `support_below_18` | Joins the new `stg_tiktok_ads__location` model on `country_code` to add geographic region attributes. |
+| [stg_tiktok_ads__location_tmp](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location_tmp) | New Tmp Model | | | |
+| [stg_tiktok_ads__location](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location) | New Staging Model | | | |
+| [tiktok_ads__campaign_country_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__campaign_country_report) | New Columns | | `country_name`, `parent_location_id`, `has_support_below_18` | |
+
+## Feature Update
+- **For dbt Core users**: Adds the `tiktok_ads__using_location` variable (`true` by default). If you do not want to sync the `location` table from your TikTok Ads connection, set this variable to `false` in your `dbt_project.yml` to disable the location join and the related columns in `tiktok_ads__campaign_country_report`. See the [README](https://github.com/fivetran/dbt_tiktok_ads/blob/main/README.md#disable-location-enrichment) for more details.
 
 ## Bug Fix
-- Replaces the invalid `"datetime"` datatype on `stat_time_day` with `dbt.type_timestamp()` in the `get_campaign_country_report_columns` macro. Databricks users hit a compilation error when the column was missing from the source table and `fill_staging_columns` generated a cast to the unsupported `datetime` type.
+- Avoids potential data type failures for Databricks users not syncing the `campaign_country_report.stat_time_day` field.  
 
 # dbt_tiktok_ads v1.2.0
 

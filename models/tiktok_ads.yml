@@ -411,7 +411,7 @@ models:
     description: Each record in this table represents the daily performance of a campaign at the country/geographic region level.
     columns:
       - name: source_relation
-        description: Source table or view from which the country-level data was derived.
+        description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The reporting date for the campaign data (in YYYY-MM-DD format).
         tests:
@@ -463,11 +463,9 @@ models:
         description: The percentage of times people saw your ad and performed a click.
       - name: real_time_conversion
         description: Number of times your ad resulted in the optimization event you selected.
-      - name: region_name
+      - name: country_name
         description: Human-readable name of the geographic region associated with the country code.
-      - name: area_type
-        description: Geographic classification of the location (e.g. country, region, city).
-      - name: parent_id
-        description: Identifier of the parent region, enabling hierarchical rollups (city to state to country).
-      - name: support_below_18
+      - name: parent_location_id
+        description: Identifier of the parent region, enabling hierarchical rollups (city to province to country).
+      - name: has_support_below_18
         description: Whether the location supports targeting users under 18. Used for compliance with age-restricted ad targeting rules.

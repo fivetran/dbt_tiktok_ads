@@ -21,6 +21,8 @@ vars:
     ad_history: "{{ source('tiktok_ads', 'ad_history') }}"
     advertiser: "{{ source('tiktok_ads', 'advertiser') }}"
     campaign_country_report: "{{ source('tiktok_ads', 'campaign_country_report') }}"
+    location: "{{ source('tiktok_ads', 'location') }}"
+  tiktok_ads__using_location: true
   tiktok_ads__ad_group_hourly_passthrough_metrics: []
   tiktok_ads__ad_hourly_passthrough_metrics: []
   tiktok_ads__campaign_hourly_passthrough_metrics: []
