@@ -48,6 +48,7 @@ aggregated as (
         campaigns.budget_mode,
         {% if var('tiktok_ads__using_location', true) %}
         locations.region_name as country_name,
+        locations.location_id
         locations.parent_location_id,
         locations.has_support_below_18,
         {% endif %}
@@ -76,7 +77,7 @@ aggregated as (
         and country_report.source_relation = locations.source_relation
     {% endif %}
 
-    {{ dbt_utils.group_by(n=15 + (3 if var('tiktok_ads__using_location', true) else 0)) }}
+    {{ dbt_utils.group_by(n=15 + (4 if var('tiktok_ads__using_location', true) else 0)) }}
 )
 
 select *

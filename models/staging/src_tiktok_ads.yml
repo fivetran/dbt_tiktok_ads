@@ -727,7 +727,9 @@ sources:
       - name: location
         identifier: "{{ var('tiktok_ads_location_identifier', 'location') }}"
         description: Reference table of geographic regions and locations available for TikTok Ads targeting. Each record represents a location, such as a country, province, or city.
-        columns:
+        config:
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_location', true) }}"
+          columns:
           - name: _fivetran_synced
             description: Timestamp indicating when the record was last synced.
           - name: region_id
