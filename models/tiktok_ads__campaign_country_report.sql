@@ -48,7 +48,7 @@ aggregated as (
         campaigns.budget_mode,
         {% if var('tiktok_ads__using_location', true) %}
         locations.region_name as country_name,
-        locations.location_id
+        locations.location_id,
         locations.parent_location_id,
         locations.has_support_below_18,
         {% endif %}

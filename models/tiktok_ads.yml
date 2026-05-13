@@ -465,6 +465,8 @@ models:
         description: Number of times your ad resulted in the optimization event you selected.
       - name: country_name
         description: Human-readable name of the geographic region associated with the country code.
+      - name: location_id
+        description: TikTok's identifier for the country-level location record.
       - name: parent_location_id
         description: Identifier of the parent region, enabling hierarchical rollups (city to province to country).
       - name: has_support_below_18
