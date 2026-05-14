@@ -10,12 +10,12 @@
 | [`stg_tiktok_ads__location_tmp`](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location_tmp) | New Tmp Model | | | |
 | [`stg_tiktok_ads__location`](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location) | New Staging Model | | | |
 
-## Feature Update
+## Feature Updates
 **For dbt Core users**: 
 - Adds the `tiktok_ads__using_location` variable (`true` by default). If you do not sync or want to use the `location` table, set this variable to `false` in your `dbt_project.yml`. See the [README](https://github.com/fivetran/dbt_tiktok_ads/blob/main/README.md#disable-location-enrichment) for more details.
 
 ## Bug Fix
-- Avoids potential data type failures for Databricks users not syncing the `campaign_country_report.stat_time_day` field.  
+- Fixes potential data type failures for Databricks users not syncing the `campaign_country_report.stat_time_day` field.  
 
 # dbt_tiktok_ads v1.2.0
 
