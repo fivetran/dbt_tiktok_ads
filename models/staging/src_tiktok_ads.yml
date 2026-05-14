@@ -723,3 +723,28 @@ sources:
             description: Total amount spent for the campaign in the account currency.
           - name: stat_time_day
             description: The reporting date for the campaign data (in YYYY-MM-DD format).
+
+      - name: location
+        identifier: "{{ var('tiktok_ads_location_identifier', 'location') }}"
+        description: Reference table of geographic regions and locations available for TikTok Ads targeting. Each record represents a location, such as a country, province, or city.
+        config:
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_location', true) }}"
+        columns:
+          - name: _fivetran_synced
+            description: Timestamp indicating when the record was last synced.
+          - name: region_id
+            description: Unique identifier for the geographic region.
+          - name: advertiser_id
+            description: Advertiser ID associated with this location record.
+          - name: country_code
+            description: Two-letter ISO country code for the location.
+          - name: region_name
+            description: Human-readable name of the geographic region.
+          - name: region_level
+            description: Reporting granularity of the location (e.g. COUNTRY, PROVINCE, CITY).
+          - name: area_type
+            description: Classification of the location, such as administrative region or media market.
+          - name: parent_id
+            description: Identifier of the parent region, enabling hierarchical rollups (city to province to country).
+          - name: support_below_18
+            description: Whether the location supports targeting users under 18. Used for compliance with age-restricted ad targeting rules.
