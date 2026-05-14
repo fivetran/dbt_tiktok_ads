@@ -7,8 +7,8 @@
 | Data Model | Change Type | Old | New | Notes |
 |------------|-------------|-----|-----|-------|
 | [tiktok_ads__campaign_country_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__campaign_country_report) | New Columns | | `country_name`, `location_id`, `parent_location_id`, `has_support_below_18` | |
-| [`stg_tiktok_ads__location_tmp`](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location_tmp) | New Tmp Model | | | |
-| [`stg_tiktok_ads__location`](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location) | New Staging Model | | | |
+| [stg_tiktok_ads__location_tmp](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location_tmp) | New Tmp Model | | | |
+| [stg_tiktok_ads__location](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__location) | New Staging Model | | | |
 
 ## Feature Updates
 **For dbt Core users**: 
