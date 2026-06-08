@@ -74,7 +74,7 @@ Include the following tiktok_ads package version in your `packages.yml` file _if
 ```yaml
 packages:
   - package: fivetran/tiktok_ads
-    version: [">=1.3.0", "<1.4.0"]
+    version: [">=1.4.0", "<1.5.0"]
 
 ```
 > All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/tiktok_ads_source` in your `packages.yml` since this package has been deprecated.
@@ -88,29 +88,44 @@ dispatch:
 ```
 
 ### Define database and schema variables
-By default, this package will look for your TikTok Ads data in the `tiktok_ads` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your TikTok Ads data is, you would add the following configuration to your root `dbt_project.yml` file with your custom database and schema names:
+#### Option A: Single connection
+By default, this package runs using your destination and the `tiktok_ads` schema. If this is not where your TikTok Ads data is (for example, if your TikTok Ads schema is named `tiktok_ads_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 vars:
-    tiktok_ads_schema: your_database_name
-    tiktok_ads_database: your_schema_name
+    tiktok_ads_database: your_destination_name
+    tiktok_ads_schema: your_schema_name
 ```
+
+#### Option B: Union multiple connections
+If you have multiple TikTok Ads connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. For each source table, the package will union all of the data together and pass the unioned table into the transformations. The `source_relation` column in each model indicates the origin of each record.
+
+To use this functionality, you will need to set the `tiktok_ads_sources` variable in your root `dbt_project.yml` file:
+
+```yml
+# dbt_project.yml
+
+vars:
+  tiktok_ads:
+    tiktok_ads_sources:
+      - database: connection_1_destination_name # Required
+        schema: connection_1_schema_name # Required
+        name: connection_1_source_name # Required only if following the step in the following subsection
+
+      - database: connection_2_destination_name
+        schema: connection_2_schema_name
+        name: connection_2_source_name
+```
+
+> Previous versions of this package employed two separate, mutually exclusive variables for unioning: `tiktok_ads_union_schemas` and `tiktok_ads_union_databases`. While these variables are still supported, `tiktok_ads_sources` is the recommended variable to configure.
+
+#### Optional: Incorporate unioned sources into DAG
+
+If you use [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt#transformationsfordbtcore) and are unioning multiple TikTok Ads connections, you can define your sources in a property `.yml` file, [using this as a template](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/staging/src_tiktok_ads.yml). Set the variable `has_defined_sources: true` under the TikTok Ads namespace in your `dbt_project.yml`. Otherwise, your TikTok Ads connections won't appear in your DAG. See the `union_connections` macro [documentation](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#optional-union-connections-defined-sources-configuration) for full configuration details.
 
 ### (Optional) Additional configurations
 
 <details open><summary>Expand/Collapse details</summary>
-
-#### Union multiple connections
-If you have multiple tiktok_ads connections in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `tiktok_ads_union_schemas` OR `tiktok_ads_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
-
-```yml
-vars:
-    tiktok_ads_union_schemas: ['tiktok_ads_usa','tiktok_ads_canada'] # use this if the data is in different schemas/datasets of the same database/project
-    tiktok_ads_union_databases: ['tiktok_ads_usa','tiktok_ads_canada'] # use this if the data is in different databases/projects but uses the same schema name
-```
-> NOTE: The native `source.yml` connection set up in the package will not function when the union schema/database feature is utilized. Although the data will be correctly combined, you will not observe the sources linked to the package models in the Directed Acyclic Graph (DAG). This happens because the package includes only one defined `source.yml`.
-
-To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
 #### Disable Country Reports
 This package leverages the `campaign_country_report` table to help report on ad and campaign performance by country/geographic region level. However, if you are not actively syncing this report from your TikTok Ads connection, you may disable the transformations for the `campaign_country_report` by adding the following variable configuration to your root `dbt_project.yml` file:
@@ -174,6 +189,14 @@ If an individual source table has a different name than the package expects, add
 ```yml
 vars:
     tiktok_ads_<default_source_table_name>_identifier: your_table_name 
+```
+
+#### Source casing for case-sensitive destinations
+By default, the package applies case-insensitive comparisons when resolving `source_relation` values. If your destination is case-sensitive and you want downstream transformations to respect the exact casing of your source database and schema names, set the following variable:
+
+```yml
+vars:
+    fivetran_using_source_casing: true
 ```
 
 </details>

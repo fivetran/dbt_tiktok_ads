@@ -1,3 +1,21 @@
+# dbt_tiktok_ads v1.4.0
+
+[PR #43](https://github.com/fivetran/dbt_tiktok_ads/pull/43) includes the following updates:
+
+## Schema/Data Changes
+**1 total change • 0 possible breaking changes**
+
+| Data Model | Change Type | Old | New | Notes |
+|------------|-------------|-----|-----|-------|
+| All models | `source_relation` column | Empty string (`''`) | `<database>.<schema>` | Only populated when using multiple TikTok Ads sources |
+
+## Feature Updates
+- Introduces the new (recommended) `tiktok_ads_sources` variable for more robust union data configuration. The old `tiktok_ads_union_schemas` and `tiktok_ads_union_databases` variables will still be supported. See the [README](https://github.com/fivetran/dbt_tiktok_ads/tree/main#define-database-and-schema-variables) for specific details.
+
+## Under the Hood
+- Adds the `fivetran_using_source_casing` variable for case-sensitive destination support. When enabled, downstream transformations respect source casing to ensure consistent results. See the [Additional Configurations](https://github.com/fivetran/dbt_tiktok_ads/#source-casing-for-case-sensitive-destinations) section of the README for details.
+- Introduces `fivetran_utils.partition_by_source_relation` to conditionally include `source_relation` in partition clauses only when multiple sources are configured.
+
 # dbt_tiktok_ads v1.3.0
 
 [PR #42](https://github.com/fivetran/dbt_tiktok_ads/pull/42) includes the following updates:
