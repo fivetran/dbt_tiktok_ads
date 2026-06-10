@@ -7,7 +7,7 @@
 
 | Data Model | Change Type | Old | New | Notes |
 |------------|-------------|-----|-----|-------|
-| All models | `source_relation` column | Empty string (`''`) | `<database>.<schema>` | Only populated when using multiple TikTok Ads sources |
+| All models | `source_relation` column (when using a single TikTok Ads schema) | Empty string (`''`) | `<database>.<schema>` |  |
 
 ## Feature Updates
 - Introduces the new (recommended) `tiktok_ads_sources` variable for more robust union data configuration. The old `tiktok_ads_union_schemas` and `tiktok_ads_union_databases` variables will still be supported. See the [README](https://github.com/fivetran/dbt_tiktok_ads/tree/main#define-database-and-schema-variables) for specific details.
