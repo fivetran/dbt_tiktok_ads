@@ -26,3 +26,9 @@ test_scenarios:
     vars:
       tiktok_ads__using_campaign_country_report: false
     include_incremental: false
+
+  - name: "MDLS"
+    vars:
+      fivetran_using_source_casing: true
+    include_incremental: false
+    include_dbt_seed: true

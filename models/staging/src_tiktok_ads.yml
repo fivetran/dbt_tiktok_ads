@@ -9,7 +9,7 @@ sources:
     
     config:
       loaded_at_field: _fivetran_synced
-      enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) }}"
+      enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads_sources', []) == [] }}"
       freshness: 
         warn_after: {count: 48, period: hour}
         error_after: {count: 168, period: hour}
@@ -693,7 +693,7 @@ sources:
         identifier: "{{ var('tiktok_ads_campaign_country_report_identifier', 'campaign_country_report') }}"
         description: Each record provides country-level reporting metrics at the campaign level.
         config:
-          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_campaign_country_report', true) }}"
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_campaign_country_report', true) and var('tiktok_ads_sources', []) == [] }}"
         columns:
           - name: _fivetran_synced
             description: Timestamp indicating when the record was last synced.
@@ -728,7 +728,7 @@ sources:
         identifier: "{{ var('tiktok_ads_location_identifier', 'location') }}"
         description: Reference table of geographic regions and locations available for TikTok Ads targeting. Each record represents a location, such as a country, province, or city.
         config:
-          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_location', true) }}"
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_location', true) and var('tiktok_ads_sources', []) == [] }}"
         columns:
           - name: _fivetran_synced
             description: Timestamp indicating when the record was last synced.

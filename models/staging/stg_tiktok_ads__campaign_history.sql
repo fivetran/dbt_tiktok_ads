@@ -16,10 +16,7 @@ fields as (
             )
         }}
     
-        {{ fivetran_utils.source_relation(
-            union_schema_variable='tiktok_ads_union_schemas', 
-            union_database_variable='tiktok_ads_union_databases') 
-        }}
+        {{ fivetran_utils.apply_source_relation(package_name='tiktok_ads') }}
 
     from base
 ), 
@@ -40,7 +37,7 @@ final as (
         budget_mode,
         create_time as created_at,
         is_new_structure,
-        row_number() over (partition by source_relation, campaign_id order by updated_at desc) = 1 as is_most_recent_record
+        row_number() over (partition by campaign_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by updated_at desc) = 1 as is_most_recent_record
     from fields
 )
 

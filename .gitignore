@@ -75,3 +75,4 @@ venv.bak/
 # Claude Code files
 CLAUDE.md
 build_plans/
+worktrees/
