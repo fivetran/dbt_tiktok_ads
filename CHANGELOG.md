@@ -1,3 +1,11 @@
+# dbt_tiktok_ads v1.4.1
+
+[PR #46](https://github.com/fivetran/dbt_tiktok_ads/pull/46) includes the following updates:
+
+## Feature Updates
+- Adds DuckDB as a supported destination.
+
+
 # dbt_tiktok_ads v1.4.0
 
 [PR #43](https://github.com/fivetran/dbt_tiktok_ads/pull/43) includes the following updates:
