@@ -1,3 +1,8 @@
+# dbt_tiktok_ads v1.4.2
+
+## Documentation
+- Removes the `image_ids` field from the `tiktok_ads.ad_history` source documentation. TikTok stopped populating this field on August 27, 2026, and the field was never used in any staged or downstream model.
+
 # dbt_tiktok_ads v1.4.1
 
 [PR #46](https://github.com/fivetran/dbt_tiktok_ads/pull/46) includes the following updates:

@@ -293,8 +293,6 @@ sources:
             description: Time at which the ad was created.
           - name: display_name
             description: The display name of landing page or pure exposure ad.
-          - name: image_ids
-            description: A list of image IDs.
           - name: impression_tracking_url
             description: Display monitoring URL. 
           - name: is_aco
