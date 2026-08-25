@@ -1,3 +1,10 @@
+# dbt_tiktok_ads v1.4.2
+
+[PR #47](https://github.com/fivetran/dbt_tiktok_ads/pull/47) includes the following updates:
+
+## Documentation
+- Removes the `image_ids` field from `src_tiktok_ads.yml`. It's not used downstream, and TikTok will stop populating it starting August, 2026.
+
 # dbt_tiktok_ads v1.4.1
 
 [PR #46](https://github.com/fivetran/dbt_tiktok_ads/pull/46) includes the following updates:
