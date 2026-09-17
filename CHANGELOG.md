@@ -1,14 +1,13 @@
 # dbt_tiktok_ads v1.5.0-a1
 
-[PR #TBD](https://github.com/fivetran/dbt_tiktok_ads/pull/TBD) includes the following updates:
+[PR #48](https://github.com/fivetran/dbt_tiktok_ads/pull/48) includes the following updates:
 
 ## Schema/Data Change
-**4 total changes • 0 possible breaking changes**
+**3 total changes • 0 possible breaking changes**
 
 | Data Model(s) | Change type | Old | New | Notes |
 | ---------- | ----------- | -------- | -------- | ----- |
-| `stg_tiktok_ads__smart_plus_ad_history_tmp` | New Tmp Model | | | |
-| `stg_tiktok_ads__smart_plus_ad_history` | New Staging Model | | | |
+| `stg_tiktok_ads__smart_plus_ad_history_tmp`, `stg_tiktok_ads__smart_plus_ad_history` | New Tmp/Staging Model | | | |
 | `tiktok_ads__ad_report`, `tiktok_ads__advertiser_report` | Bug Fix | `ad_name`, `advertiser_id`, `advertiser_name`, `campaign_id`, and `ad_group_id` resolved to `null` for TikTok Smart+ ads | These fields now resolve correctly for Smart+ ads | TikTok moved Smart+ ads out of `ad_history` and into the new `smart_plus_ad_history` table; the `ads` CTE in both models now unions both sources so `ad_id` resolves against either |
 | `tiktok_ads__url_report` | Bug Fix, New Column | `ad_name`, `base_url`, `url_host`, `url_path`, and `utm_*` resolved to `null` for Smart+ ads | These fields now resolve correctly for Smart+ ads; adds a new `landing_page_urls` column | A Smart+ ad can have multiple landing pages, unlike a manual ad. `base_url`/`url_host`/`url_path`/`utm_*` are derived from one of them for consistency with the existing single-URL columns; the new `landing_page_urls` column preserves the full, comma-separated set so no URL data is lost |
 
