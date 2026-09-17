@@ -328,6 +328,8 @@ models:
         description: Ad group ID.
       - name: ad_group_name
         description: Ad group name.
+      - name: landing_page_urls
+        description: All landing page URLs for the ad, comma-separated. Only populated for TikTok Smart+ ads, which can have multiple landing pages; `null` for manual ads, which always have exactly one (reflected in `base_url`/`url_host`/`url_path`/`utm_*` below).
       - name: base_url
         description: The base URL of the ad, extracted from the `landing page url`.
         tests:

@@ -141,6 +141,13 @@ vars:
     tiktok_ads__using_location: False # True by default
 ```
 
+#### Disable Smart+ Ads Enrichment
+This package leverages the `smart_plus_ad_history` table to resolve ad-level attributes (`ad_name`, `advertiser_id`, `campaign_id`, `ad_group_id`, and, within `tiktok_ads__url_report`, the landing page URL fields) for TikTok Smart+ ads within `tiktok_ads__ad_report`, `tiktok_ads__advertiser_report`, and `tiktok_ads__url_report`, since Smart+ ads are synced to `smart_plus_ad_history` rather than `ad_history`. If you are not syncing the `smart_plus_ad_history` table from your TikTok Ads connection, you may disable this enrichment by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    tiktok_ads__using_smart_plus_ads: False # True by default
+```
+
 #### Disable the URL null filter
 By default, the `tiktok_ads_url_report` model will filter out records where the URL is null. If you would like to include these records in your final model, you may disable this filter by adding the following variable configuration to your root `dbt_project.yml` file:
 ```yml

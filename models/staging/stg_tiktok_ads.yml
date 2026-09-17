@@ -455,3 +455,111 @@ models:
         description: Whether the location supports targeting users under 18. Used for compliance with age-restricted ad targeting rules.
       - name: _fivetran_synced
         description: Timestamp indicating when the record was last synced.
+
+  - name: stg_tiktok_ads__smart_plus_ad_history
+    description: Each record represents a version of a TikTok Smart+ ad. Smart+ ads are TikTok's automated campaign ads and are synced here instead of in `stg_tiktok_ads__ad_history`, which contains manual ads only.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: smart_plus_ad_id
+        description: Smart+ ad ID.
+        tests:
+          - not_null
+      - name: updated_at
+        description: Time the record was updated.
+      - name: adgroup_id
+        description: Ad group ID.
+      - name: advertiser_id
+        description: Advertiser ID.
+      - name: campaign_id
+        description: Campaign ID.
+      - name: ad_name
+        description: Ad name.
+      - name: campaign_name
+        description: Campaign name.
+      - name: adgroup_name
+        description: Ad group name.
+      - name: create_time
+        description: Time at which the Smart+ ad was created.
+      - name: operation_status
+        description: Operation status.
+      - name: secondary_status
+        description: Ad status.
+      - name: landing_page_url
+        description: One landing page URL for the Smart+ ad, picked deterministically from `landing_page_urls` when the ad has more than one. Used to derive `base_url`, `url_host`, `url_path`, and the `utm_*` columns, consistent with how `stg_tiktok_ads__ad_history` handles its single `landing_page_url` field.
+      - name: landing_page_urls
+        description: All landing page URLs for the Smart+ ad, comma-separated. A single Smart+ ad can have multiple landing pages, unlike a manual ad.
+      - name: base_url
+        description: The base URL of the ad, extracted from `landing_page_url`.
+      - name: url_host
+        description: The URL host of the ad, extracted from `landing_page_url`.
+      - name: url_path
+        description: The URL path of the ad, extracted from `landing_page_url`.
+      - name: utm_source
+        description: The utm_source parameter of the ad, extracted from `landing_page_url`.
+      - name: utm_medium
+        description: The utm_medium parameter of the ad, extracted from `landing_page_url`.
+      - name: utm_campaign
+        description: The utm_campaign parameter of the ad, extracted from `landing_page_url`.
+      - name: utm_content
+        description: The utm_content parameter of the ad, extracted from `landing_page_url`.
+      - name: utm_term
+        description: The utm_term parameter of the ad, extracted from `landing_page_url`.
+      - name: tracking_info_click_tracking_url
+        description: Click monitoring URL.
+      - name: tracking_info_impression_tracking_url
+        description: Display monitoring URL.
+      - name: tracking_info_tracking_app_id
+        description: Tracking app ID.
+      - name: tracking_info_tracking_message_event_set_id
+        description: Tracking message event set ID.
+      - name: identity_id
+        description: Identity ID used for the Smart+ ad.
+      - name: identity_type
+        description: Identity type used for the Smart+ ad.
+      - name: dark_post_status
+        description: Dark post status.
+      - name: product_specific_type
+        description: Product specific type.
+      - name: product_set_id
+        description: Product set ID.
+      - name: product_ids
+        description: List of product IDs featured in the Smart+ ad.
+      - name: creative_auto_add_toggle
+        description: Whether creatives are automatically added to the Smart+ ad.
+      - name: catalog_creative_toggle
+        description: Whether catalog creatives are enabled for the Smart+ ad.
+      - name: end_card_cta
+        description: End card call-to-action.
+      - name: product_display_field_list
+        description: List of product display fields.
+      - name: auto_disclaimer_types
+        description: List of automatically applied disclaimer types.
+      - name: fallback_type
+        description: Fallback type.
+      - name: call_to_action_id
+        description: Call to action ID.
+      - name: product_info_selling_points
+        description: List of product selling points.
+      - name: phone_info_phone_region_code
+        description: Phone region code.
+      - name: phone_info_phone_region_calling_code
+        description: Phone region calling code.
+      - name: phone_info_phone_number
+        description: Phone number, desensitised data.
+      - name: ad_text_list
+        description: List of ad text variants.
+      - name: auto_message_list
+        description: List of automated messages.
+      - name: call_to_action_list
+        description: List of call-to-action variants.
+      - name: interactive_add_on_list
+        description: List of interactive add-ons.
+      - name: page_list
+        description: List of pages associated with the Smart+ ad.
+      - name: custom_product_page_list
+        description: List of custom product pages.
+      - name: deeplink_list
+        description: List of deeplinks associated with the Smart+ ad.
+      - name: is_most_recent_record
+        description: Whether record is the most recent one for this particular grain.
