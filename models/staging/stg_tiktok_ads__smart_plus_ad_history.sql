@@ -100,7 +100,15 @@ final as (
         fields.page_list,
         fields.custom_product_page_list,
         fields.deeplink_list,
-        row_number() over (partition by fields.smart_plus_ad_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by fields.modify_time desc) = 1 as is_most_recent_record
+        -- When smart_plus_ad_history hasn't synced (no rows at all -- Fivetran's Redshift fallback still returns one
+        -- fully-null placeholder row), smart_plus_ad_id and modify_time are both null and there is exactly one row,
+        -- so it's trivially the most recent. Skipping the window function here avoids Redshift's "constant expressions
+        -- are not supported in partition by/order by clauses" error, since every column in that placeholder row is a
+        -- literal.
+        case
+            when fields.smart_plus_ad_id is null and fields.modify_time is null then true
+            else row_number() over (partition by fields.smart_plus_ad_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by fields.modify_time desc) = 1
+        end as is_most_recent_record
     from fields
     left join landing_page_urls_agg
         on fields.smart_plus_ad_id = landing_page_urls_agg.smart_plus_ad_id
