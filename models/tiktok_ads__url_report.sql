@@ -8,10 +8,54 @@ with hourly as (
 
 ads as (
 
-    select *
+    select
+        ad_id,
+        ad_group_id,
+        advertiser_id,
+        campaign_id,
+        ad_name,
+        landing_page_url,
+        cast(null as {{ dbt.type_string() }}) as landing_page_urls,
+        base_url,
+        url_host,
+        url_path,
+        utm_source,
+        utm_medium,
+        utm_campaign,
+        utm_content,
+        utm_term,
+        source_relation
     from {{ ref('stg_tiktok_ads__ad_history') }}
     where is_most_recent_record
-), 
+
+    {% if var('tiktok_ads__using_smart_plus_ads', true) %}
+    union all
+
+    -- Smart+ ads are synced to `smart_plus_ad_history` instead of `ad_history`, which contains manual ads only.
+    -- A Smart+ ad can have multiple landing pages: `base_url`/`url_host`/`url_path`/`utm_*` are derived from one of
+    -- them (`landing_page_url`), while `landing_page_urls` preserves the full, comma-separated set.
+    select
+        smart_plus_ad_id as ad_id,
+        adgroup_id as ad_group_id,
+        advertiser_id,
+        campaign_id,
+        ad_name,
+        landing_page_url,
+        landing_page_urls,
+        base_url,
+        url_host,
+        url_path,
+        utm_source,
+        utm_medium,
+        utm_campaign,
+        utm_content,
+        utm_term,
+        source_relation
+    from {{ ref('stg_tiktok_ads__smart_plus_ad_history') }}
+    where is_most_recent_record
+    {% endif %}
+
+),
 
 ad_groups as (
 
@@ -46,6 +90,7 @@ aggregated as (
         ad_groups.ad_group_name,
         hourly.ad_id,
         ads.ad_name,
+        ads.landing_page_urls,
         ads.base_url,
         ads.url_host,
         ads.url_path,
@@ -103,7 +148,7 @@ aggregated as (
         where ads.landing_page_url is not null
     {% endif %}
 
-    {{ dbt_utils.group_by(23) }}
+    {{ dbt_utils.group_by(24) }}
 
 )
 

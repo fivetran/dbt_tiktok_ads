@@ -28,6 +28,11 @@ test_scenarios:
       tiktok_ads__using_campaign_country_report: false
     include_incremental: false
 
+  - name: "smart plus ads disabled"
+    vars:
+      tiktok_ads__using_smart_plus_ads: false
+    include_incremental: false
+
   - name: "MDLS"
     vars:
       fivetran_using_source_casing: true

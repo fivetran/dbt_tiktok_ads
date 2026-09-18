@@ -1,5 +1,5 @@
 name: 'tiktok_ads'
-version: '1.4.2'
+version: '1.5.0-a1'
 config-version: 2
 require-dbt-version: [">=1.3.0", "<3.0.0"]
 models:
@@ -22,7 +22,7 @@ vars:
     advertiser: "{{ source('tiktok_ads', 'advertiser') }}"
     campaign_country_report: "{{ source('tiktok_ads', 'campaign_country_report') }}"
     location: "{{ source('tiktok_ads', 'location') }}"
-  tiktok_ads__using_location: true
+    smart_plus_ad_history: "{{ source('tiktok_ads', 'smart_plus_ad_history') }}"
   tiktok_ads__ad_group_hourly_passthrough_metrics: []
   tiktok_ads__ad_hourly_passthrough_metrics: []
   tiktok_ads__campaign_hourly_passthrough_metrics: []
