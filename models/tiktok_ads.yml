@@ -14,11 +14,6 @@ models:
         description: Advertiser name.
       - name: advertiser_id
         description: Advertiser ID.
-        tests:
-          - not_null:
-              config:
-                # Smart+ ads can't resolve advertiser_id when tiktok_ads__using_smart_plus_ads is disabled.
-                enabled: "{{ var('tiktok_ads__using_smart_plus_ads', true) }}"
       - name: currency
         description: Advertiser's currency.
       - name: impressions
