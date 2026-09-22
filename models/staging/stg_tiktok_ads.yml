@@ -457,12 +457,12 @@ models:
         description: Timestamp indicating when the record was last synced.
 
   - name: stg_tiktok_ads__smart_plus_ad_history
-    description: Each record represents a version of a TikTok Smart+ ad. Smart+ ads are TikTok's automated campaign ads and are synced here instead of in `stg_tiktok_ads__ad_history`, which contains manual ads only.
+    description: Each record represents a version of a TikTok Smart+ ad -- a higher-level grouping over one or more `stg_tiktok_ads__creative_history` records. `smart_plus_ad_id` does not match the `ad_id` used in hourly reporting; this model is used to enrich Smart+ ads with landing page URL data via `stg_tiktok_ads__creative_history.smart_plus_ad_id`, not as a direct join to reporting data.
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: smart_plus_ad_id
-        description: Smart+ ad ID.
+        description: Smart+ ad ID. A separate, higher-level grouping ID from `creative_id` -- does not match the `ad_id` used in hourly reporting.
         tests:
           - not_null
       - name: updated_at
@@ -561,5 +561,51 @@ models:
         description: List of custom product pages.
       - name: deeplink_list
         description: List of deeplinks associated with the Smart+ ad.
+      - name: is_most_recent_record
+        description: Whether record is the most recent one for this particular grain.
+
+  - name: stg_tiktok_ads__creative_history
+    description: Each record represents a version of a TikTok Smart+ creative. Smart+ ads are synced here (as `creative_id`), not in `stg_tiktok_ads__ad_history`, which contains manual ads only. `creative_id` is the same ID that TikTok's reporting API returns as `ad_id` for Smart+ ads.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: creative_id
+        description: Creative ID. The same value TikTok's reporting API returns as `ad_id` for Smart+ ads.
+        tests:
+          - not_null
+      - name: updated_at
+        description: Time the record was updated.
+      - name: smart_plus_ad_id
+        description: ID of the parent Smart+ ad this creative belongs to. A separate, higher-level grouping ID from `stg_tiktok_ads__smart_plus_ad_history` -- not the same ID space as `creative_id`/reporting `ad_id`.
+      - name: advertiser_id
+        description: Advertiser ID.
+      - name: adgroup_id
+        description: Ad group ID.
+      - name: campaign_id
+        description: Campaign ID.
+      - name: video_id
+        description: Video ID.
+      - name: create_time
+        description: Time at which the creative was created.
+      - name: creative_name
+        description: Creative name.
+      - name: campaign_name
+        description: Campaign name.
+      - name: adgroup_name
+        description: Ad group name.
+      - name: identity_id
+        description: Identity ID used for the creative.
+      - name: identity_type
+        description: Identity type used for the creative.
+      - name: campaign_automation_type
+        description: Campaign automation type. `UPGRADED_SMART_PLUS_CREATIVE` for Smart+ creatives.
+      - name: ad_text
+        description: The ad text.
+      - name: secondary_status
+        description: Ad status.
+      - name: operation_status
+        description: Operation status.
+      - name: image_ids
+        description: List of image IDs associated with the creative.
       - name: is_most_recent_record
         description: Whether record is the most recent one for this particular grain.

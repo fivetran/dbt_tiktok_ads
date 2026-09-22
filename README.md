@@ -142,7 +142,7 @@ vars:
 ```
 
 #### Disable Smart+ Ads Enrichment
-This package leverages the `smart_plus_ad_history` table to resolve ad-level attributes (`ad_name`, `advertiser_id`, `campaign_id`, `ad_group_id`, and, within `tiktok_ads__url_report`, the landing page URL fields) for TikTok Smart+ ads within `tiktok_ads__ad_report`, `tiktok_ads__advertiser_report`, and `tiktok_ads__url_report`, since Smart+ ads are synced to `smart_plus_ad_history` rather than `ad_history`. If you are not syncing the `smart_plus_ad_history` table from your TikTok Ads connection, you may disable this enrichment by adding the following variable configuration to your root `dbt_project.yml` file:
+This package leverages the `creative_history` table to resolve ad-level attributes (`ad_name`, `advertiser_id`, `campaign_id`, `ad_group_id`) for TikTok Smart+ ads within `tiktok_ads__ad_report`, `tiktok_ads__advertiser_report`, and `tiktok_ads__url_report`, since Smart+ ads are synced to `creative_history` rather than `ad_history`. Within `tiktok_ads__url_report`, the landing page URL fields for Smart+ ads are additionally resolved via the `smart_plus_ad_history` table, joined through `creative_history.smart_plus_ad_id`. If you are not syncing the `creative_history` (and, for URL data, `smart_plus_ad_history`) tables from your TikTok Ads connection, you may disable this enrichment by adding the following variable configuration to your root `dbt_project.yml` file:
 ```yml
 vars:
     tiktok_ads__using_smart_plus_ads: False # True by default

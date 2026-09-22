@@ -31,28 +31,36 @@ ads as (
     {% if var('tiktok_ads__using_smart_plus_ads', true) %}
     union all
 
-    -- Smart+ ads are synced to `smart_plus_ad_history` instead of `ad_history`, which contains manual ads only.
-    -- A Smart+ ad can have multiple landing pages: `base_url`/`url_host`/`url_path`/`utm_*` are derived from one of
-    -- them (`landing_page_url`), while `landing_page_urls` preserves the full, comma-separated set.
+    -- Smart+ ads are synced to `creative_history` instead of `ad_history`, which contains manual ads only.
+    -- `creative_history.creative_id` is the same ad_id that TikTok's reporting API returns for Smart+ ads --
+    -- `smart_plus_ad_history.smart_plus_ad_id` is a separate, higher-level grouping ID that does not match
+    -- `hourly.ad_id`. It's still the right FK to look up a Smart+ ad's landing page URL(s) through, since
+    -- `creative_history` itself carries no URL data. A Smart+ ad can have multiple landing pages:
+    -- `base_url`/`url_host`/`url_path`/`utm_*` are derived from one of them (`landing_page_url`), while
+    -- `landing_page_urls` preserves the full, comma-separated set.
     select
-        smart_plus_ad_id as ad_id,
-        adgroup_id as ad_group_id,
-        advertiser_id,
-        campaign_id,
-        ad_name,
-        landing_page_url,
-        landing_page_urls,
-        base_url,
-        url_host,
-        url_path,
-        utm_source,
-        utm_medium,
-        utm_campaign,
-        utm_content,
-        utm_term,
-        source_relation
-    from {{ ref('stg_tiktok_ads__smart_plus_ad_history') }}
-    where is_most_recent_record
+        creative_history.creative_id as ad_id,
+        creative_history.adgroup_id as ad_group_id,
+        creative_history.advertiser_id,
+        creative_history.campaign_id,
+        creative_history.creative_name as ad_name,
+        smart_plus_ad_history.landing_page_url,
+        smart_plus_ad_history.landing_page_urls,
+        smart_plus_ad_history.base_url,
+        smart_plus_ad_history.url_host,
+        smart_plus_ad_history.url_path,
+        smart_plus_ad_history.utm_source,
+        smart_plus_ad_history.utm_medium,
+        smart_plus_ad_history.utm_campaign,
+        smart_plus_ad_history.utm_content,
+        smart_plus_ad_history.utm_term,
+        creative_history.source_relation
+    from {{ ref('stg_tiktok_ads__creative_history') }} as creative_history
+    left join {{ ref('stg_tiktok_ads__smart_plus_ad_history') }} as smart_plus_ad_history
+        on creative_history.smart_plus_ad_id = smart_plus_ad_history.smart_plus_ad_id
+        and creative_history.source_relation = smart_plus_ad_history.source_relation
+        and smart_plus_ad_history.is_most_recent_record
+    where creative_history.is_most_recent_record
     {% endif %}
 
 ),

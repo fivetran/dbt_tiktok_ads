@@ -23,6 +23,7 @@ vars:
     campaign_country_report: "{{ source('tiktok_ads', 'campaign_country_report') }}"
     location: "{{ source('tiktok_ads', 'location') }}"
     smart_plus_ad_history: "{{ source('tiktok_ads', 'smart_plus_ad_history') }}"
+    creative_history: "{{ source('tiktok_ads', 'creative_history') }}"
   tiktok_ads__ad_group_hourly_passthrough_metrics: []
   tiktok_ads__ad_hourly_passthrough_metrics: []
   tiktok_ads__campaign_hourly_passthrough_metrics: []

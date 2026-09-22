@@ -3,16 +3,17 @@
 [PR #48](https://github.com/fivetran/dbt_tiktok_ads/pull/48) includes the following updates:
 
 ## Schema/Data Change
-**3 total changes • 0 possible breaking changes**
+**4 total changes • 0 possible breaking changes**
 
 | Data Model(s) | Change type | Old | New | Notes |
 | ---------- | ----------- | -------- | -------- | ----- |
+| `stg_tiktok_ads__creative_history_tmp`, `stg_tiktok_ads__creative_history` | New Tmp/Staging Model | | | |
 | `stg_tiktok_ads__smart_plus_ad_history_tmp`, `stg_tiktok_ads__smart_plus_ad_history` | New Tmp/Staging Model | | | |
-| `tiktok_ads__ad_report`, `tiktok_ads__advertiser_report` | Bug Fix | `ad_name`, `advertiser_id`, `advertiser_name`, `campaign_id`, and `ad_group_id` resolved to `null` for TikTok Smart+ ads | These fields now resolve correctly for Smart+ ads | TikTok moved Smart+ ads out of `ad_history` and into the new `smart_plus_ad_history` table; the `ads` CTE in both models now unions both sources so `ad_id` resolves against either |
-| `tiktok_ads__url_report` | Bug Fix, New Column | `ad_name`, `base_url`, `url_host`, `url_path`, and `utm_*` resolved to `null` for Smart+ ads | These fields now resolve correctly for Smart+ ads; adds a new `landing_page_urls` column | A Smart+ ad can have multiple landing pages, unlike a manual ad. `base_url`/`url_host`/`url_path`/`utm_*` are derived from one of them for consistency with the existing single-URL columns; the new `landing_page_urls` column preserves the full, comma-separated set so no URL data is lost |
+| `tiktok_ads__ad_report`, `tiktok_ads__advertiser_report` | Bug Fix | `ad_name`, `advertiser_id`, `advertiser_name`, `campaign_id`, and `ad_group_id` resolved to `null` for TikTok Smart+ ads | These fields now resolve correctly for Smart+ ads | TikTok moved Smart+ ads out of `ad_history` and into `creative_history`; the `ads` CTE in both models now unions both sources (aliasing `creative_id` as `ad_id`) so `hourly.ad_id` resolves against either. `creative_id` is the same ID TikTok's reporting API returns as `ad_id` for Smart+ ads -- `smart_plus_ad_history.smart_plus_ad_id` is a separate, higher-level grouping ID that does not match reporting `ad_id` and was not usable as the join key |
+| `tiktok_ads__url_report` | Bug Fix, New Column | `ad_name`, `base_url`, `url_host`, `url_path`, and `utm_*` resolved to `null` for Smart+ ads | These fields now resolve correctly for Smart+ ads; adds a new `landing_page_urls` column | Joins through `creative_history` for the ad_id match, then through `creative_history.smart_plus_ad_id` to `smart_plus_ad_history` for landing page URL data, since `creative_history` itself carries no URL fields. A Smart+ ad can have multiple landing pages, unlike a manual ad. `base_url`/`url_host`/`url_path`/`utm_*` are derived from one of them for consistency with the existing single-URL columns; the new `landing_page_urls` column preserves the full, comma-separated set so no URL data is lost |
 
 ## Feature Update
-- Adds the `tiktok_ads__using_smart_plus_ads` variable (`true` by default). If you do not sync or want to use the `smart_plus_ad_history` table, set this variable to `false` in your `dbt_project.yml`.
+- Adds the `tiktok_ads__using_smart_plus_ads` variable (`true` by default). If you do not sync or want to use the `creative_history`/`smart_plus_ad_history` tables, set this variable to `false` in your `dbt_project.yml`.
 
 # dbt_tiktok_ads v1.4.2
 

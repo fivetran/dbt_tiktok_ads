@@ -833,3 +833,46 @@ sources:
             description: List of custom product pages.
           - name: deeplink_list
             description: List of deeplinks associated with the Smart+ ad.
+
+      - name: creative_history
+        identifier: "{{ var('tiktok_ads_creative_history_identifier', 'creative_history') }}"
+        description: Each record represents a version of a TikTok Smart+ creative. Smart+ ads are synced here (as `creative_id`), not in `ad_history`, which contains manual ads only. `creative_id` is the same ID that TikTok's reporting API returns as `ad_id` for Smart+ ads.
+        config:
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_smart_plus_ads', true) and var('tiktok_ads_sources', []) == [] }}"
+        columns:
+          - name: creative_id
+            description: Creative ID. The same value TikTok's reporting API returns as `ad_id` for Smart+ ads.
+          - name: modify_time
+            description: Time the record was updated.
+          - name: smart_plus_ad_id
+            description: ID of the parent Smart+ ad this creative belongs to. A separate, higher-level grouping ID from `smart_plus_ad_history` -- not the same ID space as `creative_id`/reporting `ad_id`.
+          - name: advertiser_id
+            description: Advertiser ID.
+          - name: adgroup_id
+            description: Ad group ID.
+          - name: campaign_id
+            description: Campaign ID.
+          - name: video_id
+            description: Video ID.
+          - name: create_time
+            description: Time at which the creative was created.
+          - name: creative_name
+            description: Creative name.
+          - name: campaign_name
+            description: Campaign name.
+          - name: adgroup_name
+            description: Ad group name.
+          - name: identity_id
+            description: Identity ID used for the creative.
+          - name: identity_type
+            description: Identity type used for the creative.
+          - name: campaign_automation_type
+            description: Campaign automation type. `UPGRADED_SMART_PLUS_CREATIVE` for Smart+ creatives.
+          - name: ad_text
+            description: The ad text.
+          - name: secondary_status
+            description: Ad status.
+          - name: operation_status
+            description: Operation status.
+          - name: image_ids
+            description: List of image IDs associated with the creative.
