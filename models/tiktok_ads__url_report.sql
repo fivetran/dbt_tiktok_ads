@@ -31,14 +31,8 @@ ads as (
     {% if var('tiktok_ads__using_creative_history', true) %}
     union all
 
-    -- Smart+ ads are synced to `creative_history` instead of `ad_history`, which contains manual ads only.
-    -- `creative_history.creative_id` is the same ad_id that TikTok's reporting API returns for Smart+ ads --
-    -- `smart_plus_ad_history.smart_plus_ad_id` is a separate, higher-level grouping ID that does not match
-    -- `hourly.ad_id`. It's still the right FK to look up a Smart+ ad's landing page URL(s) through, since
-    -- `creative_history` itself carries no URL data. A Smart+ ad can have multiple landing pages:
-    -- `base_url`/`url_host`/`url_path`/`utm_*` are derived from one of them (`landing_page_url`), while
-    -- `landing_page_urls` preserves the full, comma-separated set. If `tiktok_ads__using_smart_plus_ad_history`
-    -- is disabled, Smart+ ads still resolve here via `creative_history`, just without URL data.
+    -- Smart+ ads resolve via `creative_history`, then join `smart_plus_ad_history` (through
+    -- `creative_history.smart_plus_ad_id`) for URL data only, since `creative_history` carries none.
     select
         creative_history.creative_id as ad_id,
         creative_history.adgroup_id as ad_group_id,

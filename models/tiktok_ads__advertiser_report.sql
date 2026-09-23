@@ -24,10 +24,8 @@ ads as (
     {% if var('tiktok_ads__using_creative_history', true) %}
     union all
 
-    -- Smart+ ads are synced to `creative_history` instead of `ad_history`, which contains manual ads only.
-    -- `creative_history.creative_id` is the same ad_id that TikTok's reporting API returns for Smart+ ads --
-    -- `smart_plus_ad_history.smart_plus_ad_id` is a separate, higher-level grouping ID that does not match
-    -- `hourly.ad_id` and is not usable as a join key here.
+    -- Smart+ ads are synced to `creative_history`, not `ad_history`. `creative_id` is the same ID TikTok's
+    -- reporting API returns as `ad_id` for Smart+ ads -- `smart_plus_ad_id` is a separate ID and not usable here.
     select
         creative_id as ad_id,
         advertiser_id,
