@@ -1,4 +1,4 @@
-{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_smart_plus_ads', true)) }}
+{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_creative_history', true)) }}
 
 with base as (
 

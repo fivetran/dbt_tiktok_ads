@@ -21,7 +21,7 @@ ads as (
     from {{ ref('stg_tiktok_ads__ad_history') }}
     where is_most_recent_record
 
-    {% if var('tiktok_ads__using_smart_plus_ads', true) %}
+    {% if var('tiktok_ads__using_creative_history', true) %}
     union all
 
     -- Smart+ ads are synced to `creative_history` instead of `ad_history`, which contains manual ads only.

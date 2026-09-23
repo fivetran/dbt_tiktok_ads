@@ -1,4 +1,4 @@
-{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_smart_plus_ads', true)) }}
+{{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_smart_plus_ad_history', true)) }}
 
 {% if var('tiktok_ads_union_schemas', []) | length > 0 or var('tiktok_ads_union_databases', []) | length > 0 %}
 

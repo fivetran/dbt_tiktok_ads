@@ -751,7 +751,7 @@ sources:
         identifier: "{{ var('tiktok_ads_smart_plus_ad_history_identifier', 'smart_plus_ad_history') }}"
         description: Each record represents a version of a TikTok Smart+ ad. Smart+ ads are TikTok's automated campaign ads and are synced here instead of in `ad_history`, which contains manual ads only.
         config:
-          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_smart_plus_ads', true) and var('tiktok_ads_sources', []) == [] }}"
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_smart_plus_ad_history', true) and var('tiktok_ads_sources', []) == [] }}"
         columns:
           - name: smart_plus_ad_id
             description: Smart+ ad ID.
@@ -838,7 +838,7 @@ sources:
         identifier: "{{ var('tiktok_ads_creative_history_identifier', 'creative_history') }}"
         description: Each record represents a version of a TikTok Smart+ creative. Smart+ ads are synced here (as `creative_id`), not in `ad_history`, which contains manual ads only. `creative_id` is the same ID that TikTok's reporting API returns as `ad_id` for Smart+ ads.
         config:
-          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_smart_plus_ads', true) and var('tiktok_ads_sources', []) == [] }}"
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_creative_history', true) and var('tiktok_ads_sources', []) == [] }}"
         columns:
           - name: creative_id
             description: Creative ID. The same value TikTok's reporting API returns as `ad_id` for Smart+ ads.

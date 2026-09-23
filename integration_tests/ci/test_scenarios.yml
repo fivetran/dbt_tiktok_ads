@@ -28,9 +28,14 @@ test_scenarios:
       tiktok_ads__using_campaign_country_report: false
     include_incremental: false
 
-  - name: "smart plus ads disabled"
+  - name: "creative history disabled"
     vars:
-      tiktok_ads__using_smart_plus_ads: false
+      tiktok_ads__using_creative_history: false
+    include_incremental: false
+
+  - name: "smart plus ad history disabled"
+    vars:
+      tiktok_ads__using_smart_plus_ad_history: false
     include_incremental: false
 
   - name: "MDLS"

@@ -15,7 +15,7 @@
 | `tiktok_ads__url_report` | Bug Fix, New Column | `ad_name`, `base_url`, `url_host`, `url_path`, and `utm_*` resolved to `null` for Smart+ ads | These fields now resolve correctly for Smart+ ads; adds a new `landing_page_urls` column | Joins through `creative_history` for the ad_id match, then through `creative_history.smart_plus_ad_id` to `smart_plus_ad_history` for landing page URL data, since `creative_history` itself carries no URL fields. A Smart+ ad can have multiple landing pages, unlike a manual ad. `base_url`/`url_host`/`url_path`/`utm_*` are derived from one of them for consistency with the existing single-URL columns; the new `landing_page_urls` column preserves the full, comma-separated set so no URL data is lost |
 
 ## Feature Update
-- Adds the `tiktok_ads__using_smart_plus_ads` variable (`true` by default). If you do not sync or want to use the `creative_history`/`smart_plus_ad_history` tables, set this variable to `false` in your `dbt_project.yml`.
+- Adds the `tiktok_ads__using_creative_history` and `tiktok_ads__using_smart_plus_ad_history` variables (`true` by default), controlled independently since you may sync one table without the other. Set either to `false` in your `dbt_project.yml` if you do not sync or want to use that table. See the [README](https://github.com/fivetran/dbt_tiktok_ads/tree/main#disable-smart-ads-enrichment) for details.
 
 # dbt_tiktok_ads v1.4.2
 
