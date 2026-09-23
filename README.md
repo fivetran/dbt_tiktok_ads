@@ -148,7 +148,7 @@ vars:
     tiktok_ads__using_creative_history: False # True by default
 ```
 
-Within `tiktok_ads__url_report`, the landing page URL fields for Smart+ ads are additionally resolved via the `smart_plus_ad_history` table, joined through `creative_history.smart_plus_ad_id`. This is controlled independently, since you may sync `creative_history` without syncing `smart_plus_ad_history` (or vice versa). If you are not syncing `smart_plus_ad_history`, Smart+ ads will still resolve in `tiktok_ads__ad_report` and `tiktok_ads__advertiser_report`, but will have `null` URL fields in `tiktok_ads__url_report` (and will be excluded from it entirely if the [URL null filter](#disable-the-url-null-filter) is enabled). You may disable this enrichment by adding the following variable configuration to your root `dbt_project.yml` file:
+Within `tiktok_ads__url_report`, the landing page URL fields for Smart+ ads are additionally resolved via the `smart_plus_ad_history` table, joined through `creative_history.smart_plus_ad_id`. This is controlled independently, since you may sync `creative_history` without syncing `smart_plus_ad_history` (or vice versa). If you are not syncing `smart_plus_ad_history`, Smart+ ads are left out of `tiktok_ads__url_report` entirely, since there's no URL data to report on for them -- they still resolve normally in `tiktok_ads__ad_report` and `tiktok_ads__advertiser_report`. You may disable this enrichment by adding the following variable configuration to your root `dbt_project.yml` file:
 ```yml
 vars:
     tiktok_ads__using_smart_plus_ad_history: False # True by default

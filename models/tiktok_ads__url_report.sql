@@ -28,18 +28,19 @@ ads as (
     from {{ ref('stg_tiktok_ads__ad_history') }}
     where is_most_recent_record
 
-    {% if var('tiktok_ads__using_creative_history', true) %}
+    {% if var('tiktok_ads__using_creative_history', true) and var('tiktok_ads__using_smart_plus_ad_history', true) %}
     union all
 
     -- Smart+ ads resolve via `creative_history`, then join `smart_plus_ad_history` (through
     -- `creative_history.smart_plus_ad_id`) for URL data only, since `creative_history` carries none.
+    -- Without `smart_plus_ad_history` there's no URL data to report on, so Smart+ ads are left out here
+    -- entirely (they're still included in `tiktok_ads__ad_report`/`tiktok_ads__advertiser_report`).
     select
         creative_history.creative_id as ad_id,
         creative_history.adgroup_id as ad_group_id,
         creative_history.advertiser_id,
         creative_history.campaign_id,
         creative_history.creative_name as ad_name,
-        {% if var('tiktok_ads__using_smart_plus_ad_history', true) %}
         smart_plus_ad_history.landing_page_url,
         smart_plus_ad_history.landing_page_urls,
         smart_plus_ad_history.base_url,
@@ -50,26 +51,12 @@ ads as (
         smart_plus_ad_history.utm_campaign,
         smart_plus_ad_history.utm_content,
         smart_plus_ad_history.utm_term,
-        {% else %}
-        cast(null as {{ dbt.type_string() }}) as landing_page_url,
-        cast(null as {{ dbt.type_string() }}) as landing_page_urls,
-        cast(null as {{ dbt.type_string() }}) as base_url,
-        cast(null as {{ dbt.type_string() }}) as url_host,
-        cast(null as {{ dbt.type_string() }}) as url_path,
-        cast(null as {{ dbt.type_string() }}) as utm_source,
-        cast(null as {{ dbt.type_string() }}) as utm_medium,
-        cast(null as {{ dbt.type_string() }}) as utm_campaign,
-        cast(null as {{ dbt.type_string() }}) as utm_content,
-        cast(null as {{ dbt.type_string() }}) as utm_term,
-        {% endif %}
         creative_history.source_relation
     from {{ ref('stg_tiktok_ads__creative_history') }} as creative_history
-    {% if var('tiktok_ads__using_smart_plus_ad_history', true) %}
     left join {{ ref('stg_tiktok_ads__smart_plus_ad_history') }} as smart_plus_ad_history
         on creative_history.smart_plus_ad_id = smart_plus_ad_history.smart_plus_ad_id
         and creative_history.source_relation = smart_plus_ad_history.source_relation
         and smart_plus_ad_history.is_most_recent_record
-    {% endif %}
     where creative_history.is_most_recent_record
     {% endif %}
 
