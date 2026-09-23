@@ -36,7 +36,7 @@ seeds:
   tiktok_ads_integration_tests:
     tiktok_creative_history_data:
       +column_types:
-        identity_id: varchar
+        identity_id: "{{ 'string' if target.type in ('bigquery', 'databricks', 'spark') else 'varchar' }}"
 
 dispatch:
   - macro_namespace: dbt_utils
