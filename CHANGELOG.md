@@ -1,6 +1,8 @@
-# dbt_tiktok_ads v1.5.0-a1
+# dbt_tiktok_ads v1.5.0-a2
 
 [PR #48](https://github.com/fivetran/dbt_tiktok_ads/pull/48) includes the following updates:
+
+> This supersedes the `v1.5.0-a1` pre-release, which joined on `smart_plus_ad_history.smart_plus_ad_id`. That ID does not match the reporting `ad_id` TikTok returns for Smart+ ads, so the `null` `advertiser_id`/`campaign_id`/`ad_group_id`/`ad_name` values were not resolved. If you are on `v1.5.0-a1`, upgrade to this version.
 
 ## Schema/Data Change
 **4 total changes • 0 possible breaking changes**
