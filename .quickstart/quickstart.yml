@@ -10,6 +10,7 @@ table_variables:
     - location
   tiktok_ads__using_smart_plus_ads:
     - smart_plus_ad_history
+    - creative_history
 
 destination_configurations:
   databricks:
