@@ -8,10 +8,33 @@ with hourly as (
 
 ads as (
 
-    select *
+    select
+        ad_id,
+        ad_group_id,
+        advertiser_id,
+        campaign_id,
+        ad_name,
+        source_relation
     from {{ ref('stg_tiktok_ads__ad_history') }}
     where is_most_recent_record
-), 
+
+    {% if var('tiktok_ads__using_creative_history', true) %}
+    union all
+
+    -- Smart+ ads are synced to `creative_history`, not `ad_history`. `creative_id` is the same ID TikTok's
+    -- reporting API returns as `ad_id` for Smart+ ads -- `smart_plus_ad_id` is a separate ID and not usable here.
+    select
+        creative_id as ad_id,
+        adgroup_id as ad_group_id,
+        advertiser_id,
+        campaign_id,
+        creative_name as ad_name,
+        source_relation
+    from {{ ref('stg_tiktok_ads__creative_history') }}
+    where is_most_recent_record
+    {% endif %}
+
+),
 
 ad_groups as (
 

@@ -5,7 +5,7 @@ This dbt package transforms data from Fivetran's Tiktok Ads connector into analy
 
 ## Resources
 
-- Number of materialized models¹: 24
+- Number of materialized models¹: 28
 - Connector documentation
   - [Tiktok Ads connector documentation](https://fivetran.com/docs/connectors/applications/tiktok-ads)
   - [Tiktok Ads ERD](https://fivetran.com/docs/connectors/applications/tiktok-ads#schemainformation)
@@ -74,7 +74,7 @@ Include the following tiktok_ads package version in your `packages.yml` file _if
 ```yaml
 packages:
   - package: fivetran/tiktok_ads
-    version: [">=1.4.0", "<1.5.0"]
+    version: [">=1.5.0", "<1.6.0"]
 
 ```
 > All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/tiktok_ads_source` in your `packages.yml` since this package has been deprecated.
@@ -139,6 +139,19 @@ This package leverages the `location` table to enrich the `tiktok_ads__campaign_
 ```yml
 vars:
     tiktok_ads__using_location: False # True by default
+```
+
+#### Disable Smart+ Ads Enrichment
+This package leverages the `creative_history` table to resolve ad-level attributes (`ad_name`, `advertiser_id`, `campaign_id`, `ad_group_id`) for TikTok Smart+ ads within `tiktok_ads__ad_report`, `tiktok_ads__advertiser_report`, and `tiktok_ads__url_report`, since Smart+ ads are synced to `creative_history` rather than `ad_history`. If you are not syncing the `creative_history` table from your TikTok Ads connection, you may disable this enrichment by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    tiktok_ads__using_creative_history: False # True by default
+```
+
+Within `tiktok_ads__url_report`, the landing page URL fields for Smart+ ads are additionally resolved via the `smart_plus_ad_history` table, joined through `creative_history.smart_plus_ad_id`. This is controlled independently, since you may sync `creative_history` without syncing `smart_plus_ad_history` (or vice versa). If you are not syncing `smart_plus_ad_history`, Smart+ ads are left out of `tiktok_ads__url_report` entirely, since there's no URL data to report on for them -- they still resolve normally in `tiktok_ads__ad_report` and `tiktok_ads__advertiser_report`. You may disable this enrichment by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    tiktok_ads__using_smart_plus_ad_history: False # True by default
 ```
 
 #### Disable the URL null filter
