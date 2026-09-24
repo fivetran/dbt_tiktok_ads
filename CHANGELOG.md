@@ -1,4 +1,4 @@
-# dbt_tiktok_ads v1.5.0
+# dbt_tiktok_ads v1.5.0-a2
 
 [PR #48](https://github.com/fivetran/dbt_tiktok_ads/pull/48) includes the following updates:
 
