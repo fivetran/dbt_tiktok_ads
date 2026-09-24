@@ -5,7 +5,7 @@ This dbt package transforms data from Fivetran's Tiktok Ads connector into analy
 
 ## Resources
 
-- Number of materialized models¹: 24
+- Number of materialized models¹: 28
 - Connector documentation
   - [Tiktok Ads connector documentation](https://fivetran.com/docs/connectors/applications/tiktok-ads)
   - [Tiktok Ads ERD](https://fivetran.com/docs/connectors/applications/tiktok-ads#schemainformation)
@@ -74,7 +74,7 @@ Include the following tiktok_ads package version in your `packages.yml` file _if
 ```yaml
 packages:
   - package: fivetran/tiktok_ads
-    version: 1.5.0-a2
+    version: [">=1.5.0", "<1.6.0"]
 
 ```
 > All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/tiktok_ads_source` in your `packages.yml` since this package has been deprecated.
