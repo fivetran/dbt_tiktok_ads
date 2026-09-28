@@ -51,7 +51,9 @@ final as (
 
     select
         fields.source_relation,
-        fields.smart_plus_ad_id,
+        -- Cast since some accounts sync this as a string here but a numeric type in creative_history (or vice versa),
+        -- which breaks the join between the two in tiktok_ads__url_report without a consistent type.
+        cast(fields.smart_plus_ad_id as {{ dbt.type_string() }}) as smart_plus_ad_id,
         cast(fields.modify_time as {{ dbt.type_timestamp() }}) as updated_at,
         fields.adgroup_id,
         fields.advertiser_id,

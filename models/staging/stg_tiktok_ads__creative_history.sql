@@ -27,7 +27,9 @@ final as (
         source_relation,
         creative_id,
         cast(modify_time as {{ dbt.type_timestamp() }}) as updated_at,
-        smart_plus_ad_id,
+        -- Cast since some accounts sync this as a numeric type here but a string in smart_plus_ad_history (or vice
+        -- versa), which breaks the join between the two in tiktok_ads__url_report without a consistent type.
+        cast(smart_plus_ad_id as {{ dbt.type_string() }}) as smart_plus_ad_id,
         advertiser_id,
         adgroup_id,
         campaign_id,
