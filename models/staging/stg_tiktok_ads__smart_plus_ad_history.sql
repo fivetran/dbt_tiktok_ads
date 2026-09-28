@@ -38,9 +38,8 @@ landing_page_urls_agg as (
     select
         source_relation,
         smart_plus_ad_id,
-        -- A single Smart+ ad can have multiple landing pages. `landing_page_url` picks one (the lowest alphabetically,
-        -- for a deterministic result) to derive `base_url`/`url_host`/`url_path`/`utm_*` from, consistent with the single
-        -- URL that `ad_history` provides for manual ads. `landing_page_urls` preserves the full set so no data is lost.
+        -- A Smart+ ad can have multiple landing pages; `landing_page_url` picks one (lowest alphabetically) for
+        -- `base_url`/`url_host`/`url_path`/`utm_*`, while `landing_page_urls` preserves the full set.
         min(landing_page_url) as landing_page_url,
         {{ fivetran_utils.string_agg('landing_page_url', "', '") }} as landing_page_urls
     from landing_page_urls_unnested
@@ -51,8 +50,6 @@ final as (
 
     select
         fields.source_relation,
-        -- Cast since some accounts sync this as a string here but a numeric type in creative_history (or vice versa),
-        -- which breaks the join between the two in tiktok_ads__url_report without a consistent type.
         cast(fields.smart_plus_ad_id as {{ dbt.type_string() }}) as smart_plus_ad_id,
         cast(fields.modify_time as {{ dbt.type_timestamp() }}) as updated_at,
         fields.adgroup_id,
@@ -102,11 +99,8 @@ final as (
         fields.page_list,
         fields.custom_product_page_list,
         fields.deeplink_list,
-        -- When smart_plus_ad_history hasn't synced (no rows at all -- Fivetran's Redshift fallback still returns one
-        -- fully-null placeholder row), smart_plus_ad_id and modify_time are both null and there is exactly one row,
-        -- so it's trivially the most recent. Skipping the window function here avoids Redshift's "constant expressions
-        -- are not supported in partition by/order by clauses" error, since every column in that placeholder row is a
-        -- literal.
+        -- Skips the window function for Redshift's all-null placeholder row (empty-table fallback), which would
+        -- otherwise fail with "constant expressions are not supported in partition by/order by clauses".
         case
             when fields.smart_plus_ad_id is null and fields.modify_time is null then true
             else row_number() over (partition by fields.smart_plus_ad_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by fields.modify_time desc) = 1
