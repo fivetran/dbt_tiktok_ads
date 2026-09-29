@@ -15,10 +15,6 @@
 ## Feature Update
 - Adds the `tiktok_ads__using_creative_history` and `tiktok_ads__using_smart_plus_ad_history` variables, both `true` by default. See the [README](https://github.com/fivetran/dbt_tiktok_ads/tree/main#disable-smart-ads-enrichment) for details.
 
-## Under the Hood
-- Casts `smart_plus_ad_id` to a consistent type in both `stg_tiktok_ads__creative_history` and `stg_tiktok_ads__smart_plus_ad_history`. Some accounts sync it as a different native type in each table, which broke the join in `tiktok_ads__url_report`.
-
-
 # dbt_tiktok_ads v1.5.0-a2
 
 [PR #48](https://github.com/fivetran/dbt_tiktok_ads/pull/48) includes the following updates:
