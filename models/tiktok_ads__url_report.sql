@@ -8,10 +8,59 @@ with hourly as (
 
 ads as (
 
-    select *
+    select
+        ad_id,
+        ad_group_id,
+        advertiser_id,
+        campaign_id,
+        ad_name,
+        landing_page_url,
+        cast(null as {{ dbt.type_string() }}) as landing_page_urls,
+        base_url,
+        url_host,
+        url_path,
+        utm_source,
+        utm_medium,
+        utm_campaign,
+        utm_content,
+        utm_term,
+        source_relation
     from {{ ref('stg_tiktok_ads__ad_history') }}
     where is_most_recent_record
-), 
+
+    {% if var('tiktok_ads__using_creative_history', true) and var('tiktok_ads__using_smart_plus_ad_history', true) %}
+    union all
+
+    -- Smart+ ads resolve via `creative_history`, then join `smart_plus_ad_history` (through
+    -- `creative_history.smart_plus_ad_id`) for URL data only, since `creative_history` carries none.
+    -- Without `smart_plus_ad_history` there's no URL data to report on, so Smart+ ads are left out here
+    -- entirely (they're still included in `tiktok_ads__ad_report`/`tiktok_ads__advertiser_report`).
+    select
+        creative_history.creative_id as ad_id,
+        creative_history.adgroup_id as ad_group_id,
+        creative_history.advertiser_id,
+        creative_history.campaign_id,
+        creative_history.creative_name as ad_name,
+        smart_plus_ad_history.landing_page_url,
+        smart_plus_ad_history.landing_page_urls,
+        smart_plus_ad_history.base_url,
+        smart_plus_ad_history.url_host,
+        smart_plus_ad_history.url_path,
+        smart_plus_ad_history.utm_source,
+        smart_plus_ad_history.utm_medium,
+        smart_plus_ad_history.utm_campaign,
+        smart_plus_ad_history.utm_content,
+        smart_plus_ad_history.utm_term,
+        creative_history.source_relation
+    from {{ ref('stg_tiktok_ads__creative_history') }} as creative_history
+    left join {{ ref('stg_tiktok_ads__smart_plus_ad_history') }} as smart_plus_ad_history
+        on creative_history.smart_plus_ad_id = smart_plus_ad_history.smart_plus_ad_id
+        and creative_history.source_relation = smart_plus_ad_history.source_relation
+        and smart_plus_ad_history.is_most_recent_record
+    where creative_history.is_most_recent_record
+    {% endif %}
+
+),
 
 ad_groups as (
 
@@ -46,6 +95,7 @@ aggregated as (
         ad_groups.ad_group_name,
         hourly.ad_id,
         ads.ad_name,
+        ads.landing_page_urls,
         ads.base_url,
         ads.url_host,
         ads.url_path,
@@ -103,7 +153,7 @@ aggregated as (
         where ads.landing_page_url is not null
     {% endif %}
 
-    {{ dbt_utils.group_by(23) }}
+    {{ dbt_utils.group_by(24) }}
 
 )
 
