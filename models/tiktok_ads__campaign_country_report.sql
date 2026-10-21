@@ -58,7 +58,7 @@ aggregated as (
         sum(country_report.conversion) as conversion,
         sum(country_report.spend)/nullif(sum(country_report.clicks),0) as daily_cpc,
         (sum(country_report.spend)/nullif(sum(country_report.impressions),0))*1000 as daily_cpm,
-        (sum(country_report.clicks)/nullif(sum(country_report.impressions),0))*100 as daily_ctr,
+        (cast(sum(country_report.clicks) as {{ dbt.type_numeric() }})/nullif(sum(country_report.impressions),0))*100 as daily_ctr,
         sum(country_report.real_time_conversion) as real_time_conversion
 
         {{ tiktok_ads_persist_pass_through_columns(pass_through_variable='tiktok_ads__campaign_country_report_passthrough_metrics', identifier='country_report', transform='sum', coalesce_with=0) }}        
