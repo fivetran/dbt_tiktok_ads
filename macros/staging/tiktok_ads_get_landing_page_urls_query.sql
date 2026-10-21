@@ -11,6 +11,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
         select
             source_relation,
             smart_plus_ad_id,
+            updated_at,
             json_extract_scalar(url_element, '$') as landing_page_url
         from required_fields,
             unnest(json_extract_array(landing_page_url_list)) as url_element
@@ -22,6 +23,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
         select
             source_relation,
             smart_plus_ad_id,
+            updated_at,
             trim(both '"' from url_element::text) as landing_page_url
         from required_fields
         cross join lateral json_array_elements(landing_page_url_list::json) as url_element
@@ -35,6 +37,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
         select
             source_relation,
             smart_plus_ad_id,
+            updated_at,
             {{ 'landing_page_url_list' if is_native_json else 'json_parse(landing_page_url_list)' }} as parsed_landing_page_url_list
         from required_fields
     ),
@@ -43,6 +46,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
         select
             p.source_relation,
             p.smart_plus_ad_id,
+            p.updated_at,
             url_element::varchar as landing_page_url
         from parsed_landing_page_urls as p, p.parsed_landing_page_url_list as url_element
     )
@@ -53,6 +57,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
         select
             source_relation,
             smart_plus_ad_id,
+            updated_at,
             url_element.value::string as landing_page_url
         from required_fields,
             lateral flatten(input => parse_json(landing_page_url_list)) as url_element
@@ -65,6 +70,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
         select
             source_relation,
             smart_plus_ad_id,
+            updated_at,
             landing_page_url
         from required_fields
         lateral view explode(from_json(landing_page_url_list, 'array<string>')) as landing_page_url
@@ -76,6 +82,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
         select
             source_relation,
             smart_plus_ad_id,
+            updated_at,
             unnest(cast(from_json(landing_page_url_list, '["VARCHAR"]') as varchar[])) as landing_page_url
         from required_fields
     )

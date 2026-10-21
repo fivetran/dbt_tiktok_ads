@@ -30,6 +30,7 @@ required_fields as (
     select
         source_relation,
         smart_plus_ad_id,
+        updated_at,
         landing_page_url_list
     from fields
     where landing_page_url_list is not null
@@ -42,12 +43,13 @@ landing_page_urls_agg as (
     select
         source_relation,
         smart_plus_ad_id,
+        updated_at,
         -- A Smart+ ad can have multiple landing pages; `landing_page_url` picks one (lowest alphabetically) for
         -- `base_url`/`url_host`/`url_path`/`utm_*`, while `landing_page_urls` preserves the full set.
         min(landing_page_url) as landing_page_url,
         {{ fivetran_utils.string_agg('landing_page_url', "', '") }} as landing_page_urls
     from landing_page_urls_unnested
-    group by 1, 2
+    group by 1, 2, 3
 ),
 
 final as (
@@ -113,6 +115,7 @@ final as (
     left join landing_page_urls_agg
         on fields.smart_plus_ad_id = landing_page_urls_agg.smart_plus_ad_id
         and fields.source_relation = landing_page_urls_agg.source_relation
+        and fields.updated_at = landing_page_urls_agg.updated_at
 )
 
 select *
