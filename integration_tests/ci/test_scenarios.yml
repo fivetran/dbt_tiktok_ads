@@ -43,3 +43,8 @@ test_scenarios:
       fivetran_using_source_casing: true
     include_incremental: false
     include_dbt_seed: true
+
+  - name: "campaign age gender disabled"
+    vars:
+      tiktok_ads__using_campaign_age_gender_report: false
+    include_incremental: false

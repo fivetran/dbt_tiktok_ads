@@ -5,7 +5,7 @@ This dbt package transforms data from Fivetran's Tiktok Ads connector into analy
 
 ## Resources
 
-- Number of materialized models¹: 28
+- Number of materialized models¹: 31
 - Connector documentation
   - [Tiktok Ads connector documentation](https://fivetran.com/docs/connectors/applications/tiktok-ads)
   - [Tiktok Ads ERD](https://fivetran.com/docs/connectors/applications/tiktok-ads#schemainformation)
@@ -36,6 +36,7 @@ By default, this package materializes the following final tables:
 | [tiktok_ads__ad_group_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_group_report.sql) | Represents daily performance aggregated at the ad group level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which ad groups have the strongest engagement relative to their budget?</li><li>Do certain ad groups dominate impressions within a campaign?</li><li>Are new ad groups ramping up as expected after launch?</li></ul> |
 | [tiktok_ads__campaign_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_report.sql) | Represents daily performance aggregated at the campaign level, including `spend`, `clicks`, `impressions`, and `conversions`.<br><br>**Example Analytics Questions:**<ul><li>Which campaigns are most efficient in terms of cost per conversion?</li><li>Are paused or limited-status campaigns still accruing impressions?</li><li>Which campaigns contribute most to overall spend or conversions?</li></ul> |
 | [tiktok_ads__campaign_country_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_country_report.sql) | Represents daily performance aggregated at the campaign level by country, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with geographic context.<br><br>**Example Analytics Questions:**<ul><li>Which countries are delivering the highest return on ad spend for each campaign?</li><li>Are there seasonal performance variations by geographic region?</li></ul> |
+| [tiktok_ads__campaign_age_gender_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__campaign_age_gender_report.sql) | Represents daily performance at the campaign level for each audience age range and gender combination, including `spend`, `clicks`, `impressions`, and `conversions`. The model splits each age range into `min_age` and `max_age`.<br><br>**Example Analytics Questions:**<ul><li>Which age and gender segments convert best for each campaign?</li><li>Does the gender mix of conversions change across age ranges?</li></ul> |
 | [tiktok_ads__advertiser_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__advertiser_report.sql) | Represents daily performance aggregated at the advertiser level (equivalent to account level), including `spend`, `clicks`, `impressions`, and `conversions`.<br><br>**Example Analytics Questions:**<ul><li>How does performance compare across different accounts by account manager?</li><li>Are currency fluctuations affecting results across markets?</li></ul> |
 | [tiktok_ads__ad_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__ad_report.sql) | Represents daily performance at the individual ad level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which ad creatives are driving the lowest cost per click?</li><li>Do expanded text ads perform better than responsive search ads?</li><li>How do performance trends change after refreshing ad copy?</li></ul> |
 | [tiktok_ads__url_report](https://github.com/fivetran/dbt_tiktok_ads/blob/main/models/tiktok_ads__url_report.sql) | Represents daily performance of URLs at the ad level, including `spend`, `clicks`, `impressions`, and `conversions`, enriched with ad context and demographic targeting data.<br><br>**Example Analytics Questions:**<ul><li>Which landing pages are driving the highest conversion rates?</li><li>Are certain URLs performing better with specific ad creative combinations?</li></ul> |
@@ -74,7 +75,7 @@ Include the following tiktok_ads package version in your `packages.yml` file _if
 ```yaml
 packages:
   - package: fivetran/tiktok_ads
-    version: [">=1.5.0", "<1.6.0"]
+    version: [">=1.6.0", "<1.7.0"]
 
 ```
 > All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/tiktok_ads_source` in your `packages.yml` since this package has been deprecated.
@@ -134,6 +135,13 @@ vars:
     tiktok_ads__using_campaign_country_report: False # True by default
 ```
 
+#### Disable the Age and Gender Report
+This package uses the `campaign_age_gender_report` table to build `tiktok_ads__campaign_age_gender_report`. If you don't sync this report from your TikTok Ads connection, disable this model by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    tiktok_ads__using_campaign_age_gender_report: False # True by default
+```
+
 #### Disable Location Enrichment
 This package leverages the `location` table to enrich the `tiktok_ads__campaign_country_report` with geographic region attributes (`country_name`, `parent_location_id`, and `has_support_below_18`). If you are not syncing the `location` table from your TikTok Ads connection, you may disable the location join and the related columns by adding the following variable configuration to your root `dbt_project.yml` file:
 ```yml
@@ -165,6 +173,8 @@ vars:
 By default, this package will select `clicks`, `impressions`, `spend` , `conversion`, `real_time_conversion`, `total_purchase_value`, and `total_sales_lead_value` from the source reporting tables to store into the staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) if desired, but not required. Use the below format for declaring the respective pass-through variables:
 
 > IMPORTANT: Make sure to exercise due diligence when adding metrics to these models. The metrics added by default (clicks, impressions, spend, and various conversion metrics) have been vetted by the Fivetran team, maintaining this package for accuracy. There are metrics included within the source reports, such as metric averages, which may be inaccurately represented at the grain for reports created in this package. You must ensure that whichever metrics you pass through are appropriate to aggregate at the respective reporting levels in this package.
+>
+> `tiktok_ads__campaign_age_gender_report` keeps the `CAMPAIGN_AGE_GENDER_REPORT` grain. If you roll it up by age or gender, sum additive metrics only, such as `result`. Summed ratio fields, such as `ctr`, `cpm`, `cost_per_result`, or any `*_rate` field, are incorrect. Calculate those from the summed metrics instead.
 
 ```yml
 vars:
@@ -177,13 +187,15 @@ vars:
     tiktok_ads__campaign_country_report_passthrough_metrics:
       - name: "unique_string_field"
         alias: "field_id"
+    tiktok_ads__campaign_age_gender_report_passthrough_metrics:
+      - name: "result"
     tiktok_ads__campaign_hourly_passthrough_metrics:
       - name: "unique_string_field"
         alias: "field_id"
 ```
 
 #### Change the build schema
-By default, this package will build the TikTok Ads staging models (8 views, 8 tables) within a schema titled (`<target_schema>` + `_stg_tiktok_ads`) and the final TikTok Ads models (6 tables) within a schema titled (`<target_schema>` + `_tiktok_ads`) in your target database. If this is not where you would like your modeled TikTok data to be written to, add the following configuration to your `dbt_project.yml` file:
+By default, this package builds the TikTok Ads staging models (12 views, 12 tables) within a schema titled (`<target_schema>` + `_stg_tiktok_ads`) and the final TikTok Ads models (7 tables) within a schema titled (`<target_schema>` + `_tiktok_ads`) in your target database. If this is not where you would like your modeled TikTok data to be written to, add the following configuration to your `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml

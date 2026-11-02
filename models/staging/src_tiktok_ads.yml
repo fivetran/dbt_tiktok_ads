@@ -716,7 +716,48 @@ sources:
           - name: impressions
             description: Total number of times ads in the campaign were shown.
           - name: real_time_conversion
-            description: Number of real-time conversions tracked by TikTok.
+            description: >
+              The number of times your ad achieved an outcome, 
+              based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
+          - name: spend
+            description: Total amount spent for the campaign in the account currency.
+          - name: stat_time_day
+            description: The reporting date for the campaign data (in YYYY-MM-DD format).
+
+      - name: campaign_age_gender_report
+        identifier: "{{ var('tiktok_ads_campaign_age_gender_report_identifier', 'campaign_age_gender_report') }}"
+        description: Each record provides daily reporting metrics at the campaign level for one audience age range and gender.
+        config:
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_campaign_age_gender_report', true) and var('tiktok_ads_sources', []) == [] }}"
+        columns:
+          - name: _fivetran_synced
+            description: Timestamp indicating when the record was last synced.
+          - name: age
+            description: Audience age range (`AGE_13_17`, `AGE_18_24`, `AGE_25_34`, `AGE_35_44`, `AGE_45_54`, or `AGE_55_100`).
+          - name: campaign_id
+            description: Unique identifier of the campaign.
+          - name: clicks
+            description: Total number of times users clicked on ads within the campaign.
+          - name: conversion
+            description: Number of attributed conversions from ads in the campaign based on the TikTok attribution model.
+          - name: conversion_rate
+            description: Ratio of conversions to impressions, calculated as conversions divided by impressions.
+          - name: cost_per_conversion
+            description: Average cost per conversion, calculated as total spend divided by conversions.
+          - name: cpc
+            description: Cost per click, calculated as spend divided by the number of clicks.
+          - name: cpm
+            description: Cost per thousand impressions, calculated as (spend / impressions) * 1000.
+          - name: ctr
+            description: Click-through rate, calculated as clicks divided by impressions.
+          - name: gender
+            description: Audience gender, such as `MALE`, `FEMALE`, or `NONE` when TikTok can't determine it.
+          - name: impressions
+            description: Total number of times ads in the campaign were shown.
+          - name: real_time_conversion
+            description: >
+              The number of times your ad achieved an outcome, 
+              based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
           - name: spend
             description: Total amount spent for the campaign in the account currency.
           - name: stat_time_day

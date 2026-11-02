@@ -432,7 +432,49 @@ models:
       - name: stat_time_day
         description: The reporting date for the campaign data (in YYYY-MM-DD format).
 
-  - name: stg_tiktok_ads__location 
+  - name: stg_tiktok_ads__campaign_age_gender_report
+    description: Each record provides daily reporting metrics at the campaign level for one audience age range and gender.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: _fivetran_synced
+        description: Timestamp indicating when the record was last synced.
+      - name: age
+        description: Audience age range (`AGE_13_17`, `AGE_18_24`, `AGE_25_34`, `AGE_35_44`, `AGE_45_54`, or `AGE_55_100`).
+      - name: min_age
+        description: Lower bound of the audience age range, parsed from `age`. Null when `age` isn't a range.
+      - name: max_age
+        description: Upper bound of the audience age range, parsed from `age`. TikTok uses 100 for the oldest range, which means 55 and older. Null when `age` isn't a range.
+      - name: campaign_id
+        description: Unique identifier of the campaign.
+      - name: clicks
+        description: Total number of times users clicked on ads within the campaign.
+      - name: conversion
+        description: Number of attributed conversions from ads in the campaign based on the TikTok attribution model.
+      - name: conversion_rate
+        description: Ratio of conversions to impressions, calculated as conversions divided by impressions.
+      - name: cost_per_conversion
+        description: Average cost per conversion, calculated as total spend divided by conversions.
+      - name: cpc
+        description: Cost per click, calculated as spend divided by the number of clicks.
+      - name: cpm
+        description: Cost per thousand impressions, calculated as (spend / impressions) * 1000.
+      - name: ctr
+        description: Click-through rate, calculated as clicks divided by impressions.
+      - name: gender
+        description: Audience gender, such as `MALE`, `FEMALE`, or `NONE` when TikTok can't determine it. A null value becomes `NONE`.
+      - name: impressions
+        description: Total number of times ads in the campaign were shown.
+      - name: real_time_conversion
+        description: >
+          The number of times your ad achieved an outcome,
+          based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
+      - name: spend
+        description: Total amount spent for the campaign in the account currency.
+      - name: stat_time_day
+        description: The reporting date for the campaign data (in YYYY-MM-DD format).
+
+  - name: stg_tiktok_ads__location
     description: Reference table of geographic regions and locations available for TikTok Ads targeting. Each record represents a location, such as a country, province, or city.
     columns:
       - name: source_relation
