@@ -6,7 +6,7 @@ schema_data_changes:
       change_type: New field/model
       new: Daily campaign performance by audience age range and gender
       is_breaking: false
-      notes: Built from the `CAMPAIGN_AGE_GENDER_REPORT` source table. Splits `age` into `min_age` and `max_age`. A null `age` or `gender` becomes `NONE`.
+      notes: Built from the `CAMPAIGN_AGE_GENDER_REPORT` source table. Splits `age` into `min_age` and `max_age`. A null `age` becomes `NONE`, and a null `gender` becomes `UNKNOWN`.
     - models:
         - stg_tiktok_ads__campaign_age_gender_report_tmp
         - stg_tiktok_ads__campaign_age_gender_report

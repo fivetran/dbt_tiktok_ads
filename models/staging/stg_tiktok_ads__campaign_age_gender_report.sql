@@ -34,7 +34,7 @@ final as (
         case when upper(age) like 'AGE%'
             then cast(nullif({{ dbt.split_part('age', "'_'", 3) }}, '') as {{ dbt.type_int() }})
         end as max_age,
-        coalesce(gender, 'NONE') as gender,
+        coalesce(gender, 'UNKNOWN') as gender,
         coalesce(clicks, 0) as clicks,
         coalesce(impressions, 0) as impressions,
         coalesce(spend, 0) as spend,

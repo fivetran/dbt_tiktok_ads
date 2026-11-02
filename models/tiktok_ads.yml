@@ -498,7 +498,7 @@ models:
       - name: max_age
         description: Upper bound of the audience age range, parsed from `age`. TikTok uses 100 for the oldest range, which means 55 and older. Null when `age` isn't a range.
       - name: gender
-        description: Audience gender, such as `MALE`, `FEMALE`, or `NONE` when TikTok can't determine it. A null value becomes `NONE`.
+        description: Audience gender, such as `MALE`, `FEMALE`, or `UNKNOWN` when TikTok can't determine it. A null value becomes `UNKNOWN`.
       - name: advertiser_id
         description: Unique identifier for the advertiser.
       - name: advertiser_name

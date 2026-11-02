@@ -128,18 +128,18 @@ If you use [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/
 
 <details open><summary>Expand/Collapse details</summary>
 
-#### Disable Country Reports
-This package leverages the `campaign_country_report` table to help report on ad and campaign performance by country/geographic region level. However, if you are not actively syncing this report from your TikTok Ads connection, you may disable the transformations for the `campaign_country_report` by adding the following variable configuration to your root `dbt_project.yml` file:
-```yml
-vars:
-    tiktok_ads__using_campaign_country_report: False # True by default
-```
-
 #### Disable the Age and Gender Report
 This package uses the `campaign_age_gender_report` table to build `tiktok_ads__campaign_age_gender_report`. If you don't sync this report from your TikTok Ads connection, disable this model by adding the following variable configuration to your root `dbt_project.yml` file:
 ```yml
 vars:
     tiktok_ads__using_campaign_age_gender_report: False # True by default
+```
+
+#### Disable Country Reports
+This package leverages the `campaign_country_report` table to help report on ad and campaign performance by country/geographic region level. However, if you are not actively syncing this report from your TikTok Ads connection, you may disable the transformations for the `campaign_country_report` by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    tiktok_ads__using_campaign_country_report: False # True by default
 ```
 
 #### Disable Location Enrichment

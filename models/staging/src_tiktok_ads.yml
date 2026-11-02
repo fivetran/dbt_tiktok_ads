@@ -751,7 +751,7 @@ sources:
           - name: ctr
             description: Click-through rate, calculated as clicks divided by impressions.
           - name: gender
-            description: Audience gender, such as `MALE`, `FEMALE`, or `NONE` when TikTok can't determine it.
+            description: Audience gender, such as `MALE`, `FEMALE`, or `UNKNOWN` when TikTok can't determine it.
           - name: impressions
             description: Total number of times ads in the campaign were shown.
           - name: real_time_conversion

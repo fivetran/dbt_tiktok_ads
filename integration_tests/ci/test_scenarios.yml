@@ -21,9 +21,10 @@ test_scenarios:
     vars: {}
     include_incremental: false
 
-  - name: "url filter disabled"
+  - name: "url filter + campaign_age_gender disabled"
     vars:
       ad_reporting__url_report__using_null_filter: false
+      tiktok_ads__using_campaign_age_gender_report: false
     include_incremental: false
 
   - name: "campaign country disabled"
@@ -46,8 +47,3 @@ test_scenarios:
       fivetran_using_source_casing: true
     include_incremental: false
     include_dbt_seed: true
-
-  - name: "campaign age gender disabled"
-    vars:
-      tiktok_ads__using_campaign_age_gender_report: false
-    include_incremental: false
