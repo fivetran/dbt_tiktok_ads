@@ -26,13 +26,13 @@ final as (
     select
         campaign_id,
         cast(stat_time_day as date) as stat_time_day,
-        coalesce(age, 'NONE') as age,
-        -- TikTok age ranges follow the AGE_<min>_<max> format. Other values, such as NONE, return null.
+        coalesce(age, 'UNKNOWN') as age,
+        -- TikTok age ranges follow the AGE_<min>_<max> format. Other values, such as UNKNOWN, return null.
         case when upper(age) like 'AGE%'
-            then cast(nullif({{ dbt.split_part('age', "'_'", 2) }}, '') as {{ dbt.type_int() }})
+            then {{ dbt.safe_cast("nullif(" ~ dbt.split_part('age', "'_'", 2) ~ ", '')", dbt.type_int()) }}
         end as min_age,
         case when upper(age) like 'AGE%'
-            then cast(nullif({{ dbt.split_part('age', "'_'", 3) }}, '') as {{ dbt.type_int() }})
+            then {{ dbt.safe_cast("nullif(" ~ dbt.split_part('age', "'_'", 3) ~ ", '')", dbt.type_int()) }}
         end as max_age,
         coalesce(gender, 'UNKNOWN') as gender,
         coalesce(clicks, 0) as clicks,

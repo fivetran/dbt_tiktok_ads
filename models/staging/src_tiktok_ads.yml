@@ -364,8 +364,7 @@ sources:
           - name: conversion
             description: >
               The number of times your ad achieved an outcome, based on the secondary goal you selected. 
-              As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-              Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred.)
           - name: real_time_result
             description: >
               The number of times your ad achieved an outcome, based on the optimization goal you selected. 
@@ -486,8 +485,7 @@ sources:
           - name: conversion
             description: >
               The number of times your ad achieved an outcome, based on the secondary goal you selected. 
-              As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns.
-              Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred.)
           - name: real_time_result
             description: >
               The number of times your ad achieved an outcome, based on the optimization goal you selected. 
@@ -609,8 +607,7 @@ sources:
           - name: conversion
             description: >
               The number of times your ad achieved an outcome, based on the secondary goal you selected. 
-              As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-              Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred.)
           - name: real_time_result
             description: >
               The number of times your ad achieved an outcome, based on the optimization goal you selected. 

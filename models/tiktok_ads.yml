@@ -27,8 +27,7 @@ models:
       - name: conversion
         description: >
           The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -112,8 +111,7 @@ models:
       - name: conversion
         description: >
           The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -193,8 +191,7 @@ models:
       - name: conversion
         description: >
           The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -262,8 +259,7 @@ models:
       - name: conversion
         description: >
           The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -370,8 +366,7 @@ models:
       - name: conversion
         description: >
           The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -453,8 +448,7 @@ models:
       - name: conversion
         description: >
           The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
@@ -524,8 +518,7 @@ models:
       - name: conversion
         description: >
           The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
