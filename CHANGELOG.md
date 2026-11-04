@@ -5,7 +5,7 @@
 
 | Data Model(s) | Change type | Old | New | Notes |
 | ------------- | ----------- | --- | --- | ----- |
-| tiktok_ads__campaign_age_gender_report | New field/model |  | Daily campaign performance by audience age range and gender | Built from the `CAMPAIGN_AGE_GENDER_REPORT` source table. Splits `age` into `min_age` and `max_age`. A null `age` becomes `NONE`, and a null `gender` becomes `UNKNOWN`. |
+| tiktok_ads__campaign_age_gender_report | New field/model |  | Daily campaign performance by audience age range and gender | Built from the `CAMPAIGN_AGE_GENDER_REPORT` source table. Splits `age` into `min_age` and `max_age`. A null `age` or `gender` becomes `UNKNOWN`. |
 | stg_tiktok_ads__campaign_age_gender_report_tmp<br>stg_tiktok_ads__campaign_age_gender_report | New field/model |  |  | Enabled by default. Disable with the `tiktok_ads__using_campaign_age_gender_report` variable. |
 
 ## Feature Update
