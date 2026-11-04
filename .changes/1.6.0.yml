@@ -3,15 +3,15 @@ schema_data_changes:
   entries:
   - models:
     - tiktok_ads__campaign_age_gender_report
-    change_type: New field/model
+    change_type: New model
     new: Daily campaign performance by audience age range and gender
     is_breaking: false
     notes: Built from the `CAMPAIGN_AGE_GENDER_REPORT` source table. Splits `age`
       into `min_age` and `max_age`. A null `age` or `gender` becomes `UNKNOWN`.
   - models:
-    - stg_tiktok_ads__campaign_age_gender_report_tmp
     - stg_tiktok_ads__campaign_age_gender_report
-    change_type: New field/model
+    - stg_tiktok_ads__campaign_age_gender_report_tmp
+    change_type: New staging model
     is_breaking: false
     notes: Enabled by default. Disable with the `tiktok_ads__using_campaign_age_gender_report`
       variable.
@@ -20,7 +20,7 @@ new_features:
   description: Adds two variables for the new age and gender report.
   details:
   - '`tiktok_ads__using_campaign_age_gender_report` disables the new models if you
-    don''t sync `CAMPAIGN_AGE_GENDER_REPORT`. It''s `true` by default.'
+    don''t sync `CAMPAIGN_AGE_GENDER_REPORT`. It''s `true` by default and configured dynamically in Quickstart.'
   - '`tiktok_ads__campaign_age_gender_report_passthrough_metrics` passes additional
     `CAMPAIGN_AGE_GENDER_REPORT` metrics through to `tiktok_ads__campaign_age_gender_report`.'
 date: '2026-11-02'
