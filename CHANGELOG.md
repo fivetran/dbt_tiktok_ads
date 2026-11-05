@@ -5,8 +5,8 @@
 
 | Data Model(s) | Change type | Old | New | Notes |
 | ------------- | ----------- | --- | --- | ----- |
-| tiktok_ads__campaign_age_gender_report | New model |  | Daily campaign performance by audience age range and gender | Built from the `CAMPAIGN_AGE_GENDER_REPORT` source table. Splits `age` into `min_age` and `max_age`. A null `age` or `gender` becomes `UNKNOWN`. |
-| stg_tiktok_ads__campaign_age_gender_report<br>stg_tiktok_ads__campaign_age_gender_report_tmp | New staging model |  |  | Enabled by default. Disable with the `tiktok_ads__using_campaign_age_gender_report` variable. |
+| [tiktok_ads__campaign_age_gender_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__campaign_age_gender_report) | New model |  | Daily campaign performance by audience age range and gender | Built from the `CAMPAIGN_AGE_GENDER_REPORT` source table. Splits `age` into `min_age` and `max_age`. A null `age` or `gender` becomes `UNKNOWN`. |
+| [stg_tiktok_ads__campaign_age_gender_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__campaign_age_gender_report)<br>[stg_tiktok_ads__campaign_age_gender_report_tmp](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__campaign_age_gender_report_tmp) | New staging model |  |  | Enabled by default. Disable with the `tiktok_ads__using_campaign_age_gender_report` variable. |
 
 ## Feature Update
 - **Campaign age and gender reporting variables**: Adds two variables for the new age and gender report.
