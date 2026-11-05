@@ -20,7 +20,8 @@ new_features:
   description: Adds two variables for the new age and gender report.
   details:
   - '`tiktok_ads__using_campaign_age_gender_report` disables the new models if you
-    don''t sync `CAMPAIGN_AGE_GENDER_REPORT`. It''s `true` by default and configured dynamically in Quickstart.'
+    don''t sync `CAMPAIGN_AGE_GENDER_REPORT`. It''s `true` by default and configured
+    dynamically in Quickstart.'
   - '`tiktok_ads__campaign_age_gender_report_passthrough_metrics` passes additional
     `CAMPAIGN_AGE_GENDER_REPORT` metrics through to `tiktok_ads__campaign_age_gender_report`.'
 date: '2026-11-02'
