@@ -1,5 +1,5 @@
 name: 'tiktok_ads_integration_tests'
-version: '1.5.0'
+version: '1.5.1'
 profile: 'integration_tests'
 config-version: 2
 
@@ -37,6 +37,14 @@ seeds:
     tiktok_creative_history_data:
       +column_types:
         identity_id: "{{ 'string' if target.type in ('bigquery', 'databricks', 'spark') else 'varchar' }}"
+    tiktok_smart_plus_ad_history_json_data:
+      +enabled: "{{ target.type == 'redshift' and not var('fivetran_using_source_casing', false) }}"
+      +column_types:
+        landing_page_url_list_string: varchar
+      # Fivetran syncs `landing_page_url_list` as SUPER on Redshift. Load as VARCHAR first, then convert to SUPER in a post-hook.
+      +post-hook:
+        - "alter table {{ this }} add column landing_page_url_list super default null"
+        - "update {{ this }} set landing_page_url_list = json_parse(landing_page_url_list_string)"
 
 dispatch:
   - macro_namespace: dbt_utils

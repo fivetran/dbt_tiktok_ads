@@ -41,6 +41,12 @@ test_scenarios:
       tiktok_ads__using_smart_plus_ad_history: false
     include_incremental: false
 
+  - name: "smart plus ad history json"
+    vars:
+      tiktok_ads_smart_plus_ad_history_identifier: "tiktok_smart_plus_ad_history_json_data"
+    include_incremental: false
+    warehouses: ["redshift"]
+
   - name: "MDLS"
     vars:
       fivetran_using_source_casing: true
