@@ -1,0 +1,8 @@
+version: 1.5.1
+bug_fixes:
+  - title: Smart+ staging models now use the synced `updated_at` column
+    description: "`stg_tiktok_ads__creative_history` and `stg_tiktok_ads__smart_plus_ad_history` now read `updated_at` from the source instead of `modify_time`, which Fivetran does not sync."
+    details:
+      - Previously, `modify_time` filled in as `null` for every record. On Redshift, this caused the error `constant expressions are not supported in order by clauses`. On other destinations, `updated_at` was `null` and `is_most_recent_record` was not deterministic.
+  - title: Redshift support for `landing_page_url_list` synced as SUPER
+    description: "`stg_tiktok_ads__smart_plus_ad_history` no longer calls `json_parse()` on `landing_page_url_list` when Fivetran syncs it as SUPER, which caused the error `function json_parse(super) does not exist`."

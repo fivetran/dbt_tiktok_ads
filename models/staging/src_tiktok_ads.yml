@@ -755,7 +755,7 @@ sources:
         columns:
           - name: smart_plus_ad_id
             description: Smart+ ad ID.
-          - name: modify_time
+          - name: updated_at
             description: Time the record was updated.
           - name: advertiser_id
             description: Advertiser ID.
@@ -842,7 +842,7 @@ sources:
         columns:
           - name: creative_id
             description: Creative ID. The same value TikTok's reporting API returns as `ad_id` for Smart+ ads.
-          - name: modify_time
+          - name: updated_at
             description: Time the record was updated.
           - name: smart_plus_ad_id
             description: ID of the parent Smart+ ad this creative belongs to. A separate, higher-level grouping ID from `smart_plus_ad_history` -- not the same ID space as `creative_id`/reporting `ad_id`.

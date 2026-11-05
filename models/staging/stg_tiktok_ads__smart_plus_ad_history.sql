@@ -1,5 +1,9 @@
 {{ config(enabled=var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_smart_plus_ad_history', true)) }}
 
+{%- set source_columns = adapter.get_columns_in_relation(ref('stg_tiktok_ads__smart_plus_ad_history_tmp')) -%}
+{#- Fivetran syncs `landing_page_url_list` as a native JSON type on some destinations (e.g. SUPER on Redshift), so the unnesting macro needs its datatype. -#}
+{%- set landing_page_url_list_datatype = source_columns | selectattr('name', 'equalto', 'landing_page_url_list') | map(attribute='dtype') | first | default('') | lower -%}
+
 with base as (
 
     select *
@@ -11,7 +15,7 @@ fields as (
     select
         {{
             fivetran_utils.fill_staging_columns(
-                source_columns=adapter.get_columns_in_relation(ref('stg_tiktok_ads__smart_plus_ad_history_tmp')),
+                source_columns=source_columns,
                 staging_columns=get_smart_plus_ad_history_columns()
             )
         }}
@@ -31,7 +35,7 @@ required_fields as (
     where landing_page_url_list is not null
 ),
 
-{{ tiktok_ads_get_landing_page_urls_query(output_cte_name='landing_page_urls_unnested') }},
+{{ tiktok_ads_get_landing_page_urls_query(output_cte_name='landing_page_urls_unnested', landing_page_url_list_datatype=landing_page_url_list_datatype) }},
 
 landing_page_urls_agg as (
 
@@ -51,7 +55,7 @@ final as (
     select
         fields.source_relation,
         cast(fields.smart_plus_ad_id as {{ dbt.type_string() }}) as smart_plus_ad_id,
-        cast(fields.modify_time as {{ dbt.type_timestamp() }}) as updated_at,
+        cast(fields.updated_at as {{ dbt.type_timestamp() }}) as updated_at,
         fields.adgroup_id,
         fields.advertiser_id,
         fields.campaign_id,
@@ -102,8 +106,8 @@ final as (
         -- Skips the window function for Redshift's all-null placeholder row (empty-table fallback), which would
         -- otherwise fail with "constant expressions are not supported in partition by/order by clauses".
         case
-            when fields.smart_plus_ad_id is null and fields.modify_time is null then true
-            else row_number() over (partition by fields.smart_plus_ad_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by fields.modify_time desc) = 1
+            when fields.smart_plus_ad_id is null and fields.updated_at is null then true
+            else row_number() over (partition by fields.smart_plus_ad_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by fields.updated_at desc) = 1
         end as is_most_recent_record
     from fields
     left join landing_page_urls_agg

@@ -2,7 +2,7 @@
 
 {% set columns = [
     {"name": "smart_plus_ad_id", "datatype": dbt.type_numeric()},
-    {"name": "modify_time", "datatype": dbt.type_timestamp()},
+    {"name": "updated_at", "datatype": dbt.type_timestamp()},
     {"name": "advertiser_id", "datatype": dbt.type_numeric()},
     {"name": "adgroup_id", "datatype": dbt.type_numeric()},
     {"name": "campaign_id", "datatype": dbt.type_numeric()},
