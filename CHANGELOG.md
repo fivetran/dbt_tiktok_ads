@@ -1,3 +1,18 @@
+# dbt_tiktok_ads v1.6.0
+
+## Schema/Data Change
+**2 total changes • 0 possible breaking changes**
+
+| Data Model(s) | Change type | Old | New | Notes |
+| ------------- | ----------- | --- | --- | ----- |
+| [tiktok_ads__campaign_age_gender_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.tiktok_ads__campaign_age_gender_report) | New model |  | Daily campaign performance by audience age range and gender | Built from the `CAMPAIGN_AGE_GENDER_REPORT` source table. Splits `age` into `min_age` and `max_age`. A null `age` or `gender` becomes `UNKNOWN`. |
+| [stg_tiktok_ads__campaign_age_gender_report](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__campaign_age_gender_report)<br>[stg_tiktok_ads__campaign_age_gender_report_tmp](https://fivetran.github.io/dbt_tiktok_ads/#!/model/model.tiktok_ads.stg_tiktok_ads__campaign_age_gender_report_tmp) | New staging model |  |  | Enabled by default. Disable with the `tiktok_ads__using_campaign_age_gender_report` variable. |
+
+## Feature Update
+- **Campaign age and gender reporting variables**: Adds two variables for the new age and gender report.
+  - `tiktok_ads__using_campaign_age_gender_report` disables the new models if you don't sync `CAMPAIGN_AGE_GENDER_REPORT`. It's `true` by default and configured dynamically in Quickstart.
+  - `tiktok_ads__campaign_age_gender_report_passthrough_metrics` passes additional `CAMPAIGN_AGE_GENDER_REPORT` metrics through to `tiktok_ads__campaign_age_gender_report`.
+
 # dbt_tiktok_ads v1.5.0
 
 [PR #48](https://github.com/fivetran/dbt_tiktok_ads/pull/48) includes the following updates:

@@ -26,9 +26,8 @@ models:
         description: The number of unique users who saw your ads at least once. This metric is estimated.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          The number of times your ad resulted in the optimization event you selected.  
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -111,9 +110,8 @@ models:
         description: The number of unique users who saw your ads at least once. This metric is estimated.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          The number of times your ad resulted in the optimization event you selected.  
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -192,9 +190,8 @@ models:
         description: The number of unique users who saw your ads at least once. This metric is estimated.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          The number of times your ad resulted in the optimization event you selected.  
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -261,9 +258,8 @@ models:
         description: The number of unique users who saw your ads at least once. This metric is estimated.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          The number of times your ad resulted in the optimization event you selected.  
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -369,9 +365,8 @@ models:
         description: The number of unique users who saw your ads at least once. This metric is estimated.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          The number of times your ad resulted in the optimization event you selected.  
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: likes
         description: The number of likes your video creative received within 1 day of a user seeing a paid ad.
       - name: comments
@@ -452,9 +447,8 @@ models:
         description: The amount of spend that occurred on the day of the record.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
-          As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-          Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+          The number of times your ad resulted in the optimization event you selected.  
+          (The total count is calculated based on the time each ad impression occurred.)
       - name: daily_cpc
         description: The average amount of money you've spent on a click.
       - name: daily_cpm
@@ -471,3 +465,65 @@ models:
         description: Identifier of the parent region, enabling hierarchical rollups (city to province to country).
       - name: has_support_below_18
         description: Whether the location supports targeting users under 18. Used for compliance with age-restricted ad targeting rules.
+
+  - name: tiktok_ads__campaign_age_gender_report
+    description: Each record in this table represents the daily performance of a campaign for one audience age range and gender.
+    columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
+      - name: date_day
+        description: The reporting date for the campaign data (in YYYY-MM-DD format).
+        tests:
+          - not_null
+      - name: campaign_id
+        description: Unique identifier for the campaign.
+        tests:
+          - not_null
+      - name: campaign_name
+        description: Name of the campaign.
+      - name: campaign_type
+        description: Type/category of the campaign.
+      - name: created_at
+        description: Timestamp when the campaign was created.
+      - name: age
+        description: Audience age range (`AGE_13_17`, `AGE_18_24`, `AGE_25_34`, `AGE_35_44`, `AGE_45_54`, or `AGE_55_100`).
+      - name: min_age
+        description: Lower bound of the audience age range, parsed from `age`. Null when `age` isn't a range.
+      - name: max_age
+        description: Upper bound of the audience age range, parsed from `age`. TikTok uses 100 for the oldest range, which means 55 and older. Null when `age` isn't a range.
+      - name: gender
+        description: Audience gender, such as `MALE`, `FEMALE`, or `UNKNOWN` when TikTok can't determine it. A null value becomes `UNKNOWN`.
+      - name: advertiser_id
+        description: Unique identifier for the advertiser.
+      - name: advertiser_name
+        description: Name of the advertiser account.
+      - name: currency
+        description: Currency in which spend and cost metrics are reported.
+      - name: objective_type
+        description: Objective type of the campaign (e.g., conversions, traffic).
+      - name: status
+        description: Current status of the campaign.
+      - name: split_test_variable
+        description: Split Test variables. Optional values; TARGETING, BIDDING_OPTIMIZATION, CREATIVE.
+      - name: budget
+        description: Total budget allocated to the campaign.
+      - name: budget_mode
+        description: Budget pacing mode (e.g., daily, total).
+      - name: impressions
+        description: The number of impressions that occurred on the day of the record.
+      - name: clicks
+        description: The number of clicks that occurred on the day of the record.
+      - name: spend
+        description: The amount of spend that occurred on the day of the record.
+      - name: conversion
+        description: >
+          The number of times your ad resulted in the optimization event you selected.  
+          (The total count is calculated based on the time each ad impression occurred.)
+      - name: daily_cpc
+        description: The average amount of money you've spent on a click.
+      - name: daily_cpm
+        description: The average amount of money you've spent per 1,000 impressions.
+      - name: daily_ctr
+        description: The percentage of times people saw your ad and performed a click.
+      - name: real_time_conversion
+        description: Number of times your ad resulted in the optimization event you selected.
