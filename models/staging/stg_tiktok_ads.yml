@@ -212,7 +212,7 @@ models:
         description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          The number of times your ad resulted in the optimization event you selected.  
           (The total count is calculated based on the time each ad impression occurred.)
       - name: shares
         description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
@@ -285,7 +285,7 @@ models:
         description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          The number of times your ad resulted in the optimization event you selected.  
           (The total count is calculated based on the time each ad impression occurred.)
       - name: shares
         description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
@@ -358,7 +358,7 @@ models:
         description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
       - name: conversion
         description: >
-          The number of times your ad achieved an outcome, based on the secondary goal you selected.  
+          The number of times your ad resulted in the optimization event you selected.  
           (The total count is calculated based on the time each ad impression occurred.)
       - name: shares
         description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
