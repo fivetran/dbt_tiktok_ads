@@ -1,11 +1,11 @@
 {# Unnests the `landing_page_url_list` JSON array (one Smart+ ad can have multiple landing pages) into one row per URL.
 Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `get_url_tags_query` macro. #}
 
-{% macro tiktok_ads_get_landing_page_urls_query(output_cte_name) %}
-    {{ return(adapter.dispatch('tiktok_ads_get_landing_page_urls_query', 'tiktok_ads')(output_cte_name)) }}
+{% macro tiktok_ads_get_landing_page_urls_query(output_cte_name, landing_page_url_list_datatype=none) %}
+    {{ return(adapter.dispatch('tiktok_ads_get_landing_page_urls_query', 'tiktok_ads')(output_cte_name, landing_page_url_list_datatype)) }}
 {% endmacro %}
 
-{% macro default__tiktok_ads_get_landing_page_urls_query(output_cte_name) %}
+{% macro default__tiktok_ads_get_landing_page_urls_query(output_cte_name, landing_page_url_list_datatype=none) %}
 {# bigquery #}
     {{ output_cte_name }} as (
         select
@@ -17,7 +17,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
     )
 {% endmacro %}
 
-{% macro postgres__tiktok_ads_get_landing_page_urls_query(output_cte_name) %}
+{% macro postgres__tiktok_ads_get_landing_page_urls_query(output_cte_name, landing_page_url_list_datatype=none) %}
     {{ output_cte_name }} as (
         select
             source_relation,
@@ -28,12 +28,14 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
     )
 {% endmacro %}
 
-{% macro redshift__tiktok_ads_get_landing_page_urls_query(output_cte_name) %}
+{% macro redshift__tiktok_ads_get_landing_page_urls_query(output_cte_name, landing_page_url_list_datatype=none) %}
+    {#- Fivetran syncs `landing_page_url_list` as SUPER on Redshift, which is already parsed. json_parse() only accepts strings. -#}
+    {%- set is_native_json = landing_page_url_list_datatype == 'super' %}
     parsed_landing_page_urls as (
         select
             source_relation,
             smart_plus_ad_id,
-            json_parse(landing_page_url_list) as parsed_landing_page_url_list
+            {{ 'landing_page_url_list' if is_native_json else 'json_parse(landing_page_url_list)' }} as parsed_landing_page_url_list
         from required_fields
     ),
 
@@ -46,7 +48,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
     )
 {% endmacro %}
 
-{% macro snowflake__tiktok_ads_get_landing_page_urls_query(output_cte_name) %}
+{% macro snowflake__tiktok_ads_get_landing_page_urls_query(output_cte_name, landing_page_url_list_datatype=none) %}
     {{ output_cte_name }} as (
         select
             source_relation,
@@ -57,7 +59,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
     )
 {% endmacro %}
 
-{% macro spark__tiktok_ads_get_landing_page_urls_query(output_cte_name) %}
+{% macro spark__tiktok_ads_get_landing_page_urls_query(output_cte_name, landing_page_url_list_datatype=none) %}
 {# databricks and spark #}
     {{ output_cte_name }} as (
         select
@@ -69,7 +71,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
     )
 {% endmacro %}
 
-{% macro duckdb__tiktok_ads_get_landing_page_urls_query(output_cte_name) %}
+{% macro duckdb__tiktok_ads_get_landing_page_urls_query(output_cte_name, landing_page_url_list_datatype=none) %}
     {{ output_cte_name }} as (
         select
             source_relation,

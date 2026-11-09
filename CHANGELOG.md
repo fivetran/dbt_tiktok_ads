@@ -1,3 +1,12 @@
+# dbt_tiktok_ads v1.5.1
+
+[PR #55](https://github.com/fivetran/dbt_tiktok_ads/pull/55) includes the following updates:
+
+## Bug Fix
+- **Smart+ staging models now use the synced `updated_at` column**: `stg_tiktok_ads__creative_history` and `stg_tiktok_ads__smart_plus_ad_history` now read `updated_at` from the source instead of `modify_time`, which Fivetran does not sync.
+  - Previously, `modify_time` filled in as `null` for every record. On Redshift, this caused the error `constant expressions are not supported in order by clauses`. On other destinations, `updated_at` was `null` and `is_most_recent_record` was not deterministic.
+- **Redshift support for `landing_page_url_list` synced as SUPER**: `stg_tiktok_ads__smart_plus_ad_history` no longer calls `json_parse()` on `landing_page_url_list` when Fivetran syncs it as SUPER, which caused the error `function json_parse(super) does not exist`.
+
 # dbt_tiktok_ads v1.5.0
 
 [PR #48](https://github.com/fivetran/dbt_tiktok_ads/pull/48) includes the following updates:
