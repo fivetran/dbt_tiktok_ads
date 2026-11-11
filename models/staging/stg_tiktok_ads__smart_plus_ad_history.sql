@@ -45,7 +45,7 @@ landing_page_urls_agg as (
         -- A Smart+ ad can have multiple landing pages; `landing_page_url` picks one (lowest alphabetically) for
         -- `base_url`/`url_host`/`url_path`/`utm_*`, while `landing_page_urls` preserves the full set.
         min(landing_page_url) as landing_page_url,
-        {{ fivetran_utils.string_agg('landing_page_url', "', '") }} as landing_page_urls
+        {{ dbt.listagg('landing_page_url', "', '") }} as landing_page_urls
     from landing_page_urls_unnested
     group by 1, 2
 ),
@@ -70,11 +70,11 @@ final as (
         {{ dbt.split_part('landing_page_urls_agg.landing_page_url', "'?'", 1) }} as base_url,
         {{ dbt_utils.get_url_host('landing_page_urls_agg.landing_page_url') }} as url_host,
         '/' || {{ dbt_utils.get_url_path('landing_page_urls_agg.landing_page_url') }} as url_path,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_source') }} as utm_source,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_medium') }} as utm_medium,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_campaign') }} as utm_campaign,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_content') }} as utm_content,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_term') }} as utm_term,
+        {{ dbt_utils.get_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_source') }} as utm_source,
+        {{ dbt_utils.get_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_medium') }} as utm_medium,
+        {{ dbt_utils.get_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_campaign') }} as utm_campaign,
+        {{ dbt_utils.get_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_content') }} as utm_content,
+        {{ dbt_utils.get_url_parameter('landing_page_urls_agg.landing_page_url', 'utm_term') }} as utm_term,
         fields.tracking_info_click_tracking_url,
         fields.tracking_info_impression_tracking_url,
         fields.tracking_info_tracking_app_id,
