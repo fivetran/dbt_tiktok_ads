@@ -1,0 +1,10 @@
+version: 1.5.2
+bug_fixes:
+- description: Replaces `fivetran_utils.string_agg` with dbt's built-in `dbt.listagg`. On Databricks,
+    aggregated values that contain a comma followed by a space are no longer split apart. Lists
+    built without `distinct` also keep duplicate values on Databricks now, which matches the other
+    warehouses. Output on other warehouses doesn't change.
+under_the_hood:
+- description: Replaces the `tiktok_ads_extract_url_parameter` macro with `dbt_utils.get_url_parameter` and
+    removes `tiktok_ads_extract_url_parameter`. `dbt_utils.get_url_parameter` now includes the same
+    Spark and Databricks logic, so output doesn't change.

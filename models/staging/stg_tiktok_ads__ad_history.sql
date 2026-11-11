@@ -38,11 +38,11 @@ final as (
         {{ dbt.split_part('landing_page_url', "'?'", 1) }} as base_url,
         {{ dbt_utils.get_url_host('landing_page_url') }} as url_host,
         '/' || {{ dbt_utils.get_url_path('landing_page_url') }} as url_path,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_url', 'utm_source') }} as utm_source,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_url', 'utm_medium') }} as utm_medium,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_url', 'utm_campaign') }} as utm_campaign,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_url', 'utm_content') }} as utm_content,
-        {{ tiktok_ads.tiktok_ads_extract_url_parameter('landing_page_url', 'utm_term') }} as utm_term,
+        {{ dbt_utils.get_url_parameter('landing_page_url', 'utm_source') }} as utm_source,
+        {{ dbt_utils.get_url_parameter('landing_page_url', 'utm_medium') }} as utm_medium,
+        {{ dbt_utils.get_url_parameter('landing_page_url', 'utm_campaign') }} as utm_campaign,
+        {{ dbt_utils.get_url_parameter('landing_page_url', 'utm_content') }} as utm_content,
+        {{ dbt_utils.get_url_parameter('landing_page_url', 'utm_term') }} as utm_term,
         landing_page_url,
         row_number() over (partition by ad_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by updated_at desc) = 1 as is_most_recent_record
     from fields
