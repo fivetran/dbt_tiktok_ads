@@ -3,8 +3,9 @@ pr_number: 57
 under_the_hood:
 - title: Column documentation now matches staging model output
   description: Removes four column entries from `stg_tiktok_ads.yml` that the staging
-    models do not output, so the package documentation reflects the columns you
-    actually receive.
+    models do not output, so the package documentation reflects the columns you actually
+    receive.
   details:
-  - "`stg_tiktok_ads__advertiser`: removes `create_time`, `license_no`, and `license_url`."
-  - "`stg_tiktok_ads__campaign_history`: removes `opt_status`."
+  - '`stg_tiktok_ads__advertiser`: removes `create_time`, `license_no`, and `license_url`.'
+  - '`stg_tiktok_ads__campaign_history`: removes `opt_status`.'
+date: '2026-11-12'
