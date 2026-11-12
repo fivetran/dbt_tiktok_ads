@@ -3,6 +3,12 @@ version: 2
 models:
   - name: stg_tiktok_ads__advertiser
     description: Each record represents data for each advertiser.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - advertiser_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -48,6 +54,13 @@ models:
 
   - name: stg_tiktok_ads__ad_group_history
     description: Each record represents data for each ad group.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - ad_group_id
+              - updated_at
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -96,6 +109,13 @@ models:
 
   - name: stg_tiktok_ads__ad_history
     description: Each record represents data for each ad.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - ad_id
+              - updated_at
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -143,6 +163,13 @@ models:
 
   - name: stg_tiktok_ads__campaign_history
     description: Each record represents data for each campaign.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - campaign_id
+              - updated_at
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -179,6 +206,13 @@ models:
 
   - name: stg_tiktok_ads__ad_report_hourly
     description: Each record represents data for each ad for each hour.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - stat_time_hour
+              - ad_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -253,6 +287,13 @@ models:
 
   - name: stg_tiktok_ads__ad_group_report_hourly
     description: Each record represents data for each ad group for each hour.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - stat_time_hour
+              - ad_group_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -327,6 +368,13 @@ models:
   
   - name: stg_tiktok_ads__campaign_report_hourly
     description: Each record represent data for each campaign for each hour.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - stat_time_hour
+              - campaign_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -400,6 +448,14 @@ models:
 
   - name: stg_tiktok_ads__campaign_country_report
     description: Each record provides country-level reporting metrics at the campaign level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - stat_time_day
+              - campaign_id
+              - country_code
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -434,6 +490,13 @@ models:
 
   - name: stg_tiktok_ads__location 
     description: Reference table of geographic regions and locations available for TikTok Ads targeting. Each record represents a location, such as a country, province, or city.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - advertiser_id
+              - location_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -458,6 +521,13 @@ models:
 
   - name: stg_tiktok_ads__smart_plus_ad_history
     description: Each record represents a version of a TikTok Smart+ ad -- a higher-level grouping over one or more `stg_tiktok_ads__creative_history` records. `smart_plus_ad_id` does not match the `ad_id` used in hourly reporting; this model is used to enrich Smart+ ads with landing page URL data via `stg_tiktok_ads__creative_history.smart_plus_ad_id`, not as a direct join to reporting data.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - smart_plus_ad_id
+              - updated_at
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -566,6 +636,13 @@ models:
 
   - name: stg_tiktok_ads__creative_history
     description: Each record represents a version of a TikTok Smart+ creative. Smart+ ads are synced here (as `creative_id`), not in `stg_tiktok_ads__ad_history`, which contains manual ads only. `creative_id` is the same ID that TikTok's reporting API returns as `ad_id` for Smart+ ads.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - creative_id
+              - updated_at
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"

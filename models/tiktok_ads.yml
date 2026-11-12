@@ -3,6 +3,13 @@ version: 2
 models:
   - name: tiktok_ads__advertiser_report
     description: Each record in this table represents the daily performance of ads at the account level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -66,6 +73,16 @@ models:
 
   - name: tiktok_ads__ad_report
     description: Each record in this table represents the daily performance of ads at the ad level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
+              - ad_group_id
+              - ad_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -151,6 +168,15 @@ models:
 
   - name: tiktok_ads__ad_group_report
     description: Each record in this table represents the daily performance of ads at the ad group level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
+              - ad_group_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -232,6 +258,14 @@ models:
 
   - name: tiktok_ads__campaign_report
     description: Each record in this table represents the daily performance at the campaign level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -301,6 +335,19 @@ models:
 
   - name: tiktok_ads__url_report
     description: Each record in this table represents the daily performance of ads at the URL level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
+              - ad_group_id
+              - ad_id
+          config:
+            # Don't run this test if you allow URLs to have null entries
+            enabled: "{{ var('ad_reporting__url_report__using_null_filter', true) }}"
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -409,6 +456,15 @@ models:
 
   - name: tiktok_ads__campaign_country_report
     description: Each record in this table represents the daily performance of a campaign at the country/geographic region level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
+              - country_code
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
