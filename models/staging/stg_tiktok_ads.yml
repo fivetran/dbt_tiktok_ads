@@ -20,8 +20,6 @@ models:
         description: Contact Person
       - name: country
         description: The advertiser's country
-      - name: create_time
-        description: Advertiser's create time
       - name: currency
         description: Type of currency used by advertisers
       - name: description
@@ -32,10 +30,6 @@ models:
         description: Advertiser industry category
       - name: language
         description: Language used by advertisers
-      - name: license_no
-        description: License number
-      - name: license_url
-        description: License preview address, the link is valid for an hour by default.
       - name: advertiser_name
         description: Advertiser name
       - name: cellphone_number
@@ -170,8 +164,6 @@ models:
         description: Whether the campaign is a new structure (for the same campaign, the structure of campaign, adgroups and ads are the same)
       - name: objective_type
         description: Advertising objective.
-      - name: opt_status
-        description: Operation status. 
       - name: status
         description: Campaign status.
       - name: is_most_recent_record
