@@ -26,7 +26,7 @@ final as (
     select
         source_relation,
         creative_id,
-        cast(modify_time as {{ dbt.type_timestamp() }}) as updated_at,
+        cast(updated_at as {{ dbt.type_timestamp() }}) as updated_at,
         cast(smart_plus_ad_id as {{ dbt.type_string() }}) as smart_plus_ad_id,
         advertiser_id,
         adgroup_id,
@@ -45,8 +45,8 @@ final as (
         image_ids,
         -- See stg_tiktok_ads__smart_plus_ad_history.sql for why the empty-table case is special-cased.
         case
-            when creative_id is null and modify_time is null then true
-            else row_number() over (partition by creative_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by modify_time desc) = 1
+            when creative_id is null and updated_at is null then true
+            else row_number() over (partition by creative_id {{ fivetran_utils.partition_by_source_relation(package_name='tiktok_ads') }} order by updated_at desc) = 1
         end as is_most_recent_record
     from fields
 )
