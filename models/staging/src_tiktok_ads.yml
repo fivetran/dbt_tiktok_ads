@@ -6,7 +6,6 @@ sources:
     schema: "{{var('tiktok_ads_schema', 'tiktok_ads')}}"
 
     loader: fivetran
-    
     config:
       loaded_at_field: _fivetran_synced
       enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads_sources', []) == [] }}"
@@ -329,11 +328,11 @@ sources:
           - name: cost_per_conversion
             description: >
               The average amount of money you've spent on a conversion. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred)
           - name: real_time_conversion
             description: >
               The number of times your ad achieved an outcome, 
-              based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
+              based on the objective and settings you selected. (The total count is based on when the conversion actually happened)
           - name: cpc
             description: The average amount of money you've spent on a click.
           - name: video_play_actions
@@ -341,15 +340,13 @@ sources:
           - name: conversion_rate
             description: >
               The percentage of results you received out of all the clicks of your ads.  
-              (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred)
           - name: video_views_p_75
             description: The number of times your video was played at 75% of its length. Replays will not be counted.
           - name: result
             description: >
               The number of times your ad achieved an outcome, based on the optimization goal 
-              you selected. As one campaign may have a number of different optimization goals, 
-              this statistic is not supported for campaigns. Please go to ad groups or ads to view the results. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              you selected. (The total count is calculated based on the time each ad impression occurred)
           - name: video_views_p_50
             description: The number of times your video was played at 50% of its length. Replays will not be counted.
           - name: impressions
@@ -358,33 +355,26 @@ sources:
             description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
           - name: real_time_cost_per_result
             description: >
-              As a campaign may have different optimization goals, the total number of result  
-              is not supported in campaign section now, please go to the ad group section to view the cost
-              per Result. (The total count is based on when the conversion actually happened.)
+              Cost per time your ad achieved an outcome, based on the optimization goal you selected. (The total count is based on when the conversion actually happened)
           - name: conversion
             description: >
-              The number of times your ad achieved an outcome, based on the secondary goal you selected. 
-              As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-              Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              The number of times your ad resulted in the optimization event you selected. 
+              (The total count is calculated based on the time each ad impression occurred)
           - name: real_time_result
             description: >
-              The number of times your ad achieved an outcome, based on the optimization goal you selected. 
-              As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,
-              Please go to the ad group section to view the result. (The total count is based on when the conversion actually happened.)
+              The number of times your ad achieved an outcome, based on the optimization goal you selected. (The total count is based on when the conversion actually happened)
           - name: video_view_p_100
             description: The number of times your video was played at 100% of its length. Replays will not be counted.
           - name: shares
             description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
           - name: real_time_conversion_rate
-            description: The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened.)
+            description: The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened)
           - name: cost_per_secondary_goal_result
             description: >
-              The average cost for each secondary goal result from your adverts. As one campaign may have a number of different secondary goals, 
-              this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              The average cost for each secondary goal result from your adverts. (The total count is calculated based on the time each ad impression occurred)
           - name: secondary_goal_result_rate
             description: >
-              The percentage of secondary goal results you achieved out of all of the installs of your adverts. As one campaign may have a number 
-              of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. The total count is calculated based on the time each ad impression occurred.
+              The percentage of secondary goal results you achieved out of all of the installs of your adverts. The total count is calculated based on the time each ad impression occurred.
           - name: clicks
             description: The number of clicks on your ads.
           - name: cost_per_1000_reached
@@ -394,7 +384,7 @@ sources:
           - name: reach
             description: The number of unique users who saw your ads at least once. This metric is estimated.
           - name: real_time_cost_per_conversion
-            description: The average amount of money you've spent on a conversion. (The total count is based on when the conversion actually happened.)
+            description: The average amount of money you've spent on a conversion. (The total count is based on when the conversion actually happened)
           - name: profile_visits_rate
             description: The rate of profile visits per impression the paid ad drove during the campaign. This metric is only for Boosted TikToks.
           - name: average_video_play
@@ -411,24 +401,21 @@ sources:
             description: The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.
           - name: result_rate
             description: >
-              The percentage of results you achieved out of all of the views/clicks on your ads. As one campaign may have a number 
-              of different optimization goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view the result rate. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              The percentage of results you achieved out of all of the views/clicks on your ads. 
+              (The total count is calculated based on the time each ad impression occurred)
           - name: video_watched_6_s
             description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
           - name: secondary_goal_result
             description: >
-              The number of times your ad achieved an outcome, based on the secondary goal you selected. As one campaign may have a number 
-              of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is 
-              calculated based on the time each ad impression occurred.)
+              The number of times your ad resulted in the optimization event you selected. (The total count is 
+              calculated based on the time each ad impression occurred)
           - name: cost_per_result
             description: >
-              The average cost for each result from your ads. As one campaign may have a number of different optimization goals, this statistic 
-              is not supported for campaigns. Please go to ad groups or ads to view the cost per result. (The total count is calculated based on the time each ad impression occurred.)
+              The average cost for each result from your ads. (The total count is calculated based on the time each ad impression occurred)
           - name: average_video_play_per_user
             description: The average time your video was played per person, including any time spent replaying the video. This metric is estimated.
           - name: real_time_result_rate
-            description: As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,Please go to the ad group section to view the Result Rate. (The total count is based on when the conversion actually happened.)
+            description: The percentage of results you achieved out of all of the views/clicks on your ads. (The total count is based on when the conversion actually happened)
           - name: spend
             description: The estimated total amount of money you've spent on your campaign, ad group or ad during its schedule.
           - name: likes
@@ -451,11 +438,11 @@ sources:
           - name: cost_per_conversion
             description: >
               The average amount of money you've spent on a conversion. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred)
           - name: real_time_conversion
             description: >
               The number of times your ad achieved an outcome, 
-              based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
+              based on the objective and settings you selected. (The total count is based on when the conversion actually happened)
           - name: cpc
             description: The average amount of money you've spent on a click.
           - name: video_play_actions
@@ -463,15 +450,13 @@ sources:
           - name: conversion_rate
             description: >
               The percentage of results you received out of all the clicks of your ads.  
-              (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred)
           - name: video_views_p_75
             description: The number of times your video was played at 75% of its length. Replays will not be counted.
           - name: result
             description: >
               The number of times your ad achieved an outcome, based on the optimization goal 
-              you selected. As one campaign may have a number of different optimization goals, 
-              this statistic is not supported for campaigns. Please go to ad groups or ads to view the results. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              you selected. (The total count is calculated based on the time each ad impression occurred)
           - name: video_views_p_50
             description: The number of times your video was played at 50% of its length. Replays will not be counted.
           - name: impressions
@@ -480,33 +465,26 @@ sources:
             description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
           - name: real_time_cost_per_result
             description: >
-              As a campaign may have different optimization goals, the total number of result 
-              is not supported in campaign section now, please go to the ad group section to view the cost 
-              per Result. (The total count is based on when the conversion actually happened.)
+              Cost per time your ad achieved an outcome, based on the optimization goal you selected. (The total count is based on when the conversion actually happened)
           - name: conversion
             description: >
-              The number of times your ad achieved an outcome, based on the secondary goal you selected. 
-              As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns.
-              Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              The number of times your ad resulted in the optimization event you selected. 
+              (The total count is calculated based on the time each ad impression occurred)
           - name: real_time_result
             description: >
-              The number of times your ad achieved an outcome, based on the optimization goal you selected. 
-              As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,
-              Please go to the ad group section to view the result. (The total count is based on when the conversion actually happened.)
+              The number of times your ad achieved an outcome, based on the optimization goal you selected. (The total count is based on when the conversion actually happened)
           - name: video_view_p_100
             description: The number of times your video was played at 100% of its length. Replays will not be counted.
           - name: shares
             description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
           - name: real_time_conversion_rate
-            description: The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened.)
+            description: The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened)
           - name: cost_per_secondary_goal_result
             description: >
-              The average cost for each secondary goal result from your adverts. As one campaign may have a number of different secondary goals, 
-              this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              The average cost for each secondary goal result from your adverts. (The total count is calculated based on the time each ad impression occurred)
           - name: secondary_goal_result_rate
             description: >
-              The percentage of secondary goal results you achieved out of all of the installs of your adverts. As one campaign may have a number 
-              of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. The total count is calculated based on the time each ad impression occurred.
+              The percentage of secondary goal results you achieved out of all of the installs of your adverts. The total count is calculated based on the time each ad impression occurred.
           - name: clicks
             description: The number of clicks on your ads.
           - name: cost_per_1000_reached
@@ -516,7 +494,7 @@ sources:
           - name: reach
             description: The number of unique users who saw your ads at least once. This metric is estimated.
           - name: real_time_cost_per_conversion
-            description: The average amount of money you've spent on a conversion. (The total count is based on when the conversion actually happened.)
+            description: The average amount of money you've spent on a conversion. (The total count is based on when the conversion actually happened)
           - name: profile_visits_rate
             description: The rate of profile visits per impression the paid ad drove during the campaign. This metric is only for Boosted TikToks.
           - name: average_video_play
@@ -533,26 +511,22 @@ sources:
             description: The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.
           - name: result_rate
             description: >
-              The percentage of results you achieved out of all of the views/clicks on your ads. As one campaign may have a number 
-              of different optimization goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view the result rate. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              The percentage of results you achieved out of all of the views/clicks on your ads. 
+              (The total count is calculated based on the time each ad impression occurred)
           - name: video_watched_6_s
             description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
           - name: secondary_goal_result
             description: >
-              The number of times your ad achieved an outcome, based on the secondary goal you selected. As one campaign may have a number 
-              of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is 
-              calculated based on the time each ad impression occurred.)
+              The number of times your ad resulted in the optimization event you selected. (The total count is 
+              calculated based on the time each ad impression occurred)
           - name: cost_per_result
             description: >
-              The average cost for each result from your ads. As one campaign may have a number of different optimization goals, this statistic 
-              is not supported for campaigns. Please go to ad groups or ads to view the cost per result. (The total count is calculated based on the time each ad impression occurred.)
+              The average cost for each result from your ads. (The total count is calculated based on the time each ad impression occurred)
           - name: average_video_play_per_user
             description: The average time your video was played per person, including any time spent replaying the video. This metric is estimated.
           - name: real_time_result_rate
             description: >
-              As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,Please go to the ad group section to 
-              view the Result Rate. (The total count is based on when the conversion actually happened.)
+              The percentage of results you achieved out of all of the views/clicks on your ads. (The total count is based on when the conversion actually happened)
           - name: spend
             description: The estimated total amount of money you've spent on your campaign, ad group or ad during its schedule.
           - name: likes
@@ -575,26 +549,24 @@ sources:
           - name: cost_per_conversion
             description: >
               The average amount of money you've spent on a conversion. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred)
           - name: real_time_conversion
             description: >
               The number of times your ad achieved an outcome, 
-              based on the objective and settings you selected. (The total count is based on when the conversion actually happened.)
+              based on the objective and settings you selected. (The total count is based on when the conversion actually happened)
           - name: cpc
             description: The average amount of money you've spent on a click.
           - name: video_play_actions
             description: The number of times your video starts to play. Replays will not be counted.
           - name: conversion_rate
             description: The percentage of results you received out of all the clicks of your ads. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              (The total count is calculated based on the time each ad impression occurred)
           - name: video_views_p_75
             description: The number of times your video was played at 75% of its length. Replays will not be counted.
           - name: result
             description: >
               The number of times your ad achieved an outcome, based on the optimization goal 
-              you selected. As one campaign may have a number of different optimization goals, 
-              this statistic is not supported for campaigns. Please go to ad groups or ads to view the results. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              you selected. (The total count is calculated based on the time each ad impression occurred)
           - name: video_views_p_50
             description: The number of times your video was played at 50% of its length. Replays will not be counted.
           - name: impressions
@@ -603,33 +575,27 @@ sources:
             description: The number of comments your video creative received within 1 day of a user seeing a paid ad.
           - name: real_time_cost_per_result
             description: >
-              As a campaign may have different optimization goals, the total number of result 
-              is not supported in campaign section now, please go to the ad group section to view the cost 
-              per Result. (The total count is based on when the conversion actually happened.)
+              Cost per time your ad achieved an outcome, based on the optimization goal you selected. (The total count is based on when the conversion actually happened)
           - name: conversion
             description: >
-              The number of times your ad achieved an outcome, based on the secondary goal you selected. 
-              As one campaign may have a number of different secondary goals, this statistic is not supported for campaigns. 
-              Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              The number of times your ad resulted in the optimization event you selected. 
+              (The total count is calculated based on the time each ad impression occurred)
           - name: real_time_result
             description: >
               The number of times your ad achieved an outcome, based on the optimization goal you selected. 
-              As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,
-              Please go to the ad group section to view the result. (The total count is based on when the conversion actually happened.)
+              (The total count is based on when the conversion actually happened)
           - name: video_view_p_100
             description: The number of times your video was played at 100% of its length. Replays will not be counted.
           - name: shares
             description: The number of shares your video creative received within 1 day of a user seeing a paid ad.
           - name: real_time_conversion_rate
-            description: The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened.)
+            description: The percentage of results you received out of all the clicks of your ads. (The total count is based on when the conversion actually happened)
           - name: cost_per_secondary_goal_result
             description: > 
-              The average cost for each secondary goal result from your adverts. As one campaign may have a number of different secondary goals, 
-              this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is calculated based on the time each ad impression occurred.)
+              The average cost for each secondary goal result from your adverts. (The total count is calculated based on the time each ad impression occurred)
           - name: secondary_goal_result_rate
             description: >
-              The percentage of secondary goal results you achieved out of all of the installs of your adverts. As one campaign may have a number 
-              of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. The total count is calculated based on the time each ad impression occurred.
+              The percentage of secondary goal results you achieved out of all of the installs of your adverts. The total count is calculated based on the time each ad impression occurred.
           - name: clicks
             description: The number of clicks on your ads.
           - name: cost_per_1000_reached
@@ -639,7 +605,7 @@ sources:
           - name: reach
             description: The number of unique users who saw your ads at least once. This metric is estimated.
           - name: real_time_cost_per_conversion
-            description: The average amount of money you've spent on a conversion. (The total count is based on when the conversion actually happened.)
+            description: The average amount of money you've spent on a conversion. (The total count is based on when the conversion actually happened)
           - name: profile_visits_rate
             description: The rate of profile visits per impression the paid ad drove during the campaign. This metric is only for Boosted TikToks.
           - name: average_video_play
@@ -656,26 +622,23 @@ sources:
             description: The number of new followers that were gained within 1 day of a user seeing a paid ad. This metric is only for Boosted TikToks.
           - name: result_rate
             description: >
-              The percentage of results you achieved out of all of the views/clicks on your ads. As one campaign may have a number 
-              of different optimization goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view the result rate. 
-              (The total count is calculated based on the time each ad impression occurred.)
+              The percentage of results you achieved out of all of the views/clicks on your ads. 
+              (The total count is calculated based on the time each ad impression occurred)
           - name: video_watched_6_s
             description: The number of times your video played for at least 6 seconds, or completely played. Replays will not be counted.
           - name: secondary_goal_result
             description: >
-              The number of times your ad achieved an outcome, based on the secondary goal you selected. As one campaign may have a number 
-              of different secondary goals, this statistic is not supported for campaigns. Please go to ad groups or ads to view. (The total count is 
-              calculated based on the time each ad impression occurred.)
+              The number of times your ad resulted in the optimization event you selected. (The total count is 
+              calculated based on the time each ad impression occurred)
           - name: cost_per_result
             description: >
-              The average cost for each result from your ads. As one campaign may have a number of different optimization goals, this statistic 
-              is not supported for campaigns. Please go to ad groups or ads to view the cost per result. (The total count is calculated based on the time each ad impression occurred.)
+              The average cost for each result from your ads. (The total count is calculated based on the time each ad impression occurred)
           - name: average_video_play_per_user
             description: The average time your video was played per person, including any time spent replaying the video. This metric is estimated.
           - name: real_time_result_rate
             description: >
-              As a campaign may have different optimization goals, the total number of result is not supported in campaign section now ,Please go to the ad group section to view the Result Rate. 
-              (The total count is based on when the conversion actually happened.)
+              The percentage of results you achieved out of all of the views/clicks on your ads. 
+              (The total count is based on when the conversion actually happened)
           - name: spend
             description: The estimated total amount of money you've spent on your campaign, ad group or ad during its schedule.
           - name: likes
@@ -716,7 +679,48 @@ sources:
           - name: impressions
             description: Total number of times ads in the campaign were shown.
           - name: real_time_conversion
-            description: Number of real-time conversions tracked by TikTok.
+            description: >
+              The number of times your ad achieved an outcome, 
+              based on the objective and settings you selected. (The total count is based on when the conversion actually happened)
+          - name: spend
+            description: Total amount spent for the campaign in the account currency.
+          - name: stat_time_day
+            description: The reporting date for the campaign data (in YYYY-MM-DD format).
+
+      - name: campaign_age_gender_report
+        identifier: "{{ var('tiktok_ads_campaign_age_gender_report_identifier', 'campaign_age_gender_report') }}"
+        description: Each record provides daily reporting metrics at the campaign level for one audience age range and gender.
+        config:
+          enabled: "{{ var('ad_reporting__tiktok_ads_enabled', true) and var('tiktok_ads__using_campaign_age_gender_report', true) and var('tiktok_ads_sources', []) == [] }}"
+        columns:
+          - name: _fivetran_synced
+            description: Timestamp indicating when the record was last synced.
+          - name: age
+            description: Audience age range (`AGE_13_17`, `AGE_18_24`, `AGE_25_34`, `AGE_35_44`, `AGE_45_54`, or `AGE_55_100`).
+          - name: campaign_id
+            description: Unique identifier of the campaign.
+          - name: clicks
+            description: Total number of times users clicked on ads within the campaign.
+          - name: conversion
+            description: Number of attributed conversions from ads in the campaign based on the TikTok attribution model.
+          - name: conversion_rate
+            description: Ratio of conversions to impressions, calculated as conversions divided by impressions.
+          - name: cost_per_conversion
+            description: Average cost per conversion, calculated as total spend divided by conversions.
+          - name: cpc
+            description: Cost per click, calculated as spend divided by the number of clicks.
+          - name: cpm
+            description: Cost per thousand impressions, calculated as (spend / impressions) * 1000.
+          - name: ctr
+            description: Click-through rate, calculated as clicks divided by impressions.
+          - name: gender
+            description: Audience gender, such as `MALE`, `FEMALE`, or `UNKNOWN` when TikTok can't determine it.
+          - name: impressions
+            description: Total number of times ads in the campaign were shown.
+          - name: real_time_conversion
+            description: >
+              The number of times your ad achieved an outcome, 
+              based on the objective and settings you selected. (The total count is based on when the conversion actually happened)
           - name: spend
             description: Total amount spent for the campaign in the account currency.
           - name: stat_time_day
