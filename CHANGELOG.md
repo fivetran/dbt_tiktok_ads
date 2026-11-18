@@ -1,3 +1,12 @@
+# dbt_tiktok_ads v1.5.2
+
+[PR #57](https://github.com/fivetran/dbt_tiktok_ads/pull/57) includes the following updates:
+
+## Under the Hood
+- **Column documentation now matches staging model output**: Removes four column entries from `stg_tiktok_ads.yml` that the staging models do not output, so the package documentation reflects the columns you actually receive.
+  - `stg_tiktok_ads__advertiser`: removes `create_time`, `license_no`, and `license_url`.
+  - `stg_tiktok_ads__campaign_history`: removes `opt_status`.
+
 # dbt_tiktok_ads v1.5.1
 
 [PR #55](https://github.com/fivetran/dbt_tiktok_ads/pull/55) includes the following updates:
