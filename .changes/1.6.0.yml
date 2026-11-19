@@ -4,8 +4,7 @@ new_features:
 - description: Raises the minimum dbt version to 1.10.0.
 - description: Adds `dbt_utils.unique_combination_of_columns` tests to staging and end models. If a test fails, please [open an issue](https://github.com/fivetran/dbt_tiktok_ads/issues/new/choose).
 under_the_hood:
-- title: Column documentation now matches staging model output
-  description: Removes four column entries from `stg_tiktok_ads.yml` that the staging models do not output, so the package documentation reflects the columns you actually receive.
-  details:
-  - '`stg_tiktok_ads__advertiser`: removes `create_time`, `license_no`, and `license_url`.'
-  - '`stg_tiktok_ads__campaign_history`: removes `opt_status`.'
+- description: Removes `create_time`, `license_no`, and `license_url` from the `stg_tiktok_ads__advertiser`
+    model of the `stg_tiktok_ads.yml` file.
+- description: Removes `opt_status` from the `stg_tiktok_ads__campaign_history` model
+    of the `stg_tiktok_ads.yml` file.
