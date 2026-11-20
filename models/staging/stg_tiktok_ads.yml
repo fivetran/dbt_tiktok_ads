@@ -14,7 +14,7 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: advertiser_id
         description: Advertiser ID
-        tests:
+        data_tests:
           - not_null
       - name: address
         description: Advertiser address information
@@ -60,7 +60,7 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: ad_group_id
         description: Ad group ID
-        tests:
+        data_tests:
           - not_null
       - name: updated_at
         description: Time the record was updated.
@@ -115,7 +115,7 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: ad_id
         description: Ad ID
-        tests:
+        data_tests:
           - not_null
       - name: updated_at
         description: Time the record was updated.
@@ -169,7 +169,7 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: campaign_id
         description: Campaign ID
-        tests:
+        data_tests:
           - not_null
       - name: updated_at
         description: Time the record was updated.
@@ -210,11 +210,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: ad_id
         description: Ad id
-        tests:
+        data_tests:
           - not_null
       - name: stat_time_hour
         description: Hour of activity
-        tests:
+        data_tests:
           - not_null
       - name: cost_per_conversion
         description: >
@@ -290,11 +290,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: ad_group_id
         description: Ad group id
-        tests:
+        data_tests:
           - not_null
       - name: stat_time_hour
         description: Hour of activity
-        tests:
+        data_tests:
           - not_null
       - name: cost_per_conversion
         description: >
@@ -370,11 +370,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: campaign_id
         description: Campaign id
-        tests:
+        data_tests:
           - not_null
       - name: stat_time_hour
         description: Hour of activity
-        tests:
+        data_tests:
           - not_null
       - name: cost_per_conversion
         description: >
@@ -564,7 +564,7 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: smart_plus_ad_id
         description: Smart+ ad ID. A separate, higher-level grouping ID from `creative_id` -- does not match the `ad_id` used in hourly reporting.
-        tests:
+        data_tests:
           - not_null
       - name: updated_at
         description: Time the record was updated.
@@ -679,7 +679,7 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: creative_id
         description: Creative ID. The same value TikTok's reporting API returns as `ad_id` for Smart+ ads.
-        tests:
+        data_tests:
           - not_null
       - name: updated_at
         description: Time the record was updated.

@@ -15,7 +15,7 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
-        tests:
+        data_tests:
           - not_null
       - name: advertiser_name
         description: Advertiser name.
@@ -87,11 +87,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
-        tests:
+        data_tests:
           - not_null
       - name: ad_id
         description: Ad ID.
-        tests:
+        data_tests:
           - not_null
       - name: ad_name
         description: Ad name.
@@ -180,11 +180,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record
-        tests:
+        data_tests:
           - not_null
       - name: ad_group_id
         description: Ad group ID
-        tests:
+        data_tests:
           - not_null
       - name: ad_group_name
         description: Ad group name
@@ -268,11 +268,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Campaign ID
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: Campaign name
@@ -349,11 +349,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
-        tests:
+        data_tests:
           - not_null
       - name: ad_id
         description: Ad ID.
-        tests:
+        data_tests:
           - not_null
       - name: ad_name
         description: Ad name.
@@ -373,7 +373,7 @@ models:
         description: All landing page URLs for the ad, comma-separated. Only populated for TikTok Smart+ ads, which can have multiple landing pages; `null` for manual ads, which always have exactly one (reflected in `base_url`/`url_host`/`url_path`/`utm_*` below).
       - name: base_url
         description: The base URL of the ad, extracted from the `landing page url`.
-        tests:
+        data_tests:
           - not_null:
               config:
                 # Below is so we don't run this test if the user has allowed urls to have null entries
@@ -465,11 +465,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The reporting date for the campaign data (in YYYY-MM-DD format).
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Unique identifier for the campaign.
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: Name of the campaign.
@@ -529,11 +529,11 @@ models:
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The reporting date for the campaign data (in YYYY-MM-DD format).
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Unique identifier for the campaign.
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: Name of the campaign.
