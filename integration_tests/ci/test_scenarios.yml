@@ -37,6 +37,7 @@ test_scenarios:
   - name: "creative history disabled"
     vars:
       tiktok_ads__using_creative_history: false
+      tiktok_ads__using_location: false
     include_incremental: false
 
   - name: "smart plus ad history disabled"

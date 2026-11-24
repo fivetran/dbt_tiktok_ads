@@ -479,6 +479,15 @@ models:
 
   - name: stg_tiktok_ads__campaign_age_gender_report
     description: Each record provides daily reporting metrics at the campaign level for one audience age range and gender.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - stat_time_day
+              - campaign_id
+              - age
+              - gender
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
