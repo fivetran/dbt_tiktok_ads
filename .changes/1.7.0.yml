@@ -5,6 +5,8 @@ new_features:
   description: Raises the minimum dbt version to 1.10.0.
 - description: Adds `dbt_utils.unique_combination_of_columns` tests to staging and
     end models. If a test fails, please [open an issue](https://github.com/fivetran/dbt_tiktok_ads/issues/new/choose).
+bug_fixes:
+- description: Casts the parsed `landing_page_url_list` to an array in the DuckDB Smart+ landing page unnesting. This fixes a type mismatch that failed under dbt v2 strict static analysis.
 under_the_hood:
 - description: Updates yml column documentation to match model output.
 date: '2026-11-19'
