@@ -1,3 +1,17 @@
+# dbt_tiktok_ads v1.7.0
+
+[PR #58](https://github.com/fivetran/dbt_tiktok_ads/pull/58) includes the following updates:
+
+## Feature Update
+- **Breaking change**: Raises the minimum dbt version to 1.10.0.
+- Adds `dbt_utils.unique_combination_of_columns` tests to staging and end models. If a test fails, please [open an issue](https://github.com/fivetran/dbt_tiktok_ads/issues/new/choose).
+
+## Bug Fix
+- Casts the parsed `landing_page_url_list` to an array in the DuckDB Smart+ landing page unnesting. This fixes a type mismatch that failed under dbt v2 strict static analysis.
+
+## Under the Hood
+- Updates yml column documentation to match model output.
+
 # dbt_tiktok_ads v1.6.0
 
 ## Schema/Data Change

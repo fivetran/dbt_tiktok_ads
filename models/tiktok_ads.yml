@@ -3,12 +3,19 @@ version: 2
 models:
   - name: tiktok_ads__advertiser_report
     description: Each record in this table represents the daily performance of ads at the account level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
-        tests:
+        data_tests:
           - not_null
       - name: advertiser_name
         description: Advertiser name.
@@ -65,16 +72,26 @@ models:
 
   - name: tiktok_ads__ad_report
     description: Each record in this table represents the daily performance of ads at the ad level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
+              - ad_group_id
+              - ad_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
-        tests:
+        data_tests:
           - not_null
       - name: ad_id
         description: Ad ID.
-        tests:
+        data_tests:
           - not_null
       - name: ad_name
         description: Ad name.
@@ -149,16 +166,25 @@ models:
 
   - name: tiktok_ads__ad_group_report
     description: Each record in this table represents the daily performance of ads at the ad group level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
+              - ad_group_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record
-        tests:
+        data_tests:
           - not_null
       - name: ad_group_id
         description: Ad group ID
-        tests:
+        data_tests:
           - not_null
       - name: ad_group_name
         description: Ad group name
@@ -229,16 +255,24 @@ models:
 
   - name: tiktok_ads__campaign_report
     description: Each record in this table represents the daily performance at the campaign level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Campaign ID
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: Campaign name
@@ -297,16 +331,29 @@ models:
 
   - name: tiktok_ads__url_report
     description: Each record in this table represents the daily performance of ads at the URL level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
+              - ad_group_id
+              - ad_id
+          config:
+            # Don't run this test if you allow URLs to have null entries
+            enabled: "{{ var('ad_reporting__url_report__using_null_filter', true) }}"
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: Day of record.
-        tests:
+        data_tests:
           - not_null
       - name: ad_id
         description: Ad ID.
-        tests:
+        data_tests:
           - not_null
       - name: ad_name
         description: Ad name.
@@ -326,7 +373,7 @@ models:
         description: All landing page URLs for the ad, comma-separated. Only populated for TikTok Smart+ ads, which can have multiple landing pages; `null` for manual ads, which always have exactly one (reflected in `base_url`/`url_host`/`url_path`/`utm_*` below).
       - name: base_url
         description: The base URL of the ad, extracted from the `landing page url`.
-        tests:
+        data_tests:
           - not_null:
               config:
                 # Below is so we don't run this test if the user has allowed urls to have null entries
@@ -404,16 +451,25 @@ models:
 
   - name: tiktok_ads__campaign_country_report
     description: Each record in this table represents the daily performance of a campaign at the country/geographic region level.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - advertiser_id
+              - campaign_id
+              - country_code
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The reporting date for the campaign data (in YYYY-MM-DD format).
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Unique identifier for the campaign.
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: Name of the campaign.
@@ -468,16 +524,25 @@ models:
 
   - name: tiktok_ads__campaign_age_gender_report
     description: Each record in this table represents the daily performance of a campaign for one audience age range and gender.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - date_day
+              - campaign_id
+              - age
+              - gender
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: date_day
         description: The reporting date for the campaign data (in YYYY-MM-DD format).
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Unique identifier for the campaign.
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: Name of the campaign.

@@ -76,7 +76,7 @@ Adapted from the equivalent JSON-array-unnesting pattern in dbt_facebook_ads' `g
         select
             source_relation,
             smart_plus_ad_id,
-            unnest(from_json(landing_page_url_list, '["VARCHAR"]')) as landing_page_url
+            unnest(cast(from_json(landing_page_url_list, '["VARCHAR"]') as varchar[])) as landing_page_url
         from required_fields
     )
 {% endmacro %}
